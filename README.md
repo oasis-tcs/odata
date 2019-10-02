@@ -11,6 +11,7 @@ OASIS TC GitHub repositories, as described in
 [GitHub Repositories for OASIS TC Members' Chartered Work](https://www.oasis-open.org/resources/tcadmin/github-repositories-for-oasis-tc-members-chartered-work)
 are governed by the OASIS [TC Process](https://www.oasis-open.org/policies-guidelines/tc-process), 
 [IPR Policy](https://www.oasis-open.org/policies-guidelines/ipr), and other policies.  
+
 While they make use of public GitHub repositories, these TC GitHub repositories are distinct from
 [OASIS Open Repositories](https://www.oasis-open.org/resources/open-repositories) which are 
 used for development of open source content.
@@ -41,8 +42,8 @@ subject to applicable OASIS policies, as presented in the repository
 
 # Further Description of this Repository
 
-**Any narrative content may be provided here by the TC, for example, if the Members wish 
-to provide an extended statement of purpose.**
+*Any narrative content may be provided here by the TC, for example, if the Members wish 
+to provide an extended statement of purpose.*
 
 # Contact
 
