@@ -18,7 +18,7 @@ All such content created in GitHub Issues and/or posted to the TC's [archived co
 
 __Use of Contributions__. As with all OASIS Technical Committee assets, content placed into 
 this GitHub repository is visible and publicly accessible.  Subject to applicable
-[licensing](https://github.com/oasis-tcs/odata/blob/master/LICENSE.md) licensing</a> rules, 
+[licensing](https://github.com/oasis-tcs/odata/blob/master/LICENSE.md) rules, 
 the repository content may be re-used freely, including the creation and publication of derivative 
 works.
 
