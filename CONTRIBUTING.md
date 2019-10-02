@@ -1,8 +1,8 @@
 <img src="/Converted-PNG.png" width="200">
 
-# Repository Contributions, Participation, and Public Access<
+# Repository Contributions, Participation, and Public Access
 
-##Who may Contribute?## Contributors to [this repository](https://github.com/oasis-tcs/odata/)
+## Who may Contribute? ## Contributors to [this repository](https://github.com/oasis-tcs/odata/)
 are expected to be [Members](https://www.oasis-open.org/policies-guidelines/oasis-defined-terms-2017-05-26#dMember)
 of the [OASIS Open Data Protocol (OData) TC](https://www.oasis-open.org/committees/odata), 
 for any substantive contributions.  Anyone wishing to
@@ -14,16 +14,15 @@ as a TC Member. **Member** in this context means any TC role or office other tha
 Persons who are not TC members are invited to open issues and provide comments using this 
 repository's [GitHub Issues](https://github.com/oasis-tcs/odata/issues/new) tracking facility
 or using the TC's [comment facility](https://www.oasis-open.org/committees/comments/index.php?wg_abbrev=odata). 
-All such content created in GitHub Issues and/or posted to the TC's [archived comment list](https://lists.oasis-open.org/archives/odata-comment/)
-is governed by the terms of the [OASIS Feedback License](https://www.oasis-open.org/policies-guidelines/ipr#appendixa).
+All such content created in GitHub Issues and/or posted to the TC's [archived comment list](https://lists.oasis-open.org/archives/odata-comment/) is governed by the terms of the [OASIS Feedback License](https://www.oasis-open.org/policies-guidelines/ipr#appendixa).
 
-##Use of Contributions.## As with all OASIS Technical Committee assets, content placed into 
+## Use of Contributions. ## As with all OASIS Technical Committee assets, content placed into 
 this GitHub repository is visible and publicly accessible.  Subject to applicable
 [licensing](https://github.com/oasis-tcs/odata/blob/master/LICENSE.md">licensing</a> rules, 
 the repository content may be re-used freely, including the creation and publication of derivative 
 works.
 
-##Cloning and forking.## Users may clone and fork this repository freely, for use by any party. 
+## Cloning and forking. ## Users may clone and fork this repository freely, for use by any party. 
 
 Please see the [README](https://github.com/oasis-tcs/odata/blob/master/README.md)
 for general description of this repository, and the [LICENSE](https://github.com/oasis-tcs/odata/blob/master/LICENSE.md)
