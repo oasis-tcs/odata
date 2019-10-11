@@ -10,7 +10,7 @@ It contains non-normative, explanatory documents only, the normative documents a
 
 You can find here
 - [Frequently Asked Questions](faq)
-- [One-Pager Guides](one-pager)
+- [One-Page Guides](one-pager)
 
 Another prominent source of information around OData is https://www.odata.org/
 
