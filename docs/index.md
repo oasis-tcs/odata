@@ -1,3 +1,3 @@
-# Landing Page
+# OData - Open Data Protocol
 
 to be filled
