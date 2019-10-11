@@ -1,3 +1,7 @@
+<p align="center">
+<img src="odata-icons/ODataLogo-250.png">
+</p>
+
 # OData - Open Data Protocol
 
 This repository is a general landing page for all OData TC repositories and a container for glossaries and other documents related to the OData ecosystem.
