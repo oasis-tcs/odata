@@ -42,14 +42,42 @@ subject to applicable OASIS policies, as presented in the repository
 
 # Further Description of this Repository
 
-*Any narrative content may be provided here by the TC, for example, if the Members wish 
-to provide an extended statement of purpose.*
+This repository is a general landing page for all OData TC repositories and a container for glossaries, specifications, and other documents related to the OData ecosystem.
 
-- *description of the directory structure*
-- *guidelines for use in this repo*
-  - *guideline for lifecycle and labelling of Github issues in this project*
-- *issues only for things in this repo*
+It contains non-normative documents only, the normative documents are the OData Specifications
+- [OData Version 4.01. Part 1: Protocol](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html)
+- [OData Version 4.01. Part 2: URL Conventions](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part2-url-conventions.html)
+- [OData JSON Format Version 4.01](http://docs.oasis-open.org/odata/odata-json-format/v4.01/odata-json-format-v4.01.html)
+- [OData Common Schema Definition Language (CSDL) JSON Representation Version 4.01](http://docs.oasis-open.org/odata/odata-csdl-json/v4.01/odata-csdl-json-v4.01.html)
+- [OData Common Schema Definition Language (CSDL) XML Representation Version 4.01](http://docs.oasis-open.org/odata/odata-csdl-json/v4.01/odata-csdl-xml-v4.01.html)
+- [OData Extension for Data Aggregation Version 4.0](http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/odata-data-aggregation-ext-v4.0.html)
 
+These are supplemented by the informative Committee Notes
+- [OData Vocabularies Version 4.0](http://docs.oasis-open.org/odata/odata-vocabularies/v4.0/odata-vocabularies-v4.0.html)
+- [OData to OpenAPI Mapping Version 1.0](http://docs.oasis-open.org/odata/odata-openapi/v1.0/odata-openapi-v1.0.html)
+- [What’s New in OData Version 4.01](http://docs.oasis-open.org/odata/new-in-odata/v4.01/new-in-odata-v4.01.html)
+- [What’s New in OData Version 4.0](http://docs.oasis-open.org/odata/new-in-odata/v4.0/new-in-odata-v4.0.html)
+
+## Other OData TC GitHub Repositories
+- [odata-abnf](ttps://github.com/oasis-tcs/odata-abnf) - ABNF for OData URLs, headers, and literal data values
+- [odata-csdl-schemas](ttps://github.com/oasis-tcs/odata-csdl-schemas) - Schemas for validating CSDL JSON and CSDL XML ($metadata) 
+- [odata-json-schema](ttps://github.com/oasis-tcs/odata-csdl-schemas) - Tools for producing JSON Schema documents for OData services 
+- [odata-openapi](https://github.com/oasis-tcs/odata-openapi) - Tools for producing API descriptions for OData services that adhere to the OpenAPI Specification
+- [odata-vocabularies](https://github.com/oasis-tcs/odata-vocabularies) - Standard vocabularies for annotating OData services
+
+## Repository structure
+- [`docs`](docs) is the source of the GitHub Pages site https://oasis-tcs.github.io/odata/ 
+  - [`faq`](docs/faq) contains answers to frequently asked questions
+  - [`one-pager`](docs/one-pager) contains brief descriptions of OData concepts with links to the relevant specification sections
+
+## Use of GitHub Issues
+GitHub issues in this repository are for the non-normative documents maintained here. Issues for the normative specifications and the informative Committee Notes are still maintained in the [OData TC Jira project](https://issues.oasis-open.org/projects/ODATA/issues).
+
+The OData community is welcome to open GitHub issues that require changes to the normative specifications. These issues will be processed by the TC as follows:
+- Create an [OData TC Jira issue](https://issues.oasis-open.org/projects/ODATA/issues) reflecting the problem stated in the GitHub issue
+- Link from the GitHub issue to the corresponding Jira issue(s)
+- Label the GitHub issue with **see Jira**
+- Close the GitHub issue
 
 # Contact
 

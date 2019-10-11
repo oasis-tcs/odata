@@ -1,8 +1,12 @@
 # One-Page Guides
 
-to be filled
+Planned topics
  - server-driven paging
    - combined with delta
  - delta
- - stream properties and media resources
+ - etags
+ - stream properties
+ - media resources and media entities
+ - service versioning
+ - containment
  
