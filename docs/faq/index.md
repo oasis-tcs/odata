@@ -14,7 +14,9 @@ OData started back in 2009 as a Microsoft Open Specification, back then rather s
 
 ## Do I have to implement all of OData?
 
-No, definitely not. Start with the patterns  you need, and add other patterns later when you need them. The benefit of copying the OData patterns instead of making up similar patterns on your own is that all OData patterns work nicely together.
+No, definitely not. 
+
+Start with the patterns  you need, and add other patterns later when you need them. The benefit of copying the OData patterns instead of making up similar patterns on your own is that all OData patterns work nicely together.
 
 ## What is the minimum set of OData features I have to implement?
 
@@ -22,7 +24,7 @@ Only those that you need :smiley:.
 
 Most use cases start with a simple list of identically structured things (think: table).
 
-When this list is too large to be always read in one go, add filtering (`$filter`), sorting (`$orderby`), and paging (`$top` and `$skip` for client-driven paging, or server-driven paging).
+When this list is too large to be always read in one go, add filtering (`$filter`), sorting (`$orderby`), and paging (`$top` and `$skip` for client-driven paging, or [server-driven paging](../one-pager/server-driven-paging.md)).
 
 When this list has many fields and different clients need different sets of fields, add projection (`$select`).
 
