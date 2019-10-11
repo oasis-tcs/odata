@@ -45,6 +45,12 @@ subject to applicable OASIS policies, as presented in the repository
 *Any narrative content may be provided here by the TC, for example, if the Members wish 
 to provide an extended statement of purpose.*
 
+- *description of the directory structure*
+- *guidelines for use in this repo*
+  - *guideline for lifecycle and labelling of Github issues in this project*
+- *issues only for things in this repo*
+
+
 # Contact
 
 Please send questions or comments about 
