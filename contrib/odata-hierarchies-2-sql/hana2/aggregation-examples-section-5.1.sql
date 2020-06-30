@@ -39,12 +39,6 @@ select _trafo_1.ID, _trafo_1.Name, OrgCnt - 1, so2.ID as "Superordinate-ID"
 --              aggregate(Sales/Amount with sum as TotalAmount))
 --     /ancestors(SalesOrgHierarchy,filter(contains(Name,'East')),keep start)
 
--- example #2:
--- GET ~/SalesOrganizations?$apply=
---     /groupby((rollup(SalesOrgHierarchy)),
---              aggregate(Sales/Amount with sum as TotalAmount))
---     /ancestors(SalesOrgHierarchy,filter(contains(Name,'East')),keep start)
-
 
 with 
   _trafo_1 as (
@@ -62,8 +56,7 @@ with
                       source (select ID as node_id,
                                      Superordinate as parent_id,
                                      Name,
-                                     row_number() over (order by ID) as SiblingNum,
-                                     1 as One
+                                     row_number() over (order by ID) as SiblingNum
                                 from #SalesOrganization )
    
                       sibling order by SiblingNum
@@ -78,7 +71,7 @@ with
     select distinct node_id as ID, parent_id as Superordinate, Name, TotalAmount
       from hierarchy_ancestors (
         source _trafo_1
-        start where instr(Name,'East')<> 0
+        start where instr(Name,'East') <> 0
         )
     )
 select ID, Superordinate, TotalAmount from _trafo_2
