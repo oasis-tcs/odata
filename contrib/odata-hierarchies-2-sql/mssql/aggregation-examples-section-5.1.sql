@@ -20,7 +20,8 @@ WITH
 	trafo_1_result ([node],cnt) AS
 	(          -- groupby((rollup(...),aggregate(...)
 		SELECT ancestor_relation.ancestor, count(*)
-		FROM ancestor_relation INNER JOIN SalesOrganization ON ancestor_relation.ancestor = SalesOrganization.id
+		FROM ancestor_relation 
+		INNER JOIN SalesOrganization ON ancestor_relation.ancestor = SalesOrganization.id
 		GROUP BY ancestor_relation.ancestor
     )
 SELECT [node], so1.name, so2.ID, cnt - 1
