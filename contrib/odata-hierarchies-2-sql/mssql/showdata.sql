@@ -1,4 +1,4 @@
-USE [oasis-sales];
+USE [SalesDemoDB];
 
 SELECT *
 FROM [dbo].[Sales];

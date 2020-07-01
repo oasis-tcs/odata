@@ -1,3 +1,5 @@
+USE [SalesDemoDB];
+
 CREATE TABLE Sales
 (
   ID                varchar(8) NOT NULL,

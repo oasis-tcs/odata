@@ -1,4 +1,4 @@
-
+USE [SalesDemoDB];
 
 -- GET ~/SalesOrganizations?$apply=
 --    ancestors(SalesOrgHierarchy,
@@ -16,7 +16,7 @@ WITH
 	-- generic parent relation from hier def
 	(
 		-- set of (parent) start nodes from filter expression passed to ancestors()
-					SELECT parent_node
+		SELECT parent_node
 			FROM SalesOrganization
 				INNER JOIN parent_of ON parent_of.[node] = id
 			WHERE CHARINDEX('East', SalesOrganization.[Name]) > 0 OR CHARINDEX('Central', SalesOrganization.[Name]) > 0
@@ -25,7 +25,7 @@ WITH
 			FROM ancestors_of -- generic ancestors recursion derived from hierarchy definition
 				INNER JOIN parent_of ON parent_of.node = ancestors_of.node
 	)
-SELECT SalesOrganization.*
+SELECT DISTINCT SalesOrganization.*
 FROM SalesOrganization INNER JOIN ancestors_of ON id = node
 ;
 
@@ -55,6 +55,6 @@ WITH
 			FROM ancestors_of -- generic ancestors recursion derived from hierarchy definition
 				INNER JOIN parent_of ON parent_of.node = ancestors_of.node
 	)
-SELECT SalesOrganization.*
+SELECT DISTINCT  SalesOrganization.*
 FROM SalesOrganization INNER JOIN ancestors_of ON id = node  -- output result
 ;
