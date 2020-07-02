@@ -5,7 +5,7 @@ WITH
   -- traversal needs a stable sibling order; can be rowid if selecting from hierarchy table, or row_number() if preceding transformation
 	salesorg_w_sibling(ID,Superordinate,Name,SiblingIdx) AS
 	(
-		SELECT *,  CAST(ROW_NUMBER() OVER(ORDER BY (SELECT 1)) AS varchar(8000)) 
+		SELECT *,  CAST( RIGHT('00000' +  CAST(ROW_NUMBER() OVER(ORDER BY (SELECT 1)) AS varchar(8000)), 6) AS  varchar(8000))
 		FROM SalesOrganization
 	),
 	parent_of(node,parent_node) AS
@@ -101,7 +101,7 @@ WITH
 	trafo_1_result (ID,SuperOrdinate,Name,SiblingIndex) AS
 	(
 		-- result of descendants(...), use row_id as sibling order
-		SELECT SalesOrganization.*, CAST(ROW_NUMBER() OVER(ORDER BY (SELECT 1)) AS varchar(8000))  -- SalesOrganization.rowid
+		SELECT SalesOrganization.*, CAST( RIGHT('00000' +  CAST(ROW_NUMBER() OVER(ORDER BY (SELECT 1)) AS varchar(8000)), 6) AS  varchar(8000))  -- SalesOrganization.rowid
 		FROM SalesOrganization, descendants_of
 		WHERE id = node
     ) ,

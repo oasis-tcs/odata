@@ -52,7 +52,6 @@ WITH
 		SELECT SalesOrganization.id, ancestor_relation.ancestor, Sales.Amount
 		FROM ancestor_relation
 		INNER JOIN SalesOrganization ON SalesOrganization.Superordinate = ancestor_relation.[node]
-		-- LEFT OUTER JOIN Sales ON SalesOrganization.id = Sales.SalesOrganization
 		OUTER APPLY (SELECT Amount FROM Sales WHERE SalesOrganization.id = Sales.SalesOrganization) AS Sales
     )
 SELECT ancestor_relation.ancestor, SalesOrganization.Superordinate, sum(ancestor_relation.Amount)
@@ -74,7 +73,6 @@ WITH
 		SELECT SalesOrganization.id, ancestor_relation.ancestor, Sales.Amount
 		FROM ancestor_relation
 		INNER JOIN SalesOrganization ON SalesOrganization.Superordinate = ancestor_relation.[node]
-		-- LEFT OUTER JOIN Sales ON SalesOrganization.id = Sales.SalesOrganization
 		OUTER APPLY (SELECT Amount FROM Sales WHERE SalesOrganization.id = Sales.SalesOrganization) AS Sales
     ),
 	trafo_1_result(ID, Superordinate, [Name], aggAmount) AS

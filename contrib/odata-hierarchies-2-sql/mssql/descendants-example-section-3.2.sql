@@ -1,9 +1,8 @@
-USE [oasis-sales];
+USE [SalesDemoDB];
 
 
 -- GET ~/SalesOrganizations?$apply=
 --    descendants(SalesOrgHierarchy,filter(Name eq 'US'),keep start)
-
 
 WITH
 	parent_of([node], [parent]) AS
@@ -25,8 +24,6 @@ WITH
 SELECT [SalesOrganization].*
 FROM [SalesOrganization] INNER JOIN descendants_of ON [id] = [node]  -- output result
 ;
-
-GO
 
 -- variation: no KEEP START, i.e.
 -- GET ~/SalesOrganizations?$apply=
