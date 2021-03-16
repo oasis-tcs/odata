@@ -5,7 +5,7 @@ Containment roughly corresponds to "Composition" in UML:
 - the "contained" (child) entities have an existential dependency on the "container" (parent) entity
 - the key of contained entities is only unique within the container entity
 - contained entities can only be reached via the container entity, there is no direct or "shortened" URL for them
-- different parents can have children with the same key, these children are different entities because the parent key differs
+- different parents can have children with the same key, these children are different entities because the parent differs
 - a contained entity can only have one parent
 - a contained entity cannot change its parent, it can only be deleted, and a different entity with a different parent can be created
 
