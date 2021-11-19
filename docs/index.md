@@ -12,7 +12,7 @@ You can find here
 - [Frequently Asked Questions](faq)
 - [One-Page Guides](one-pager)
 
-Another prominent source of information around OData is https://www.odata.org/
+Another prominent source of information around OData is <https://www.odata.org/>
 
 ## OData Specifications
 
