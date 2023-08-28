@@ -51,6 +51,8 @@ It contains non-normative documents only, the normative documents are the OData 
 - [OData Common Schema Definition Language (CSDL) JSON Representation Version 4.01](http://docs.oasis-open.org/odata/odata-csdl-json/v4.01/odata-csdl-json-v4.01.html)
 - [OData Common Schema Definition Language (CSDL) XML Representation Version 4.01](http://docs.oasis-open.org/odata/odata-csdl-json/v4.01/odata-csdl-xml-v4.01.html)
 - [OData Extension for Data Aggregation Version 4.0](http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/odata-data-aggregation-ext-v4.0.html)
+- [OData Extension for Temporal Data Version 4.0](http://docs.oasis-open.org/odata/odata-temporal-ext/v4.0/odata-temporal-ext-v4.0.html)
+- [Repeatable Requests Version 1.0](https://docs.oasis-open.org/odata/repeatable-requests/v1.0/repeatable-requests-v1.0.html)
 
 These are supplemented by the informative Committee Notes
 - [OData Vocabularies Version 4.0](http://docs.oasis-open.org/odata/odata-vocabularies/v4.0/odata-vocabularies-v4.0.html)
