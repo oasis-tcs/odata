@@ -9,7 +9,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "issue-lists": "node lib/issues.js",
+    "issue-lists": "node lib/issues.js && pandoc ./issues.md -o issues.html",
     "test": "c8 mocha"
   },
   "repository": {
