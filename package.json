@@ -1,0 +1,33 @@
+{
+  "name": "odata",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Generic OData stuff",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  },
+  "scripts": {
+    "issue-lists": "node lib/issues.js",
+    "test": "c8 mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oasis-tcs/odata.git"
+  },
+  "keywords": [
+    "OData"
+  ],
+  "author": "",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/oasis-tcs/odata/issues"
+  },
+  "homepage": "https://github.com/oasis-tcs/odata#readme",
+  "devDependencies": {
+    "axios": "^1.5.0",
+    "c8": "^8.0.1",
+    "mocha": "^10.2.0"
+  }
+}
