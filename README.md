@@ -61,10 +61,11 @@ These are supplemented by the informative Committee Notes
 - [What’s New in OData Version 4.0](http://docs.oasis-open.org/odata/new-in-odata/v4.0/new-in-odata-v4.0.html)
 
 ## Other OData TC GitHub Repositories
-- [odata-abnf](ttps://github.com/oasis-tcs/odata-abnf) - ABNF for OData URLs, headers, and literal data values
-- [odata-csdl-schemas](ttps://github.com/oasis-tcs/odata-csdl-schemas) - Schemas for validating CSDL JSON and CSDL XML ($metadata) 
-- [odata-json-schema](ttps://github.com/oasis-tcs/odata-csdl-schemas) - Tools for producing JSON Schema documents for OData services 
+- [odata-abnf](https://github.com/oasis-tcs/odata-abnf) - ABNF for OData URLs, headers, and literal data values
+- [odata-csdl-schemas](https://github.com/oasis-tcs/odata-csdl-schemas) - Schemas for validating CSDL JSON and CSDL XML ($metadata) 
+- [odata-json-schema](https://github.com/oasis-tcs/odata-csdl-schemas) - Tools for producing JSON Schema documents for OData services 
 - [odata-openapi](https://github.com/oasis-tcs/odata-openapi) - Tools for producing API descriptions for OData services that adhere to the OpenAPI Specification
+- [odata-specs](https://github.com/oasis-tcs/odata-specs) - Markdown sources for OData specification drafts
 - [odata-vocabularies](https://github.com/oasis-tcs/odata-vocabularies) - Standard vocabularies for annotating OData services
 
 ## Repository structure
