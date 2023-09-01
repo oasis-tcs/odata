@@ -32,11 +32,11 @@
   {
     "topic": "Vocabularies",
     "name": "NEW or OPEN with proposal",
-    "jql": "project = ODATA AND status in (Open, New) AND component = Vocabularies AND affectedVersion is null AND proposal is not empty ORDER BY key ASC"
+    "jql": "project = ODATA AND status in (Open, New) AND component = Vocabularies AND fixVersion is null AND proposal is not empty ORDER BY key ASC"
   },
   {
     "topic": "Vocabularies",
     "name": "NEW or OPEN without proposal",
-    "jql": "project = ODATA AND component = Vocabularies AND affectedVersion is null AND proposal is empty AND status in (Open, New) ORDER BY key ASC"
+    "jql": "project = ODATA AND component = Vocabularies AND fixVersion is null AND proposal is empty AND status in (Open, New) ORDER BY key ASC"
   }
 ]
