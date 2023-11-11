@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/oasis-tcs/odata#readme",
   "devDependencies": {
-    "axios": "^1.5.0",
+    "axios": "^1.6.0",
     "c8": "^8.0.1",
     "mocha": "^10.2.0"
   }
