@@ -1,23 +1,28 @@
 [
   {
-    "topic": "V4.02 (and V4.01 Errata 01)",
+    "topic": "V4.02 and V4.01 Errata 01",
     "name": "RESOLVED",
     "jql": "project = ODATA AND status = Resolved AND fixVersion in (V4.01_ERRATA01, V4.02) ORDER BY key ASC"
   },
   {
-    "topic": "V4.02 (and V4.01 Errata 01)",
+    "topic": "V4.02 and V4.01 Errata 01",
     "name": "APPLIED",
     "jql": "project = ODATA AND status = Applied AND fixVersion in (V4.01_ERRATA01, V4.02) ORDER BY key ASC"
   },
   {
-    "topic": "V4.02 (and V4.01 Errata 01)",
-    "name": "NEW or OPEN with champion and proposal",
-    "jql": "project = ODATA AND status in (Open, New) AND fixVersion in (V4.01_ERRATA01, V4.02) AND proposal is not empty AND assignee is not empty ORDER BY key ASC, summary ASC"
+    "topic": "V4.01 Errata",
+    "name": "NEW or OPEN",
+    "jql": "project = ODATA AND status in (Open, New) AND fixVersion = V4.01_ERRATA01 ORDER BY key ASC, summary ASC"
   },
   {
-    "topic": "V4.02 (and V4.01 Errata 01)",
+    "topic": "V4.02",
+    "name": "NEW or OPEN with champion and proposal",
+    "jql": "project = ODATA AND status in (Open, New) AND fixVersion = V4.02 AND proposal is not empty AND assignee is not empty ORDER BY key ASC, summary ASC"
+  },
+  {
+    "topic": "V4.02",
     "name": "NEW or OPEN without champion or proposal",
-    "jql": "project = ODATA AND status in (Open, New) AND fixVersion in (V4.01_ERRATA01, V4.02) AND (assignee is empty OR proposal is empty) ORDER BY key ASC, summary ASC"
+    "jql": "project = ODATA AND status in (Open, New) AND fixVersion = V4.02 AND (assignee is empty OR proposal is empty) ORDER BY key ASC, summary ASC"
   },
   {
     "topic": "Data Aggregation",
