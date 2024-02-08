@@ -1,28 +1,18 @@
 [
   {
     "topic": "V4.02 and V4.01 Errata 01",
-    "name": "RESOLVED",
-    "jql": "project = ODATA AND status = Resolved AND fixVersion in (V4.01_ERRATA01, V4.02) ORDER BY key ASC"
+    "name": "with pull request",
+    "jql": "project = ODATA AND fixVersion in (V4.01_ERRATA01, V4.02) AND status in (New, Open, Resolved, Applied) AND development[pullrequests].open > 0 ORDER BY key ASC, summary ASC"
   },
   {
     "topic": "V4.02 and V4.01 Errata 01",
-    "name": "APPLIED",
-    "jql": "project = ODATA AND status = Applied AND fixVersion in (V4.01_ERRATA01, V4.02) ORDER BY key ASC"
+    "name": "RESOLVED without pull request",
+    "jql": "project = ODATA AND fixVersion in (V4.01_ERRATA01, V4.02) AND status in (Resolved) AND development[pullrequests].open = 0 ORDER BY key ASC, summary ASC"
   },
   {
-    "topic": "V4.01 Errata",
-    "name": "NEW or OPEN",
-    "jql": "project = ODATA AND status in (Open, New) AND fixVersion = V4.01_ERRATA01 ORDER BY key ASC, summary ASC"
-  },
-  {
-    "topic": "V4.02",
-    "name": "NEW or OPEN with champion and proposal",
-    "jql": "project = ODATA AND status in (Open, New) AND fixVersion = V4.02 AND proposal is not empty AND assignee is not empty ORDER BY key ASC, summary ASC"
-  },
-  {
-    "topic": "V4.02",
-    "name": "NEW or OPEN without champion or proposal",
-    "jql": "project = ODATA AND status in (Open, New) AND fixVersion = V4.02 AND (assignee is empty OR proposal is empty) ORDER BY key ASC, summary ASC"
+    "topic": "V4.02 and V4.01 Errata 01",
+    "name": "NEW or OPEN without pull request",
+    "jql": "project = ODATA AND fixVersion in (V4.01_ERRATA01, V4.02) AND status in (New, Open) AND development[pullrequests].open = 0 ORDER BY key ASC, summary ASC"
   },
   {
     "topic": "Data Aggregation",
@@ -32,16 +22,11 @@
   {
     "topic": "Temporal",
     "name": "NEW or OPEN",
-    "jql": "project = ODATA AND status in (Open, New) AND component = \"Extension for Temporal Data\" ORDER BY key ASC"
+    "jql": "project = ODATA AND status in (Open, New) AND component = Temporal ORDER BY key ASC"
   },
   {
     "topic": "Vocabularies",
-    "name": "NEW or OPEN with proposal",
-    "jql": "project = ODATA AND status in (Open, New) AND component = Vocabularies AND fixVersion is null AND proposal is not empty ORDER BY key ASC"
-  },
-  {
-    "topic": "Vocabularies",
-    "name": "NEW or OPEN without proposal",
-    "jql": "project = ODATA AND component = Vocabularies AND fixVersion is null AND proposal is empty AND status in (Open, New) ORDER BY key ASC"
+    "name": "NEW or OPEN",
+    "jql": "project = ODATA AND status in (Open, New) AND component = Vocabularies AND fixVersion is null ORDER BY key ASC"
   }
 ]
