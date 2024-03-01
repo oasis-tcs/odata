@@ -2,7 +2,7 @@
   {
     "topic": "V4.02 and V4.01 Errata 01",
     "name": "with pull request",
-    "jql": "project = ODATA AND fixVersion in (V4.01_ERRATA01, V4.02) AND status in (New, Open, Resolved, Applied) AND development[pullrequests].open > 0 ORDER BY key ASC, summary ASC"
+    "jql": "project = ODATA AND fixVersion in (V4.01_ERRATA01, V4.02) AND status in (New, Open, Resolved) AND development[pullrequests].open > 0 ORDER BY key ASC, summary ASC"
   },
   {
     "topic": "V4.02 and V4.01 Errata 01",
