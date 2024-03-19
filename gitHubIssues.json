@@ -193,14 +193,14 @@
     "title": "Improve specification and use of NavigationProperties, EntitySets, and Singletons",
     "body": "There is significant confusion over the role and semantics of Singletons and EntitySets.  For example, since Nullable is not an attribute, it is assumed that they must have a value, but implementors are also assuming that if a particular Singleton or EntitySet is not implemented, then a value need not be returned.\n\nObservations on Singletons and EntitySets from an OData metamodel point of view:\n1) A Singleton is a scalar Property with a Type that is an EntityType.\n2) An EntitySet is an array Property with a Type that is an EntityType.\n3) A NavigationProperty with ContainsTarget=\"True\" is a scalar or array Property with a Type that is an EntityType.\n4) A NavigationProperty with ContainsTarget=\"False\" is an association end with a Type that is an EntityType.\n\nThe overlap of 1, 2, and 3 is a source of great confusion.  Additionally the reasons for variations in semantics of these metatypes are not clear.  (i.e. missing Nullable attribute.)\n\n\n\n\n### Proposal\n\nThe following proposals are alternatives for simplifying the OData metamodel.\n\n\nProposal 1:\nAdd clarifying text to 4.01 along these lines:\n•\tA property must be owned by a StructuredType and must have a type\n•\tA scalar property is a property and may have at most one value that is an instance of its type\n•\tA collection property is a property that may have zero or more values that are instances of its type \n•\tA reference type value is a reference to an instance of the type\n•\tAn association end is a property that must be owned by a StructuredType and must have a reference type\n•\tEntityContainer is a special kind of StructuredType that must have exactly one instance in a model\n•\tEntitySet is a special kind of collection property that must be owned by an EntityContainer and must have type EntityType\n•\tSingleton is a special kind of scalar property that must be owned by an EntityContainer and must have type EntityType\n•\tA containment NavigationProperty (ContainsTarget=”True”) is a special kind of collection or scalar property that must be owned by an EntityType or ComplexType and must have type EntityType\n•\tA non-containment NavigationProperty (ContainsTarget=”True”) is a special kind of collection or scalar association end that must be owned by an EntityType or ComplexType and must have type EntityType\n\nAdvantages of proposal 1: \n* No changes required to implementations. \n\nProposal 2: \n1) Allow use of Singleton and EntitySet in the context of an EntityType or ComplexType declaration.\n2) Deprecate the ContainsTarget attribute.\n3) Add Nullable attribute to Singleton and EntitySet.\n\nThe advantages of Proposal 3:\n1) Eliminates implied Singleton and EntitySet.  These are now first class citizens in all cases.\n2) Simplifies specifications since containment NavigationProperty is eliminated.\n3) Clarifies whether or not a value may be omitted.\n\nProposal 4:\n1) Add EntityProperty, with same syntax and semantics as Property except that Type must be an EntityType.\n2) Allow use of EntityProperty in the context of EntityContainer, EntityType, or ComplexType.\n3) Deprecate the ContainsTarget attribute.\n4) Deprecate Singleton and EntitySet\n5) Modify syntax of NavigationProperty to only reference EntityProperties.\n\nThe advantages of Proposal 3:\n1) Eliminates Singleton and EntitySet.  These are now first class EntityProperty elements in all cases.\n2) Eliminates need for ContainsTarget attribute and therefore the concept of containment NavigationProperty.\n3) Rationalizes the syntax differences between Singleton, EntitySet, and NavigationProperty around Property.\n4) Simplifies semantics of NavigationProperty as an association.\n5) Clarifies whether or not a value may be omitted.\n\nProposal 4:\n1) Same as Proposal 3 except that instead of adding EntityProperty, instead extend Property to allow Type to be an EntityType.  In this case, the spec might refer to an entity property as a Property with Type that is an EntityType.\n2) Allow use of Property in the context of EntityContainer, EntityType, or ComplexType declarations.\n3) Deprecate the ContainsTarget attribute.\n4) Deprecate Singleton and EntitySet\n5) Modify syntax of NavigationProperty to only reference entity properties.\n\nThe advantages of Proposal 4:\n1) Everything in Proposal 3.\n2) Does not add a new metatype. \n\n\n\nImported from [ODATA-1059](https://issues.oasis-open.org/browse/ODATA-1059)",
     "labels": [
+      "ABNF",
       "CSDL JSON ",
       "CSDL XML",
       "V4.02"
     ],
     "assignees": [
       "GEricson"
-    ],
-    "repo": "odata-abnf"
+    ]
   },
   {
     "title": "Improve specification of element response requirements",
@@ -208,12 +208,12 @@
     "labels": [
       "CSDL JSON ",
       "CSDL XML",
+      "Vocabularies",
       "V4.02"
     ],
     "assignees": [
       "GEricson"
-    ],
-    "repo": "odata-vocabularies"
+    ]
   },
   {
     "title": "Formally define OData Metamodel ",
@@ -253,10 +253,10 @@
     "body": "With the new \"MayImplement\" annotation, and semantics around using a cast segment to cast to an type outside of the hierarchy we introduce a powerful new way of supporting \"dynamic interfaces\" which may be supported by some instances but not others.\n\nWhat we don't have is a way to specify, for a particular instance, which types (outside of the hierarchy) it supports.\n\n\nImported from [ODATA-1107](https://issues.oasis-open.org/browse/ODATA-1107)",
     "labels": [
       "URL Conventions",
+      "Vocabularies",
       "V4.02"
     ],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "assignees": []
   },
   {
     "title": "Provide guidance for sql-injection type attacks",
@@ -281,9 +281,10 @@
   {
     "title": "Add details to HttpResponse",
     "body": "[ODATA-884](https://issues.oasis-open.org/browse/ODATA-884) introduced a way to describe the set of requests and associated valid responses that could be made against a resource.\n\nThe response includes an HTTP Status code, and the initial proposal included the ability to specify the set of conditions under which the status code may be returned, including a human-readable string and a machine-readable error/status code.\n\nThis detail error code and description would presumably be something that could be returned in the \"details\" section of an error response (i.e., \"code\" and \"message\" below):\n\n{\n  \"error\": {\n    \"code\": \"501\",\n    \"message\": \"Unsupported functionality\",\n    \"target\": \"query\",\n    \"details\": [\n      {\n       \"code\": \"301\",\n       \"target\": \"$search\"  \n       \"message\": \"$search query option not supported\",\n      }\n    ]\n    \"innererror\": {\n      \"trace\": [...],\n      \"context\": {...}\n    }\n  }\n}\n\nThis is similar to an effort going on in OpenAPI: https://github.com/OAI/OpenAPI-Specification/issues/1392 \nwhich references: https://datatracker.ietf.org/doc/rfc7807/?include_text=1 Problem Details for HTTP APIs.\n \n\n### Proposal\n\nAdd a `Details` property to the `HttpResponse` complex type defined in [ODATA-884](https://issues.oasis-open.org/browse/ODATA-884):\n\n```xml\n<Property Name=\"Details\" Type=\"Collection(Core.HttpResponseCodeDetail)\">\n Annotation Term=\"Core.Description\" String=\"Descriptions of conditions resulting in the specified status code.\" />\n</Property>\n```\n\nThis points to a complex type representing a detailcode/description pair describing more details about the condition of the result code:\n\n```xml\n<ComplexType Name=\"HttpResponseCodeDetail\">\n  <Property Name=\"SpecificErrorCode\" Type=\"Edm.String\">\n    <Annotation Term=\"Core.Description\" String=\"Language-independent, machine-readable specific error code\" />\n  </Property>\n  <Property Name=\"Description\" Type=\"Edm.String\">\n    <Annotation Term=\"Core.Description\" String=\"Human-readable description of the response situation\" />\n    <Annotation Term=\"Core.IsLanguageDependent\" />\n  </Property>\n</ComplexType>\n```\n\nImported from [ODATA-1140](https://issues.oasis-open.org/browse/ODATA-1140)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Equivalence of NavigationProperty and Singleton or EntitySet",
@@ -299,22 +300,22 @@
     "title": "Vocabularies Document references  OData Version 4.01. Part 3: Common Schema Definition Language (CSDL)",
     "body": "The OData Version 4.01 Part 1: Protocol document refers to the OData Vocabularies Version 4.0 document.  In turn the OData 4.0 Vocabularies document refers to  _OData Version 4.01. Part 3: Common Schema Definition Language (CSDL).  However there is no longer an OData Version 4.01 Part 3.  Part 3 has been replaced by the following two documents in the 4.01 spec._\n\n_OData Common Schema Definition Language (CSDL) JSON Representation Version 4.01_\n_OData Common Schema Definition Language (CSDL) XML Representation Version 4.01_\n\n### Proposal\n\nIn the Related Work section of the OData Vocabularies document remove the sub-bullet that references \n\n _OData Version 4.01. Part 3: Common Schema Definition Language (CSDL)_\n\nand replace with references to\n\n_OData Common Schema Definition Language (CSDL) JSON Representation Version 4.01_\n_OData Common Schema Definition Language (CSDL) XML Representation Version 4.01_\n\nImported from [ODATA-1204](https://issues.oasis-open.org/browse/ODATA-1204)",
     "labels": [
+      "Vocabularies",
       "V4.01_CS02"
     ],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "assignees": []
   },
   {
     "title": "Annotate constructor/factory actions",
     "body": "In [11.5.4.1 Invoking an Action](http://docs.oasis-open.org/odata/odata/v4.01/cs01/part1-protocol/odata-v4.01-cs01-part1-protocol.html#sec_InvokinganAction) we define that\n> Actions that create and return a single entity follow the rules for entity creation and return a Location header that contains the edit URL or read URL of the created entity.\n> \n\nCurrently there's no way for clients and generic tools to recognize such \"constructor\" or \"factory\" actions. Annotating these actions would be helpful for e.g. OpenAPI generation from $metadata.\n\n### Proposal\n\nAdd tagging term Core.Constructor\n\n```xml\n<Term Name=\"Constructor\" Type=\"Core.Tag\" Nullable=\"false\" DefaultValue=\"true\" AppliesTo=\"Action\">\n  <Annotation Term=\"Core.Description\" String=\"The annotated action constructs new entities\" />\n</Term>\n```\n\nImported from [ODATA-1214](https://issues.oasis-open.org/browse/ODATA-1214)",
     "labels": [
       "Protocol",
+      "Vocabularies",
       "V4.02"
     ],
     "assignees": [
       "ralfhandl"
-    ],
-    "repo": "odata-vocabularies"
+    ]
   },
   {
     "title": "Add (but don't support) ANSI/ISO isolation levels to registered Isolation header",
@@ -341,12 +342,12 @@
     "labels": [
       "JSON Format",
       "Protocol",
+      "Vocabularies",
       "V4.02"
     ],
     "assignees": [
       "ralfhandl"
-    ],
-    "repo": "odata-vocabularies"
+    ]
   },
   {
     "title": "Allow BaseType of EntityType to be a ComplexType",
@@ -412,10 +413,10 @@
     "title": "Fix issues with Capabilities vocabulary",
     "body": "There are a few typos in some of the things we added to the Capabilities vocabulary:\n1) In PermissionType, \"Scheme\" should be of type \"Edm.String\" (and perhaps renamed \"SchemeName\") rather than Auth.SecurityScheme. We don't expect to inline the definition of the security scheme (including supported scopes, etc.)\n2) OperationRestrictions should be a single Capability.OperationRestriction, not Collection(Capability.OperationRestriction).\n3) For consistency, OperationRestriction should really be named OperationRestrictionType\n4) We don't have a way to apply restrictions to an ActionImport.  We can target a FunctionImport with ReadRestrictions (although it would be a bit strange to have a FunctionImport with Readable=false), and Actions and Functions with OperationRestrictions, but we don't have a way to define permissions, headers, etc. associated with an ActionImport.  Everything in OperationRestrictions applies to imports *except* FilterSegmentSupported.\n\n### Proposal\n\n0) Define a new \"SchemeName\" TypeDefinition in the Auth vocabulary and use within Auth vocabulary whenever referencing a scheme.\n1) In PermissionType, rename \"Scheme\" to \"Authorization\" and change type to be \"Auth.SchemeName\".\n2) Change the type of OperationRestrictions to be Capability.OperationRestriction, not Collection(Capability.OperationRestriction).\n3) Rename OperationRestriction to OperationRestrictionType\n4) Remove \"FunctionImport\" from ReadRestrictions \n\nImported from [ODATA-1318](https://issues.oasis-open.org/browse/ODATA-1318)",
     "labels": [
+      "Vocabularies",
       "V4.01_CS02"
     ],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "assignees": []
   },
   {
     "title": "Add Terms, Abbreviated Terms, and Symbols sections to specifications",
@@ -434,12 +435,12 @@
     "title": "Querying \"JSON properties\"",
     "body": "\"JSON properties\" are stream properties whose value is of media type `application/json` or one of its subtypes. They were introduced with [ODATA-1177](https://issues.oasis-open.org/browse/ODATA-1177).\n\nAs outlined in [OData Extension for JSON Data](https://www.oasis-open.org/committees/download.php/46559/OData%20Extension%20for%20JSON%20Data%20v1.0.doc) we need query capabilities on these properties.\n\nRequirements:\n1. Specify a JSON Schema that describes/restricts the JSON stream values ([ODATA-1275](https://issues.oasis-open.org/browse/ODATA-1275))\n1. Address parts of the JSON stream values in common expressions, e.g. in `$filter`, `$compute`, `$orderby` (this issue)\n\nThe second requirement can be solved via functions on JSON stream properties, e.g.\n- extract/compute an OData value (primitive, complex, collection) from a JSON stream\n- special case: extract/compute a JSON stream from a JSON stream\n- special case: extract/compute a Boolean value from a JSON stream\n\nThese functions can be inspired by (or be direct wrappers for) the SQL/JSON functions\n- JSON_QUERY, see [IBM Db2](https://www.ibm.com/docs/en/db2/11.5?topic=functions-json-query), [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/t-sql/functions/json-query-transact-sql?view=sql-server-2017), [Google BigQuery Standard SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/json_functions), or [SAP HANA](https://help.sap.com/viewer/4fe29514fd584807ac9f2a04f6754767/2.0.03/en-US/3126ea33d50d42d19517a08fe22ec5a1.html)\n- JSON_VALUE, see [IBM Db2](https://www.ibm.com/docs/en/db2/11.5?topic=functions-json-value), [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/t-sql/functions/json-value-transact-sql?view=sql-server-2017), [Google BigQuery Standard SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/json_functions), or [SAP HANA](https://help.sap.com/viewer/4fe29514fd584807ac9f2a04f6754767/2.0.02/en-US/9355cb9e45a149c1a6ddb2bd2392d864.html)\n\nPostgreSQL has its own set of [JSON Functions and Operators](https://www.postgresql.org/docs/9.4/functions-json.html).\n\n### Proposal\n\nDefine functions `JSON.query` and `JSON.value` specific to JSON stream properties in the new JSON vocabulary.\n\n \n\nImported from [ODATA-1336](https://issues.oasis-open.org/browse/ODATA-1336)",
     "labels": [
+      "Vocabularies",
       "V4.02"
     ],
     "assignees": [
       "ralfhandl"
-    ],
-    "repo": "odata-vocabularies"
+    ]
   },
   {
     "title": "PATCH: new preference return=delta to get back a delta response",
@@ -476,9 +477,10 @@
   {
     "title": "Detach textual descriptions from operation restriction terms in Capability vocabulary",
     "body": "The terms for describing restrictions on the CRUD capabilities of service operations contain properties for textual descriptions side by side with other properties expressing restrictions with semantic values. A service consumer cannot identify the description properties.\n\n\n### Proposal\n\nUpdate the term definitions to clearly separate the textual descriptions from the semantic restrictions:\n1. Allow application of the terms Core.Description and Core.LongDescription to the types:\n -- InsertRestrictionsType\n -- UpdateRestrictionsType\n -- DeleteRestrictionsType\n -- ReadRestrictionsBase, used by ReadByKeyRestrictionsType and ReadRestrictionsType\nDocument this via Validation.ApplicableTerms\n1. Deprecate usage of properties \"Description\" and \"LongDescription\" in these types. Document this via Core.Revisions of Kind=Deprecated\n\nImported from [ODATA-1358](https://issues.oasis-open.org/browse/ODATA-1358)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Define ExpandOptions for nav property in $select",
@@ -547,9 +549,10 @@
   {
     "title": "Add full-fledged support  for ISO 8601-1 duration ",
     "body": "Next version of OData [protocol ]([https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html)] should support full-fledged duration for Edm.Duration .\n\nThe [ABNF]([https://docs.oasis-open.org/odata/odata/v4.01/os/abnf/odata-abnf-construction-rules.txt)] today states duration value is\n\n   [ SIGN ] \"P\" [ 1*DIGIT \"D\" ] [ \"T\" [ 1*DIGIT \"H\" ] [ 1*DIGIT \"M\" ] [ 1*DIGIT [ \".\" 1*DIGIT ] \"S\" ] ]\ni.e. no years or month as defined by W3C's XML dayTimeDuration.\n\nIn contrast, ISO 8601-1 2019  5.5.2.2 allows to specify Years and Months.\n\nThere are well understood libraries that do support the notion of ISO 8601-1, for example Joda's Period class [https://www.joda.org/joda-time/key_period.html]\n\n\nTo notion of weeks or month as a duration makes it possible to model calendar recurrence patterns in a less custom way.\n\n### Proposal\n\nSimilar to [`Core.LocalDateTime`](https://github.com/oasis-tcs/odata-vocabularies/blob/master/vocabularies/Org.OData.Core.V1.md#localdatetime) add a new type definition based on `Edm.String`.\n\n`Core.YearMonthDayDuration` is a duration in years, months, and days that can be used to describe regularly recurring calendar events. Services MAY support arithmetic operations on `Core.YearMonthDayDuration` values and with `Edm.Date` values and MAY describe this via the term `Capabilities.YearMonthDayDurationSupport`.\n\nImported from [ODATA-1394](https://issues.oasis-open.org/browse/ODATA-1394)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "/$query shall allow Content-Type: application/x-www-form-urlencoded",
@@ -566,20 +569,21 @@
     "title": "No way to $select instance annotations on primitive types",
     "body": "We added the ability to explicitly $select/$expand an instance annotation by including the annotation in the $select list.  However, according to the ABNF, this annotation is of the form @ns.termName[#qualifier] which makes it impossible to $select an annotation applied to a primitive, enum, or collection-valued property (which would be of the form propertyName@ns.termName):\n\nprimitiveAnnotationInQuery = annotationInQuery\nannotationInQuery    = AT [ namespace \".\" ] termName [ HASH annotationQualifier ]\n\n### Proposal\n\nIn order to support explicitly selecting instance annotations on primitive, enum, and collection-valued properties, we would need to ehance the ABNF to support property annotations as in:\n\n```java\nselectProperty = primitiveProperty \n               / primitiveAnnotationInQuery\n               / primitiveProperty primitiveAnnotationInQuery\n```\n \n\nImported from [ODATA-1407](https://issues.oasis-open.org/browse/ODATA-1407)",
     "labels": [
+      "ABNF",
       "URL Conventions",
       "V4.02"
     ],
     "assignees": [
       "mikepizzo"
-    ],
-    "repo": "odata-abnf"
+    ]
   },
   {
     "title": "Capabilities vocabulary: Add EntityContainer as annotation target",
     "body": "If a service that exposes multiple entity sets as endpoints implements only the minimal conformance level and wants to inform clients about its (in)capabilities, it is required to annotate each entity set individually with the restriction terms (top&skip&compute supported, filter & sort restrictions, change tracking etc. These are many repetitions just to express restrictions at service level. \n\n### Proposal\n\n* Create new term at container level with all settings from existing terms that are not yet applicable to containers and do not reference individual properties:\n- Refactor the existing complex types used by the existing terms to be derived from base types used for the properties of the new container-level term.\n- State for each capability that it is combined with the container-level defaults using PATCH semantics, i.e. all container-level default values that are not explicitly changed in a set-level annotation still apply.\n\nImported from [ODATA-1412](https://issues.oasis-open.org/browse/ODATA-1412)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Allow Type of Singleton to be a Primitive, EnumType, or ComplexType",
@@ -659,9 +663,10 @@
   {
     "title": "Capabilities.SearchRestrictions/UnsupportedExpressions: description of default value \"none\" is misleading",
     "body": "The enum type `SearchExpressions` has no description, suggesting it simply is a set of flags allowing to turn _on_ an arbitrary combination of search features. This suggests that the value `none` with a numeric value of `0` means \"no features are on\".\n\nThe description of `none` however is \"Single search term\", suggesting that this is the _minimum_ feature set, and other features can be added on top.\n\nThe single use of type `SearchExpressions` is in the negatively named property `UnsupportedExpressions`, with a default value of `none`. Does this mean that:\n1. \"Single search term\" is _not_ supported, i.e. even the most basic search will _not_ work?\n1. \"None of the features are not supported\", i.e. everything _is_ supported?\n\n### Proposal\n\nOptions:\n1. Change description of `none` to \"no restrictions, all search terms are supported\" - somewhat counter-intuitive in the context of the enum type, but understandable in its single use\n1. Make `UnsupportedExpressions` nullable and its default value `null` - what would the value `none` then mean? No simple search, but more complicated expressions are allowed?\n\nImported from [ODATA-1453](https://issues.oasis-open.org/browse/ODATA-1453)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Potential confusion wrt Content-Type header for media entities",
@@ -686,9 +691,10 @@
   {
     "title": "Keep a CHANGELOG.md, use Semantic Versioning for each vocabulary",
     "body": "We recently published a \"breaking\" change with [https://github.com/oasis-tcs/odata-vocabularies/pull/127] - removing `EntityContainer` from the `AppliesTo` list of a term.\n\nWe claim that `AppliesTo` is only a recommendation, but some tools actually take this literally and do not apply terms to model elements not listed.\n\nIndependent of whether this was really a breaking change we should:\n- Use  [Semantic Versioning](https://semver.org/spec/v2.0.0.html) for each of our vocabulary files and add a version number using annotation `Core.SchemaVersion` to the schema of each vocabulary\n ** We may want to adapt the description of `Core.SchemaVersion` and also mention vocabularies in addition to services, or \"abstract\" to talk about schemas\n- Keep a [Changelog](https://keepachangelog.com/en/1.0.0/) in the repository root as a file `CHANGELOG.md` and mention all (interesting) changes there.\n ** \"Interesting\" are all major changes (rename/remove stuff), and most of the minor changes (add new stuff), but probably not patches.\n\n \n\n### Proposal\n\n* Use  [Semantic Versioning](https://semver.org/spec/v2.0.0.html) for each of our vocabulary files and add a version number using annotation `Core.SchemaVersion` to the schema of each vocabulary\n ** We may want to adapt the description of `Core.SchemaVersion` and also mention vocabularies in addition to services, or \"abstract\" to talk about schemas\n- Keep a [Changelog](https://keepachangelog.com/en/1.0.0/) in the repository root as a file `CHANGELOG.md` and mention all (interesting) changes there.\n ** \"Interesting\" are all major changes (rename/remove stuff), and most of the minor changes (add new stuff), but probably not patches.\n\nImported from [ODATA-1467](https://issues.oasis-open.org/browse/ODATA-1467)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Current instance/collection is only defined adhoc",
@@ -704,9 +710,10 @@
   {
     "title": "Missing term property Capabilities.NavigationRestrictions/.../ComputeSupported",
     "body": "The term [`Capabilities.ComputeSupported`](https://github.com/oasis-tcs/odata-vocabularies/blob/main/vocabularies/Org.OData.Capabilities.V1.md#ComputeSupported) applies only to entity sets, and there is no analogous term property `Capabilities/NavigationRestrictions/RestrictedProperties/ComputeSupported`.\n\nAs a consequence, support for `$compute` cannot be advertised for entity sets addressed by a navigation path.\n\nImported from [ODATA-1480](https://issues.oasis-open.org/browse/ODATA-1480)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Expand all containment navigation properties recursively",
@@ -740,16 +747,18 @@
   {
     "title": "Clarify how to allow/disallow an unbound function in $filter/$orderby",
     "body": "[11.5.4.1 Invoking a Function](https://docs.oasis-open.org/odata/odata/v4.01/os/part1-protocol/odata-v4.01-os-part1-protocol.html#sec_InvokingaFunction)\n states (emphasize mine)\n> Functions can be used within $filter or $orderby system query options. Such functions can be bound to a resource, as described above, *or called directly* by specifying the namespace- (or alias-) qualified function name.\n> \n\nIt states how bound functions can be used. \n The standard also explains how function imports can be used but there seems to be now explanation if and how they are connected for the \"called directly\" case.\n\nWhat is necessary to use a function in $filter an $apply? (e.g. is a function import necessary?)\n And depending on the answer, how can it's usage in these cases be restricted/disabled ?\n\nImported from [ODATA-1499](https://issues.oasis-open.org/browse/ODATA-1499)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Allow to specify expand query options beyond just nested expands (filter, select, ...)",
     "body": "In the current state, [ExpandRestrictions](https://github.com/oasis-tcs/odata-vocabularies/blob/ee275ab8006b9f6a93e8e817656838dcd623da0d/vocabularies/Org.OData.Capabilities.V1.xml#L524) can specify the forbidden *nested* expansions via the NonExpandableProperties but can't specify the other nested query options.\n\nFor example the request `GET /orders/?$expand=items($expand=sku)` is allowed with Capabilities annotation that allows expansion for the paths `[\"items\", \"items/sku\"]`. But the capabilities a) needs to list the NonExpandableProperties b) has no way to specify if there is a filter restriction allowed inside of the expanded `items` ( `GET /orders/?$expand=items($expand=sku; $filter=count gt 10)` )\n\nThis is different for other restrictions that typically are used as part of a NavigationPropertyRestriction that lists the NavigationProperty Path together with all kinds of restrictions.\n\nHypothetical\n\n```xml\n<Annotations Target=\"example.com.Service/orders\">\n  <Annotation Term=\"Org.OData.Capabilities.V1.NavigationRestrictions\">\n    <Record Type=\"Org.OData.Capabilities.V1.NavigationRestrictionsType\">\n      <PropertyValue Property=\"RestrictedProperties\">\n        <Collection>\n          <Record Type=\"Org.OData.Capabilities.V1.NavigationPropertyRestriction\">\n            <PropertyValue Property=\"NavigationProperty\" NavigationPropertyPath=\"items\" />\n            <PropertyValue Property=\"ExpandRestrictions\">\n              <Record Type=\"Org.OData.Capabilities.V1.ExpandRestrictionsType\">\n              </Record>\n            </PropertyValue>\n          </Record>\n          <Record Type=\"Org.OData.Capabilities.V1.NavigationPropertyRestriction\">\n             <PropertyValue Property=\"NavigationProperty\" NavigationPropertyPath=\"items/sku\" />\n             <PropertyValue Property=\"ExpandRestrictions\">\n               <Record Type=\"Org.OData.Capabilities.V1.ExpandRestrictionsType\">\n               </Record>\n             </PropertyValue>\n          </Record>\n        </Collection>\n      </PropertyValue>\n    </Record>\n  </Annotation>\n</Annotations>\n```\n\nBut that doesn't quite capture the situation since the ExpandRestriction is not restricting the navigation property it is \"applied to\" (items and items/sku) in the above but rather is restricting the navigation properties of the structured type of structured type it is applied to (hence the NonExpandableProperties)\n\nImported from [ODATA-1502](https://issues.oasis-open.org/browse/ODATA-1502)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Dry-run of data modification requests",
@@ -775,27 +784,29 @@
     "title": "Allow index segments in path expressions",
     "body": "OData already allows numeric index segments for ordered collections in the path part of the URL, see [ODATA-820](https://issues.oasis-open.org/browse/ODATA-820).\n\nAllow this also in [Path Expressions](https://docs.oasis-open.org/odata/odata/v4.01/os/part2-url-conventions/odata-v4.01-os-part2-url-conventions.html#sec_PathExpressions):\n```java\nGET Entries?$expand=components($orderby=name))&$orderby=components/0/name\n```\nNote: the index in `$orderby` is evaluated on the implicit server-defined order of the `components` as `$orderby` has to be evaluated _before_ `$expand`. This is somewhat counter-intuitive and could be remedied by further extending the path syntax to e.g.\n```\n$orderby=components($orderby=name)/0/name\n```\n\nWith that however it would be more \"natural\" to use a nested `$index` option instead of an index segment:\n```\n$orderby=components($orderby=name;$index=0)/name\n```\n\n\n### Proposal\n\nTwo alternatives:\n- [https://github.com/oasis-tcs/odata-abnf/pull/59]\n- [https://github.com/oasis-tcs/odata-abnf/pull/61]\n\nImported from [ODATA-1506](https://issues.oasis-open.org/browse/ODATA-1506)",
     "labels": [
+      "ABNF",
       "URL Conventions",
       "V4.02"
     ],
     "assignees": [
       "ralfhandl"
-    ],
-    "repo": "odata-abnf"
+    ]
   },
   {
     "title": "Delta: distinguish \"soft-deleted\" and \"hard-deleted\" entities",
     "body": "One of our business object framework would like to only include \"soft-deleted\" entities (`@removed:\\{reason:\"changed\"`}) in standard delta responses, and provide \"hard-deleted\" entities (`@removed:\\{reason:\"deleted\"`}) via a separate call to a bound function.\n\nIs that something the TC wants to allow expressing in the standard Capabilities vocabulary, or is it rather something for an SAP-specific vocabulary?\n\nImported from [ODATA-1512](https://issues.oasis-open.org/browse/ODATA-1512)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Clarify use of read/update restrictions for complex types",
     "body": "Currently, ReadRestrictions and UpdateRestrictions target entities/collections of entities.\n\nMany of these properties apply equally to complex types.\n\n \n\nOne option is adding complex types to the AppliesTo for these and perhaps calling out which are/are not valid for complex types.\n\nImported from [ODATA-1513](https://issues.oasis-open.org/browse/ODATA-1513)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Generalize the use of $each",
@@ -890,9 +901,10 @@
   {
     "title": "Need to constrain functions/actions to particular paths",
     "body": "Today, actions and functions are bound to a type. This implies that, anywhere that type is present, the action or function can be invoked.\n\nThere are many scenarios in which whether an action or function could be invoked is dependent upon where the instance of the type lives.\n\nFor such scenarios, it would be nice to be able to specify exactly what usages of a type supported a particular operation.\n\nOne option would be to introduce a BindingConstraint annotation; something like:\n\n```xml\n<Action Name=\"forward\" IsBound=\"true\" >\n  <AnnotationTerm=\"Org.OData.Core.V1.Capabilities.BindingConstraint\">\n     <Collection>\n        <Record>\n           <PropertyValue Property=\"Target\" ModelElementPath=\"/me/email\"/>\n        </Record>\n     </Collection>\n  </Annotation>\n  <ParameterName=\"bindingParameter\" Type=\"self.email\"/>\n  <ParameterName=\"recipient\" Type=\"Collection(self.recipent)\"/>\n  <ReturnTypeType=\"self.email\" />\n</Action>\n```\n\nIf we don't think we need to add additional properties/annotations to the path, it would be simpler to make a collection of model element paths:\n\n```xml\n<Action Name=\"forward\" IsBound=\"true\" >\n  <AnnotationTerm=\"Org.OData.Core.V1.Capabilities.BindingConstraint\">\n      <Collection>\n         <ModelElementPath>/me/email<ModelElementPath/>\n      </Collection>\n  </Annotation>\n  <ParameterName=\"bindingParameter\" Type=\"self.email\"/>\n  <ParameterName=\"recipient\" Type=\"Collection(self.recipent)\"/>\n  <ReturnTypeType=\"self.email\" />\n</Action>\n```\n\n\n### Proposal\n\nIntroduce two new terms:\n\n*RequiresExplicitBinding* targets a bound action or function and specifies that the operation must be specified through an ExplicitOperationBinding to be available on a model element.\n\n*ExplicitOperationBindings* targets a model element and specifies the qualified name of explicitly bound operations that are supported through that path. These bindings are in addition to any bindings to the target type not annotated with RequiresExplicitBinding.\n```xml\n<Term Name=\"RequiresExplicitBinding\" Type=\"Core.Tag\" DefaultValue=\"true\" AppliesTo=\"Action, Function\">\n  <Annotation Name=\"Description\" Edm.String=\"This bound action or function is only available on model elements annotated with the ExplicitOperationBinding term.\"/>\n</Term>\n\n<Term Name=\"ExplicitOperationBindings\" Type=\"Collection(Edm.String)\"> \n   <Annotation Name=\"Description\" Edm.String=\"The qualified names of explicitly bound operations that are supported on the target model element. These bindings are in addition to any bindings to the type of the target model element not annotated with RequiresExplicitBinding\"/> \n</Term>\n```\n \n\nExample usage:\n```xml\n<Action Name=\"forward\" IsBound=\"true\" >\n  <AnnotationTerm=\"Org.OData.Capabilities.V1.RequiresExplicitBinding\"/>\n  <ParameterName=\"bindingParameter\" Type=\"self.email\"/>\n  <ParameterName=\"recipient\" Type=\"Collection(self.recipent)\"/>\n  <ReturnTypeType=\"self.email\" />\n</Action>\n\n<Annotations Target=\"self.Container/me/email\">\n  <Annotation Term=\"Org.OData.Capabilities.V1.ExplicitOperationBindings\">\n    <Collection>\n      <String>self.forward</String>\n    </Collection>\n  </Annotation>\n</Annotations>\n```\n\nImported from [ODATA-1538](https://issues.oasis-open.org/browse/ODATA-1538)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Chapter 3, example 7 still uses TimeSliceStart and TimeSliceEnd",
@@ -950,9 +962,10 @@
   {
     "title": "Clarify whether Validation.AllowedValues can be applied to collection-valued properties",
     "body": "Validation.AllowedValues takes an array of primitive values, so it is obvious how it constrains the value range of a single-valued primitive-typed model element.\n\nCan this annotation also be applied to model elements whose type is a collection of primitive values, and the value constraint applies to each item in the collection?\n\n### Proposal\n\nTwo alternatives:\n1. Only allow application to single-valued primitive-typed model elements and to type definitions. Restricting values of a collection-valued property can be achieved by introducing a type definition that is annotated with `Validation.AllowedValues`.\n1. Allow annotating single- and collection-valued primitive-typed model elements, and call out that the annotation applies to items of a collection-valued model element, similar to the type facets `MaxLength` etc.\n\nImported from [ODATA-1550](https://issues.oasis-open.org/browse/ODATA-1550)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "4.3.2.3 Delete during a Period, step 3: align with corresponding step of 4.3.2.1, step 3",
@@ -979,12 +992,12 @@
     "body": "Section 8.2.8.2 introduces and describes the use of the 'callback' preference which must include a 'url' parameter. It also describes that the service can advertise it's support for the callback preference by means of the [CallbackSupported annotation](https://github.com/oasis-tcs/odata-vocabularies/blob/main/vocabularies/Org.OData.Capabilities.V1.md#CallbackSupported) from our Capabilities vocabulary.\n\nThe CallbackSupported annotation, of [CallbackType](https://github.com/oasis-tcs/odata-vocabularies/blob/main/vocabularies/Org.OData.Capabilities.V1.md#CallbackType), represents the collection of protocols supported but also a UrlTemplate, a template which can include parameters, parameters for which the meaning can be documented in a document referenced by a DocumentationUrl.\n\nThe clarification I'm seeking is twofold:\n1. What is the relationship between this UrlTemplate property in the CallbackSupported annotation and the url parameter specified as part of the Callback preference?\n1. Can the requester specify a url template as part of that url parameter referencing variables that are available/advocated by the service using this template?\n\nFYI: what I'm trying to do is to allow the requester to specify if, and if so how, it wants the job/request ID (an ID we assign to our asynchronous requests) passed to the service being notified of completion of such job.\n\nImported from [ODATA-1560](https://issues.oasis-open.org/browse/ODATA-1560)",
     "labels": [
       "Protocol",
+      "Vocabularies",
       "V4.01_ERRATA01"
     ],
     "assignees": [
       "Hubert-Heijkers"
-    ],
-    "repo": "odata-vocabularies"
+    ]
   },
   {
     "title": "Clarify \"Expand to the level present in the deep insert request\"",
@@ -1012,12 +1025,12 @@
     "title": "Expand function results ",
     "body": "Allow function results to be included in the response by including the function, optionally with parameters, in the $expand list.\n\nImported from [ODATA-1574](https://issues.oasis-open.org/browse/ODATA-1574)",
     "labels": [
+      "ABNF",
       "Protocol",
       "URL Conventions",
       "V4.02"
     ],
-    "assignees": [],
-    "repo": "odata-abnf"
+    "assignees": []
   },
   {
     "title": "Remove restriction on Partner navigation",
@@ -1101,12 +1114,12 @@
     "labels": [
       "Protocol",
       "URL Conventions",
+      "Vocabularies",
       "V4.02"
     ],
     "assignees": [
       "mikepizzo"
-    ],
-    "repo": "odata-vocabularies"
+    ]
   },
   {
     "title": "Add support for fuzzy search function within $filter, etc.",
@@ -1158,10 +1171,10 @@
     "title": "Separation of concerns: ABNF for URL components instead of whole URLs",
     "body": "We have published ABNF rules for OData request URLs\n- odataUri\n- odataRelativeUri\n- resourcePath\n- queryOptions\n\nwhich are much complicated by the fact that they produce percent-encoded URLs. Because of [ODATA-1583](https://issues.oasis-open.org/browse/ODATA-1583), much of these rules must be duplicated for the context rule, which (being a URL fragment) does not use percent-encoding.\n\nIt would be much easier if we only had ABNF rules for the _components_ of a URL:\n- path segment\n- search parameter name\n- search parameter value\n- fragment\n\nand then assemble a URL from these components, with the necessary percent-encoding.\n\nConsider writing an alternative set of ABNF rules with this approach.\n\nImported from [ODATA-1606](https://issues.oasis-open.org/browse/ODATA-1606)",
     "labels": [
+      "ABNF",
       "V4.02"
     ],
-    "assignees": [],
-    "repo": "odata-abnf"
+    "assignees": []
   },
   {
     "title": "Safety, Security and Privacy Considerations: fill out or remove appendix",
@@ -1186,32 +1199,35 @@
   {
     "title": "Clarify where RequiredProperties have to appear",
     "body": "`Capabilities.FilterRestrictionsType/RequiredProperties` are defined as\n> \n> These properties must be specified in the $filter clause\n> \n\nBe more explicit where/how these must be specified.\n\nFor example if `Foo` is required, is this filter expression sufficient?\n```\n$filter=Foo eq 'bar' or Baz eq 'qux'\n```\nOr do required properties have to appear in every expression of a top-level disjunction?\n\nImported from [ODATA-1611](https://issues.oasis-open.org/browse/ODATA-1611)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Capabilities for creating a relation to an existing entity during insert",
     "body": "The following request creates an Employee entity and associates it to an existing Employee entity via the `Manager` navigation property.\n```\nPOST Employees\n\n{\n  \"Manager@odata.bind\": \"Employees(0)\",\n  \"Name\": \"Peter\"\n}\n```\n\nIs there a Capabilities annotation on the navigation property that would forbid this operation?\n\n* `UpdateRestrictions/NonUpdatableNavigationProperties` controls changing a relation during update.\n* `InsertRestrictions/NonUpdatableNavigationProperties` controls creating a relation together with the related entity during insert.\n* What controls creating a relation to an existing entity during insert?\n\nImported from [ODATA-1612](https://issues.oasis-open.org/browse/ODATA-1612)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Validation.Minimum, Validation.Maximum: clarify possible data types",
     "body": "The term description does not state how closely the data types of the boundaries have to match the data type of the model element they are applied to, especially if the boundaries are provided via a [value path](https://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.html#sec_ValuePath).\n\nIt should be sufficient if the two types can be [cast](https://docs.oasis-open.org/odata/odata/v4.01/os/part2-url-conventions/odata-v4.01-os-part2-url-conventions.html#sec_cast) to each other,\n\nImported from [ODATA-1613](https://issues.oasis-open.org/browse/ODATA-1613)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Add NonSelectableProperties to SelectSupportType",
     "body": "There are times when properties can only be set when creating an entity or updating an entity, but cannot be retrieved.  An example of this would be a password, which can be set through the API but not read.\n\nWe have capabilities for saying that a property can *not* be specified on creation (InsertRestrictions.NonInsertableProperties) or can not be specified on update (UpdateRestrictions.NonUpdatableProperties), and we have SelectSupportType for describing select capabilities, but we don't have any way to say a particular property cannot be read (there is no NonSelectableProperties).\n\n### Proposal\n\n1a. Add NonSelectableProperties to SelectSupportType in the capabilities spec:\n```xml\n<Property Name=\"NonSelectableProperties\" Type=\"Collection(Edm.PropertyPath)\" Nullable=\"false\">\n     <Annotation Term=\"Core.Description\" String=\"These structural properties cannot be specified in a select statement.\" />\n </Property>\n```\n \n\n1b. Alternatively, if we believe that read/write is a fundamental characteristic of the property, rather than a capability of the service, we could add a model annotation to the core vocabulary for specifying the readability/writeability of a property:\n\n```xml\n<Term Name=\"PropertyUsage\" Type=\"Core.PropertyUsageType\" DefaultValue=\"Create Read Update\" Targets=\"property\">\n    <Annotation Term=\"Core.Description\" String=\"Specifies whether the target property is intended for use in a create, read, or update operation.\" />\n</Term>\n<EnumType Name=\"PropertyUsageType\" IsFlags=\"true\">\n   <Member Name=\"Create\" Value=1>\n      <Annotation Term=\"Core.Description\" String=\"The annotated property can be used in a Create operation.\" />\n   </Member>\n   <Member Name=\"Read\" Value=2>\n      <Annotation Term=\"Core.Description\" String=\"The annotated property can be read.\" />\n   </Member>\n   <Member Name=\"Update\" Value=4>\n      <Annotation Term=\"Core.Description\" String=\"The annotated value can be updated.\" />\n   </Member>\n</EnumType>\n```\n\n\n2. Add \"Omitted\" term to OData Core vocabulary used as an instance annotation to describe properties omitted from the payload:\n```xml\n<Term Name=\"Omitted\" Type=\"Edm.String\">\n    <Annotation Term=\"Core.Description\" String=\"The annotated property in a request or response payload was omitted for the specified reason.\" />\n</Term>\n```\n\nImported from [ODATA-1614](https://issues.oasis-open.org/browse/ODATA-1614)",
     "labels": [
+      "Vocabularies",
       "V4.02"
     ],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "assignees": []
   },
   {
     "title": "4.3.2.3 Delete during a Period: add example",
@@ -1290,9 +1306,10 @@
   {
     "title": "clarify usage of Capabilities.IndexableByKey  Vs  Capabilities.ReadRestrictions.ReadByKeyRestriction.Readable",
     "body": "\n\nImported from [ODATA-1627](https://issues.oasis-open.org/browse/ODATA-1627)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Resharpen definitions of PropertyPath and NavigationPropertyPath",
@@ -1310,12 +1327,12 @@
     "title": "In should support empty literal arrays",
     "body": "[ABNF] defines the inexpr as:\n\ninExpr = RWS \"in\" RWS ( listExpr / commonExpr )\n\nwhere listExpr is defined as:\n\nlistExpr  = OPEN BWS primitiveLiteral BWS *( COMMA BWS primitiveLiteral BWS ) CLOSE\n\nmeaning, the list must have at least one primitive literal.\n\nClient code generating the expression may well write the open paren, loop through the elements of the array writing each into the expression, then write a close paren.  If the array is empty, this will result in an empty listExpr.\n\nAny reason not to allow an empty listExpr and force the client code above to handle this as a special case?\n\n### Proposal\n\nUpdate listExpr in ABNF:\n\nlistExpr  = OPEN BWS [primitiveLiteral BWS *( COMMA BWS primitiveLiteral BWS )] CLOSE\n\nCall out that this evaluates to false.\nBe clear that this was added in 4.02.\n\nImported from [ODATA-1633](https://issues.oasis-open.org/browse/ODATA-1633)",
     "labels": [
+      "ABNF",
       "V4.02"
     ],
     "assignees": [
       "mikepizzo"
-    ],
-    "repo": "odata-abnf"
+    ]
   },
   {
     "title": "Case-insensitive contains, startswith and endswith",
@@ -1339,9 +1356,10 @@
   {
     "title": "Distinguish expandability for a collection vs expandability for an item within a collection",
     "body": "Gareth Jones opened [https://github.com/oasis-tcs/odata/issues/12:]\n\nIt's very useful to be able to distinguish capabilities of a single entity in a collection vs the capabilities of a collection.\n\nThis is embodied in ReadRestrictions vs ReadByKeyRestrictions for support for GET foos vs GET foos/\\{fooId}\n\nIn practice we've found that implementing $expand on a single entity is frequently cost-effective, whereas implementing it across a whole collection is not. Consequently we'd like to be able to qualify ExpandRestrictions with something akin to an ExpandByKeyRestrictions.\n\nA cheap and cheerful variant of this would be a boolean control flag in ExpandRestrictions, but it misses the possibility that the expandable set of nav properties varies between single/collection.\n\nFor clarity, we need a vocabulary annotation that allows us to express\n1. NOT Supported: `GET /foos?$expand=bars`\n1. Supported: {{GET /foos/\\{fooId}?$expand=bars}}\n\nAnother issue of ExpandRestrictions is [ODATA-1502](https://issues.oasis-open.org/browse/ODATA-1502).\n\nImported from [ODATA-1639](https://issues.oasis-open.org/browse/ODATA-1639)",
-    "labels": [],
-    "assignees": [],
-    "repo": "odata-vocabularies"
+    "labels": [
+      "Vocabularies"
+    ],
+    "assignees": []
   },
   {
     "title": "Access a property of the result of a non-composable function",
@@ -1357,11 +1375,11 @@
     "title": "More rigorous definition of $<request identifier> references",
     "body": "Sections [11.7.4](https://oasis-tcs.github.io/odata-specs/odata-protocol/odata-protocol.html#ReferencingReturnedEntities) and [11.7.6](https://oasis-tcs.github.io/odata-specs/odata-protocol/odata-protocol.html#ReferencingValuesfromResponseBodies) of OData-Protocol introduce \"references\" of the form `$<request identifier>` but do not rigorously explain how these are to be evaluated.\n\nThese references should be defined in analogy with the `$root` URL segment (in section 11.7.4) or `$this` references (in section 11.7.6). They should also appear in the ABNF.\n\nImported from [ODATA-1641](https://issues.oasis-open.org/browse/ODATA-1641)",
     "labels": [
+      "ABNF",
       "Protocol",
       "V4.02"
     ],
-    "assignees": [],
-    "repo": "odata-abnf"
+    "assignees": []
   },
   {
     "title": "Clarify key values in upsert along navigation properties",
@@ -1376,11 +1394,11 @@
     "title": "Clarify whether query options can be applied to the result of an action invocation.",
     "body": "Originally, actions were intended to map to sql stored procedures and functions to user defined functions.  Sql stored procedures are (possibly) side-effecting and not guaranteed to be idempotent, so are not safe for a query processor to compose with other query operators. As such, stored procedures don't support composition, filtering, ordering, etc., where user defined functions do.\n\nSo, functions have an `IsComposable` attribute to specify whether they can be followed in a resource path with additional segments *and query options*, where actions do not have such an attribute and are defined not to be composable (though we never actually define composable, and whether it only applies to composition in the resource path or whether it precludes things like $orderby/$filter).\n\nOData quickly grew beyond the databases, and we relaxed many of the implication constraints imposed by underlying storage systems such as sql. \n\nThere is nothing in the text or ABNF to explicitly preclude the use of query options, including $filter and $orderby, from being applied to the results of an action. I think that was intentional, but I don't see it explicitly called out anywhere.\n\nThe ABNF *does* preclude appending any segment to a bound action invocation, including the use of /$query for action invocations, but doesn't seem to preclude query options such as ?$filter.\n\nIn [ODATA-569](https://issues.oasis-open.org/browse/ODATA-569), we decided to explicitly allow appending a cast segment to the result of an action, which is performing a special type of filtering operation, further suggesting that such post processing should be supported for actions. However, that doesn't seem to be reflected in the ABNF.\n\nFurther, we do not preclude nextLinks from the results of actions, nor warn that following a nextlink should not cause a side-affecting action to be re-invoked, especially if it is not idempotent (though that could be implied by the use of GET).\n\nSo, while it's clear that actions don't support appending certain segments (i.e., you can't navigate to related entities) it is suggested that some segments (like cast segments) were intended to be supported, and very murky what query options should be supported.\n\n### Proposal\n\nClarify that query options, such as filter, orderby, *may* be supported.\n\nBe clear that following nextLinks should *NOT* cause side-affects.\n\nWarn that $top/$skip, if supported, should not be used to invoke client paging through the results of an action that may be side-affecting.\n\nImported from [ODATA-1644](https://issues.oasis-open.org/browse/ODATA-1644)",
     "labels": [
+      "ABNF",
       "Protocol",
       "URL Conventions"
     ],
-    "assignees": [],
-    "repo": "odata-abnf"
+    "assignees": []
   },
   {
     "title": "Find reliable references for Geo WKT and SRID",
