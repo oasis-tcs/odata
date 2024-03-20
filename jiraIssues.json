@@ -73,7 +73,7 @@
           "32x32": "https://issues.oasis-open.org/secure/useravatar?size=medium&avatarId=10114"
         },
         "displayName": "Ralf Handl",
-        "active": false,
+        "active": true,
         "timeZone": "Europe/Berlin"
       },
       "subtasks": [],
@@ -361,7 +361,7 @@
           "32x32": "https://issues.oasis-open.org/secure/useravatar?size=medium&avatarId=10114"
         },
         "displayName": "Ralf Handl",
-        "active": false,
+        "active": true,
         "timeZone": "Europe/Berlin"
       },
       "subtasks": [],
@@ -1357,7 +1357,7 @@
           "32x32": "https://issues.oasis-open.org/secure/useravatar?size=medium&avatarId=10114"
         },
         "displayName": "Ralf Handl",
-        "active": false,
+        "active": true,
         "timeZone": "Europe/Berlin"
       },
       "subtasks": [],
@@ -19041,9 +19041,14 @@
           "released": false
         }
       ],
-      "resolution": null,
+      "resolution": {
+        "self": "https://issues.oasis-open.org/rest/api/2/resolution/1",
+        "id": "1",
+        "description": "A fix for this issue is checked into the tree and tested.",
+        "name": "Fixed"
+      },
       "customfield_10027": null,
-      "resolutiondate": null,
+      "resolutiondate": "2024-03-20T16:53:27.000+0000",
       "workratio": -1,
       "summary": "Clarify creation of a singleton media entity",
       "lastViewed": null,
@@ -19127,19 +19132,19 @@
         "active": false,
         "timeZone": "America/Los_Angeles"
       },
-      "updated": "2024-02-13T00:44:29.000+0000",
+      "updated": "2024-03-20T16:53:27.000+0000",
       "status": {
-        "self": "https://issues.oasis-open.org/rest/api/2/status/10000",
-        "description": "",
-        "iconUrl": "https://issues.oasis-open.org/images/icons/statuses/assigned.png",
-        "name": "New",
-        "id": "10000",
+        "self": "https://issues.oasis-open.org/rest/api/2/status/5",
+        "description": "A resolution has been taken, and it is awaiting verification by reporter. From here issues are either reopened, or are closed.",
+        "iconUrl": "https://issues.oasis-open.org/images/icons/statuses/resolved.png",
+        "name": "Resolved",
+        "id": "5",
         "statusCategory": {
-          "self": "https://issues.oasis-open.org/rest/api/2/statuscategory/2",
-          "id": 2,
-          "key": "new",
-          "colorName": "blue-gray",
-          "name": "To Do"
+          "self": "https://issues.oasis-open.org/rest/api/2/statuscategory/3",
+          "id": 3,
+          "key": "done",
+          "colorName": "green",
+          "name": "Done"
         }
       }
     }
@@ -19366,7 +19371,7 @@
         "name": "Major",
         "id": "3"
       },
-      "customfield_10001": null,
+      "customfield_10001": "Step 1: come up with one definition of non/composability, also taking actions into account which are \"non-composable\" now\r\n\r\nStep 2: complement it with capabilities to express what actually is possible if a function is \"composable\"",
       "customfield_10002": null,
       "customfield_10025": "0|i035kn:",
       "labels": [],
@@ -19376,7 +19381,7 @@
       "duedate": null,
       "issuelinks": [],
       "assignee": null,
-      "updated": "2024-03-07T09:16:42.000+0000",
+      "updated": "2024-03-20T16:43:04.000+0000",
       "status": {
         "self": "https://issues.oasis-open.org/rest/api/2/status/1",
         "description": "The issue is open and ready for the assignee to start work on it.",
