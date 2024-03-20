@@ -146,7 +146,7 @@
     "title": "Support subsetting returned metadata",
     "body": "After being able to partition large services into smaller ones using cross-service navigation we might want to support requesting multiple of these small files in one request, similar to expanding an entity and including related entities.\n\n### Proposal\n\nAdd a new preference, metadata-scope, that can be specified on a metadata request. The value follows the syntax for the fragment portion of a context URL to describe the shape of results for which the client needs metadata.\n\nClients can then extract the fragment portion of the context url to use in the preference to requests only the metadata required to describe that particular response.  If the response spans multiple namespaces the service MAY include multiple schema elements in the response, one per namespace containing types used in the response.  Since this is a preference, services can also ignore and just return the metadata with references to related metadata.\n\nServices that support the metadata-scope preference SHOULD include a preference-applied header specifying the contextUrl fragment identifying the results described by the returned metadata.\n\nExample: to include the metadata required to describe customers and their orders, the client could specify:\n\nhttp://sampleservice.com/$metadata\nPrefer: metadata-scope=Customers(Orders)\n\nServices can return preference-applied to specify the extent of the metadata included. For any included namespaces, the service must return at least the requested data, but data in related namespaces can be referenced through Include.\n\nImported from [ODATA-923](https://issues.oasis-open.org/browse/ODATA-923)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V4.02"
     ],
@@ -196,7 +196,7 @@
     "body": "There is significant confusion over the role and semantics of Singletons and EntitySets.  For example, since Nullable is not an attribute, it is assumed that they must have a value, but implementors are also assuming that if a particular Singleton or EntitySet is not implemented, then a value need not be returned.\n\nObservations on Singletons and EntitySets from an OData metamodel point of view:\n1) A Singleton is a scalar Property with a Type that is an EntityType.\n2) An EntitySet is an array Property with a Type that is an EntityType.\n3) A NavigationProperty with ContainsTarget=\"True\" is a scalar or array Property with a Type that is an EntityType.\n4) A NavigationProperty with ContainsTarget=\"False\" is an association end with a Type that is an EntityType.\n\nThe overlap of 1, 2, and 3 is a source of great confusion.  Additionally the reasons for variations in semantics of these metatypes are not clear.  (i.e. missing Nullable attribute.)\n\n\n\n\n### Proposal\n\nThe following proposals are alternatives for simplifying the OData metamodel.\n\n\nProposal 1:\nAdd clarifying text to 4.01 along these lines:\n•\tA property must be owned by a StructuredType and must have a type\n•\tA scalar property is a property and may have at most one value that is an instance of its type\n•\tA collection property is a property that may have zero or more values that are instances of its type \n•\tA reference type value is a reference to an instance of the type\n•\tAn association end is a property that must be owned by a StructuredType and must have a reference type\n•\tEntityContainer is a special kind of StructuredType that must have exactly one instance in a model\n•\tEntitySet is a special kind of collection property that must be owned by an EntityContainer and must have type EntityType\n•\tSingleton is a special kind of scalar property that must be owned by an EntityContainer and must have type EntityType\n•\tA containment NavigationProperty (ContainsTarget=”True”) is a special kind of collection or scalar property that must be owned by an EntityType or ComplexType and must have type EntityType\n•\tA non-containment NavigationProperty (ContainsTarget=”True”) is a special kind of collection or scalar association end that must be owned by an EntityType or ComplexType and must have type EntityType\n\nAdvantages of proposal 1: \n- No changes required to implementations. \n\nProposal 2: \n1) Allow use of Singleton and EntitySet in the context of an EntityType or ComplexType declaration.\n2) Deprecate the ContainsTarget attribute.\n3) Add Nullable attribute to Singleton and EntitySet.\n\nThe advantages of Proposal 3:\n1) Eliminates implied Singleton and EntitySet.  These are now first class citizens in all cases.\n2) Simplifies specifications since containment NavigationProperty is eliminated.\n3) Clarifies whether or not a value may be omitted.\n\nProposal 4:\n1) Add EntityProperty, with same syntax and semantics as Property except that Type must be an EntityType.\n2) Allow use of EntityProperty in the context of EntityContainer, EntityType, or ComplexType.\n3) Deprecate the ContainsTarget attribute.\n4) Deprecate Singleton and EntitySet\n5) Modify syntax of NavigationProperty to only reference EntityProperties.\n\nThe advantages of Proposal 3:\n1) Eliminates Singleton and EntitySet.  These are now first class EntityProperty elements in all cases.\n2) Eliminates need for ContainsTarget attribute and therefore the concept of containment NavigationProperty.\n3) Rationalizes the syntax differences between Singleton, EntitySet, and NavigationProperty around Property.\n4) Simplifies semantics of NavigationProperty as an association.\n5) Clarifies whether or not a value may be omitted.\n\nProposal 4:\n1) Same as Proposal 3 except that instead of adding EntityProperty, instead extend Property to allow Type to be an EntityType.  In this case, the spec might refer to an entity property as a Property with Type that is an EntityType.\n2) Allow use of Property in the context of EntityContainer, EntityType, or ComplexType declarations.\n3) Deprecate the ContainsTarget attribute.\n4) Deprecate Singleton and EntitySet\n5) Modify syntax of NavigationProperty to only reference entity properties.\n\nThe advantages of Proposal 4:\n1) Everything in Proposal 3.\n2) Does not add a new metatype. \n\n\n\nImported from [ODATA-1059](https://issues.oasis-open.org/browse/ODATA-1059)",
     "labels": [
       "ABNF",
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V4.02"
     ],
@@ -208,7 +208,7 @@
     "title": "Improve specification of element response requirements",
     "body": "Element response requirements:  \nThere is ambiguity on the use and meaning of Nullable.  \n\nThe reason is a distinction between the semantics of Nullable and whether or not implementation is required.  \n\nAt least in one example, it is common practice to allow a Nullable=False property to be excluded from a response with the implied meaning of not implemented.  The implementation requirement is not a term defined by OData.\n\nProposal:\n1) Add the following Term to Core:\n\n<Term Name=\"ImplementationRequired\" Type=\"Core.Tag\" DefaultValue=\"false\">\n<Annotation Term=\"Core.Description\" String=\"If 'true', implementation of the qualified element is required. If the required element is Nullable and has no value, it may be omitted from a response.  Otherwise it must be present in a related response.\" If an element is not required, it may be omitted from a related response.  If an element is not required and is not Nullable and is not present in a response, it may be assumed to have not been implemented.  If the element is Nullable and not present in a response, it may either have no value or have not been implemented.\" />\n</Term>\n\nThe following summarizes the above:\na.\tNullable=True, Implementation=Optional => Omission implies no value or not implemented\nb.\tNullable=True, Implementation=Required => Omission implies no value\nc.\tNullable=False, Implementation=Optional => Omission implies not implemented, the value is unknown.\nd.\tNullable=False, Implementation=Required => Omission is not allowed, the property must indicate Null if no value.\n\n\n### Proposal\n\nProposal:\n1) Add the following Term to Core:\n\n<Term Name=\"ImplementationRequired\" Type=\"Core.Tag\" DefaultValue=\"false\">\n<Annotation Term=\"Core.Description\" String=\"If 'true', implementation of the qualified element is required. If the required element is Nullable and has no value, it may be omitted from a response.  Otherwise it must be present in a related response.\" If an element is not required, it may be omitted from a related response.  If an element is not required and is not Nullable and is not present in a response, it may be assumed to have not been implemented.  If the element is Nullable and not present in a response, it may either have no value or have not been implemented.\" />\n</Term>\n\nThe following summarizes the above:\na.\tNullable=True, Implementation=Optional => Omission implies no value or not implemented\nb.\tNullable=True, Implementation=Required => Omission implies no value\nc.\tNullable=False, Implementation=Optional => Omission implies not implemented, the value is unknown.\nd.\tNullable=False, Implementation=Required => Omission is not allowed, the property must indicate Null if no value.\n\nImported from [ODATA-1060](https://issues.oasis-open.org/browse/ODATA-1060)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "Vocabularies",
       "V4.02"
@@ -221,7 +221,7 @@
     "title": "Formally define OData Metamodel ",
     "body": "Various aspects of OData seem unclear or redundant.  A formal UML model for the OData metamodel can be used to clarify and simplify OData.   \n\nThe existing metamodel defined by 'MetadataService.xml' contains much of what is needed, but has some issues, such as:\n- The MetadataContainer element refers to metadata elements, but should be referencing instances of metadata elements (i.e. schema).  \n- Various language elements are included, (eg. ne and eq)\n\nThe included proposal started from scratch out of a need to understand several concepts, including the semantics of Singletons and EntitySets.  It needs to be rationalized with the existing 'MetadataService.xml' .  It is preliminary and needs review and refinement.  It is expressed in CSDL XML.  (See https://www.oasis-open.org/apps/org/workgroup/odata/download.php/60420/OdataMetamodel.xml.)   UML diagrams are provided that illustrate this proposal.  (See: https://www.oasis-open.org/apps/org/workgroup/odata/download.php/60421/OdataMetamodel.pdf)\n\nAn advantage of the UML model is that it expresses the Odata metamodel in precise terms.  Constraints and requirements on the various elements of the model are expressed normatively using the UML model together with UML Object Constraing Language (OCL) statements.  An added Term supports this.\n\nThe various schema definition languages CSDL XML, CSDL JSON, and others should conform to the OData metamodel.\n\n\nImported from [ODATA-1062](https://issues.oasis-open.org/browse/ODATA-1062)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V4.02"
     ],
@@ -242,7 +242,7 @@
     "title": "Nullable Collection Navigation Property",
     "body": "There is the assertion:\n\"Nullable MUST NOT be specified for a collection-valued navigation property, a collection is allowed to have zero items.\"\n\nA property, regardless of multiplicity consumes a slot in an instance (entity representation).  The slot has a sequence of values, depending on cardinality.  If the slot has no values, then the property is said to be null.  If an entry in a list of values has no value, then that entry is null.  So, you can both have a collection property that is null or a collection property consisting of a list of null values.  After much discussion, the DMTF specified the following for the values of a collection property (i.e. upper bound on multiplicity > 1)\n- NULL: The collection has no specified value.\n- [] : The collection has no elements (I.e. size = 0\n- [ Null ] : The collection has one element specified as having no value\n- [ \"\" ] : The collection has one element specified as having the empty string\n- [ \"x\", Null, \"y\",...] : The collection has multiple elements, some may be specified as having no value.\n\nThe collection representing the list of values is not a separate modeled entity, rather it is a representation of the value list of the property itself.\n\n### Proposal\n\nExplain the possible variations as described above.  Then remove the prohibition against specifying NULL on a navigation property collection.  It should be treated like any other property.\n\n\nImported from [ODATA-1071](https://issues.oasis-open.org/browse/ODATA-1071)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V4.02"
     ],
@@ -292,7 +292,7 @@
     "title": "Equivalence of NavigationProperty and Singleton or EntitySet",
     "body": "A Service often needs to provide additional data, such as service name, organization, model version, ....  This can be defined in an entity type referenced by a Singleton in the service document, but there really is no need to define a separate type for this purpose or for the additional complexity.\n\nCurrently the Service document (EntityContainer) is restricted to two specially defined property meta types: Singleton and EntitySet.  Assuming null for Singleton is allowed, [ODATA-1183](https://issues.oasis-open.org/browse/ODATA-1183), the functionality of these types is equivalent to functionality provided by containment Navigation Properties.  \n\n### Proposal\n\nThere are two aspects of the proposal.\n\n1) Allow Properties to be declared within an EntityContainer.\n\n2) Deprecate contained Navigation Properties (ContainsTarget = True) in favor of using EntitySet and Singleton declarations within EntityType and ComplexType declarations.\n\nImported from [ODATA-1184](https://issues.oasis-open.org/browse/ODATA-1184)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V5.0"
     ],
@@ -334,7 +334,7 @@
     "title": "ActionImport and FunctionImport on EntityType",
     "body": "We allow calling bound actions/functions with qualified name, or with unqualified (short) name if the namespace defining the function is marked as the default namespace. In the latter case we need precedence rules if action/function names collide with property names.\n\nThis can be avoided if an entity type can actively declare which actions/functions it allows by \"importing\" the (still global) action/function into the type, similar to what we currently do in the entity container. \n\nThis has several benefits:\n- explicitly declare support for bound actions/functions\n- provide clash-free short name for bound action/function\n- harmonize entity container and entity type \n\nImported from [ODATA-1235](https://issues.oasis-open.org/browse/ODATA-1235)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "URL Conventions",
       "V4.02"
@@ -358,7 +358,7 @@
     "title": "Allow BaseType of EntityType to be a ComplexType",
     "body": "Support common XML construction that defines a ComplexType, and then an Element (EntityType) based on that ComplexType.\n\n### Proposal\n\nIn CSDL 6.1\n\nchange:\n\nAn entity type can inherit from another entity type by specifying it as its base type.\nAn entity type inherits the key as well as structural and navigation properties of its base type.\n\nTo: \n\nAn entity type can inherit from another complex type or entity type by specifying it as its base type.\nIf the base type is a complex type, the derived entity type must define a key that consists of one or more references to structural properties..  If the base type is an entity type, the derived entity type inherits the key as well as structural and navigation properties of its base type.\n\n \n\nImported from [ODATA-1246](https://issues.oasis-open.org/browse/ODATA-1246)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V4.02"
     ],
@@ -377,7 +377,7 @@
     "title": "Explicitly state structural restrictions of type Edm.Untyped",
     "body": "The name Edm.Untyped is misleading as this type has an underlying implicit type system that is just more flexible than CSDL's current system of primitive, collection, and structured types.\n\nThis underlying type system is a little underspecified, e.g. there's a somewhat hidden restriction - only stated in the JSON Format specification - that object member names have to be OData SimpleIdentifiers and are not just strings as in JSON.\n\nImported from [ODATA-1262](https://issues.oasis-open.org/browse/ODATA-1262)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "JSON Format",
       "V4.02"
@@ -399,7 +399,7 @@
     "title": "Ability to reference newly discovered OData services",
     "body": "An ecosystem that includes multiple OData services.\n\nExamples:\n- Internet of things, where things have embedded OData services and are plugged into a system, perhaps via wi-fi or blue-tooth.\n- An ecosystem containing vehicles that opportunistically create relationships with available edge servers as they become available.\n\nSchema currently requires a Reference.  But this schema is static and cannot accommodate the use case.\n\n### Proposal\n\nAllow Navigation Property, Singleton, and EntitySet types to either EntityContainer or EntityType.  The addition of EntityContainer as a possibility enables the use case.\n\nImported from [ODATA-1308](https://issues.oasis-open.org/browse/ODATA-1308)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "JSON Format",
       "V4.02"
@@ -429,7 +429,7 @@
     "title": "Add Terms, Abbreviated Terms, and Symbols sections to specifications",
     "body": "Terms are currently defined inline to text.  This makes definition harder to find, (at least on printed copies).\n\n### Proposal\n\nAdd terms, abbreviated terms, and symbols clauses as recommended by ISO/IEC\nDirectives, Part 2 Principles and rules for the structure and drafting of ISO and IEC documents, [https://www.iso.org/sites/directives/current/part2/index.xhtml]\n\nNote: the new OASIS specification template has sections\n- 1.2.1 Definitions of Terms\n- 1.2.2 Acronyms and Abbreviations\n\nWe are already using them in [Data Aggregation](https://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/csd04/odata-data-aggregation-ext-v4.0-csd04.html#DefinitionsofTerms)\n\nImported from [ODATA-1333](https://issues.oasis-open.org/browse/ODATA-1333)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "JSON Format",
       "Protocol",
@@ -504,7 +504,7 @@
     "title": "CSDL Section 12.9 \"Parameter\" mixing with \"overload\" causes ambiguity, particularly with regard to parameter ordering",
     "body": "CSDL XML Section 12.9 Paramerter\n\nFirst paragraph:\n\n```\nAn action or function overload MAY specify parameters.\n```\n\nProblem: Even an action or function that isn't an overload may specify parameters.\n\nSecond paragraph:\n\n```\nA bound action or function overload MUST specify at least one parameter; the first parameter is the binding parameter. The order of parameters MUST NOT change unless the schema version changes.\n```\n\nProblem: Ambiguous as to whether parameter ordering may (or may not) change seems linked to whether we are referring to an overloaded, or non-overloaded, action or function.\n\nSince I originally identified the issue about parameter ordering, I can assert that I wasn't concerned about ordering only for overloaded actions/functions. It is important for parameter ordering to remain stable for non-overloaded actions/functions. (Otherwise client applications using code generated from model elements will experience backwards-incompatible changes in method/function signatures).\n\nFurthermore, the \"Element edm:Action\" and \"Attribute Name\" parts belong in section 12.1 \"Action\", not in 12.2 \"Action Overloads\".\n\nSimilarly, the \"Element edm:Function\" and \"Attribute Name\" parts belong in section 12.3 \"Function\", not in 12.4 \"Function Overloads\".\n\n\n### Proposal\n\nDistinguish between\n- an action/function as the named set of all its signature definitions aka overloads\n- a single signature definition aka overload\n\n \n\nImported from [ODATA-1370](https://issues.oasis-open.org/browse/ODATA-1370)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V4.01_ERRATA01"
     ],
@@ -527,7 +527,7 @@
     "title": "Introduce primitive types for color values",
     "body": "Consider adding a new primitive type for color to the list of standard primitive types at\n\n[http://docs.oasis-open.org/odata/odata/v4.01/csprd01/part3-csdl/odata-v4.01-csprd01-part3-csdl.html#_Toc469935966]\n\n \n\nWith a JSON serialization format similar to (or a subset of ) [https://www.w3.org/TR/css-color-3/#numerical]\n\n[CSS, 6.3 Color units](https://www.w3.org/TR/REC-CSS1-961217#color-units)\n\nImported from [ODATA-1386](https://issues.oasis-open.org/browse/ODATA-1386)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "JSON Format",
       "V4.02"
@@ -538,7 +538,7 @@
     "title": "Make key aliases optional, clarify multiple to-one navigation hops",
     "body": "When using an \"association to one\" as a key component, it is currently required to provide an alias for use in parentheses-style key syntax.\n\nThis can lead to \"funny\" aliases when the OData model is automatically derived from a conceptual model that does not know about OData key syntax.\n\n\n### Proposal\n\nCSDL:\n- Make key aliases optional for keys with a path.\n- Clarify that multiple non-nullable to-one navigation hops can occur if the referenced key property of the directly related entity type itself is referenced from a directly related entity type etc.\n\nURL Conventions:\n- If no key alias is provided for a related/nested primitive property, use the dash-separated path in parentheses-style keys, e.g. `/something(foo-bar-id='abc')`\n\nImported from [ODATA-1388](https://issues.oasis-open.org/browse/ODATA-1388)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "URL Conventions",
       "V5.0"
@@ -597,7 +597,7 @@
     "title": "Allow Type of Singleton to be a Primitive, EnumType, or ComplexType",
     "body": "In the context of an EntityContainer, it is more difficult than necessary to include a service level property or set of properties.  \n\nFor example, if we want to expose the service name as a simple string property in the entity container (i.e. as a Singleton).\n\nWe could add this to a *Details* entity type without a key, and then reference this via a Singleton.  Then _GET_ _get <service>/details/name._ It would be more natural to simply _GET <service>/name._   In another example, suppose we want to reuse this structure within other entity types.  If *Details* is specified as a _complex type_, then the natural thing is to define a scalar _property_ *detail* with type *Details*.  However, if *Details* is an entity type, we instead use a scalar _navigation property with attribute_ _ContainsTarget=true_ _and annotate_ with Core._AutoExpand_ to get the same behavior.\n\n \n\n \n\n \n\n### Proposal\n\nProposed change to 13.3 Singleton of CSDL specs\nFrom:\n`A singleton MUST specify a type that MUST be an entity type in scope.`\nTo:\n`A singleton MUST specify a type that MUST be an entity type` *, primitive type, complex type, or enumeration type* `in scope.`\n\nImported from [ODATA-1415](https://issues.oasis-open.org/browse/ODATA-1415)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V5.0"
     ],
@@ -631,7 +631,7 @@
     "title": "Conditionally add an element to a collection",
     "body": "[OData-CSDL, section 14.4.7](https://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.html#sec_IfThenElse) allows `If` without third (\"else\") child only as a direct descendant of a `Collection`. But the following would also make sense:\n```xml\n<Collection>\n <If>\n  <Path>IsLTR</Path>\n  <String>margin-left</String>\n  <If>\n   <Path>IsRTL</Path>\n   <String>margin-right</String>\n  </If>\n </If>\n</Collection>\n```\nThis would add \"margin-left\" or \"margin-right\" to the collection for left-to-right and right-to-left scripts, respectively, but add nothing, e.g., for top-to-bottom scripts. The `If` without \"else\" is embedded in another `If`.\n\n### Proposal\n\nThe if-then-else expression enables a value to be obtained by evaluating a condition expression. _The if-then-else expression is called a collection-if-then-else expression if_\n- _it is a direct child of a collection expression or_\n- _it is the second or third child of a collection-if-then-else expression._\n\n_An if-then-else expression_ MUST contain exactly three child expressions. There is one exception to this rule: if and only if the if-then-else expression is a <del>direct child of a collection expression</del> _collection-if-then-else expression_, the third child expression MAY be omitted, reducing it to an if-then expression. This can be used to conditionally add an element to a collection.\n\nImported from [ODATA-1435](https://issues.oasis-open.org/browse/ODATA-1435)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V4.02"
     ],
@@ -710,7 +710,7 @@
     "title": "Current instance/collection is only defined adhoc",
     "body": "[OData-CSDL, section \"Path evaluation\"](https://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/cos01/odata-csdl-xml-v4.01-cos01.html#sec_PathEvaluation) says that certain paths \"resolve to a type\" and leaves unclear what this means for instance paths, especially since the annotation target may be\n- a single instance (like for `Measures.ISOCurrency`)\n- or a collection (like for `Capabilities.UpdateRestrictions` where the path is evaluated for each instance in turn).\n\nThe current wording hides the fact that the specification does not have an overarching notion of \"current instance\" or \"current collection\". These have rather been introduced in an adhoc manner and were therefore not available in the section on path evaluation or in the definition of the aggregate function (see [ODATA-1451](https://issues.oasis-open.org/browse/ODATA-1451)). Compare this to the [XPath specification](https://www.w3.org/TR/xpath-10/) which begins by saying\n> Expression evaluation occurs with respect to a context. ... The context consists of:\n> - a node (the context node)\n> - a pair of non-zero positive integers (the context position and the context size)\n> - a set of variable bindings\n> - a function library\n> - the set of namespace declarations in scope for the expression\n\nand then makes use of these terms throughout the text.\n\nSuggestion to try something similar in the OData spec.\n\nImported from [ODATA-1479](https://issues.oasis-open.org/browse/ODATA-1479)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "URL Conventions",
       "V4.02"
@@ -846,7 +846,7 @@
     "title": "Support collapsing individual sections (chapters) in the HTML versions of the specification",
     "body": "\n\n### Proposal\n\nFor better usability of the standard's documents it would be beneficial to be able to collapse complete sections (chapters, sub-chapters .\n\nsee [How To Create a Collapsible (w3schools.com)](https://www.w3schools.com/howto/howto_js_collapsible.asp) for \"collapsible\"\n\nImported from [ODATA-1526](https://issues.oasis-open.org/browse/ODATA-1526)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "JSON Format",
       "Protocol",
@@ -861,7 +861,7 @@
     "title": "Allow functions/actions to return (and take) a delta payload",
     "body": "We define a delta payload that can be returned from a(n opaque) delta link, as well as other service-defined mechanisms.\n\nHowever, we don't have a way to define a custom function (or action) that can return a delta payload, and there are many places where a service may want to describe the results of a custom function (or action) using a delta payload.\n\nSimilarly, one can imagine using the delta payload as a payload to a custom action.\n\nHow can users define functions/actions that can return (or take) delta payloads.\n\nImported from [ODATA-1527](https://issues.oasis-open.org/browse/ODATA-1527)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V4.02"
     ],
@@ -1053,7 +1053,7 @@
     "title": "Remove restriction on Partner navigation",
     "body": "Consider the following scenario:\n- Foo\n  - allBar Type=Collection(Bar) Partner=foo\n  - redBar Type=Collection(Bar) Partner=foo\n  - greenBar Type=Collection(Bar) Partner=foo\n- Bar\n  - foo Type=Foo Partner=allBar\n\nThese partner navigation properties satisfy the basic rules\n> If the partner navigation property is single-valued, it MUST lead back to the source entity from all related entities. If the partner navigation property is collection-valued, the source entity MUST be part of that collection.\n> \n\nIn addition this model clearly expresses that the pair (Foo/allBar, Bar/foo) forms a bi-directional relationship, and the other two navigation properties on Foo are uni-directional with a back-link.\n\nUnfortunately this model violates the last paragraph in CSDL section [8.3 Partner Navigation Property](https://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.html#sec_PartnerNavigationProperty)\n> If a partner navigation property is specified, this partner navigation property MUST either specify the current navigation property as its partner to define a bi-directional relationship or it MUST NOT specify a partner navigation property. The latter can occur if the partner navigation property is defined on a complex type, or if the current navigation property is defined on a type derived from the type of the partner navigation property.\n> \n\nA spec-compliant model would have to hide useful information, either\n- remove Partner=allBar from Bar/foo, or\n- remove Partner=foo from Foo/redBar and Foo/greenBar\n  \n\n### Proposal\n\nReplace the requirement with an explanation\n\n> \n> If a partner navigation property is specified, and this partner navigation property specifies the current navigation property as its partner, the two navigation properties define a bi-directional relationship. A partner navigation property may specify a navigation property different from the current navigation property. \n> \n\n\n \n\nImported from [ODATA-1575](https://issues.oasis-open.org/browse/ODATA-1575)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V4.02"
     ],
@@ -1074,7 +1074,7 @@
     "title": "Further clarify restrictions around open types",
     "body": "[ODATA-1498](https://issues.oasis-open.org/browse/ODATA-1498) clarifies that \"A collection of primitive values that occurs in a property of type Edm.Untyped is interpreted as a collection of Edm.Boolean, Edm.String, and Edm.Decimal, depending on the JavaScript type.\"\n\nThis rule is true because we can't specify the type of a primitive value within a collection. However, the wording is misleading, because:\n1) It's a bit ambiguous what \"occurs in a property of type Edm.Untyped\" references – is that to say, that the property *is* an untyped collection of primitives, or is an untyped collection that contains a collection of untyped primitives, or...? \n\n2) It doesn't mention Collection(Edm.Untyped)\n\n3) It implies that the *collection* is a collection of one of the javascript types, as opposed to an individual value within any untyped collection being interpreted as one of these types.  i.e., the collection itself is untyped, and can contain primitives of any of these three types.\n\nBetter wording would be something like \"A primitive value within an untyped collection is interpreted as a Edm.Boolean, Edm.String, or Edm.Decimal.\"\n\nIn addition, we should note that a collection nested within a collection will always be an untyped collection; this is because there is no place to put a type annotation for the collection, and we say that, once you enter the untyped world, you remain untyped unless type information is explicitly supplied.\n\n \n\n### Proposal\n\n1) Close [ODATA-1498](https://issues.oasis-open.org/browse/ODATA-1498) with no further action. It clarifies what was originally intended, and that clarification has been applied. Use this issue to track restrictions around how primitives are interpreted within an untyped collection.\n\n2) Add a note to [OData-JSON] that \"A primitive value within an untyped collection is interpreted as a Edm.Boolean, Edm.String, or Edm.Double.\"\n\n3) Clarify that an enum value within an untyped collection should be represented as a string, using the member name.\n\n4) Clarify that any collection within an untyped collection is itself untyped.\n\nImported from [ODATA-1580](https://issues.oasis-open.org/browse/ODATA-1580)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "Protocol",
       "V4.01_ERRATA01",
@@ -1166,7 +1166,7 @@
     "title": "Clarify support for supplementary plane characters in OData Identifiers",
     "body": "in [OData Common Schema Definition Language (CSDL) XML Representation Version 4.01 (oasis-open.org)](http://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.html#sec_SimpleIdentifier) we define the rules for a legal identifier (for instance, a property name) in OData as follows:\n> A simple identifier is a Unicode character sequence with the following restrictions:\n> - It consists of at least one and at most 128 Unicode characters (code points).\n> - The first character MUST be the underscore character (U+005F) or any character in the Unicode category “Letter (L)” or “Letter number (Nl)”.\n> - The remaining characters MUST be the underscore character (U+005F) or any character in the Unicode category “Letter (L)”, “Letter number (Nl)”, “Decimal number (Nd)”, “Non-spacing mark (Mn)”, “Combining spacing mark (Mc)”, “Connector punctuation (Pc)”, and “Other, format (Cf)”.\n> \n> Non-normatively speaking it starts with a letter or underscore, followed by at most 127 letters, underscores or digits.\n> \n\nThe Unicode Category L is defined as Lu | Ll | Lt | Lm | Lo.\n\nWhere Lo is \"Other Letter\".\n\nQuestion: did we intent to include Surrogates (see [The Unicode Standard, Version 15.0)](https://www.unicode.org/versions/Unicode15.0.0/ch03.pdf#G2630) (or, more properly, [supplementary plane characters](https://en.wikipedia.org/wiki/Plane_(Unicode))) as valid characters in an OData identifier?\n\nThe rules for valid property names were largely taken from programming languages in order to facilitate mapping between OData types and language objects. C#, for example, does not allow surrogates in property names.\n\nNote that [ODATA-1348](https://issues.oasis-open.org/browse/ODATA-1348) tries to distinguish between characters and code points with regard to things like max string length, but this doesn't address character validity within an identifier.\n\n### Proposal\n\nWe believe, according to the current rules, that characters from the supplementary plane would be included in Lo, so are valid in identifiers.\n\nHowever, rather than call out characters that we don't recommend, we will leave that as an exercise to the reader and instead add a comment that, in order to support maximum interoperability, services SHOULD only use A-Z, a-z, 0-9, and underscore in identifiers.\n\nImported from [ODATA-1599](https://issues.oasis-open.org/browse/ODATA-1599)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V4.02",
       "Resolved"
@@ -1314,7 +1314,7 @@
     "title": "Should support annotations to bound actions/functions via path",
     "body": "For capability annotations in particular, we have moved towards path-based external targeting in order to differentiate capabilities based on how the element is accessed.\n\nThese type of path-based annotation targets start with the entity container, started by an entity set, singleton, action import or function import, and then on from there, using the following rule:\n\n·         [qualified name](https://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.html#sec_QualifiedName) of an entity container followed by a segment containing a singleton or entity set name and zero or more property, navigation property, or type-cast segments\n\nHowever, this rule doesn't include target paths that contain bound actions/functions.\n\n### Proposal\n\nAdd bound actions and bound functions to the list of things allowed within a target path for annotations.\n\nParameters can be used to differentiate overloads, including differentiating targets that identify operations bound to a collection versus members of a collection of a particular type.\n\nhttps://github.com/oasis-tcs/odata-specs/pull/233\n\nImported from [ODATA-1626](https://issues.oasis-open.org/browse/ODATA-1626)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V4.02"
     ],
@@ -1334,7 +1334,7 @@
     "title": "Resharpen definitions of PropertyPath and NavigationPropertyPath",
     "body": "V4.01 rephrased the definitions of `PropertyPath` and `NavigationPropertyPath` _and_ added absolute paths, which in combination leads to the strange effect that these two kinds of path expressions can now reference term definitions.\n\nThis is certainly surprising and afaik unintended.\n\n### Proposal\n\nRevert back to the sharper definition from V4.0 Errata 03.\n\nImported from [ODATA-1630](https://issues.oasis-open.org/browse/ODATA-1630)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V4.02"
     ],
@@ -1386,7 +1386,7 @@
     "title": "Access a property of the result of a non-composable function",
     "body": "Must a function be composable to allow access to individual properties of its returned value?\n```java\nGET BillingDocument('90000090')/self.GetPDF()/BillingDocOutputDataBinary\n```\nThe [CSDL specification](https://docs.oasis-open.org/odata/odata-csdl-json/v4.01/odata-csdl-json-v4.01.html#sec_ComposableFunction) says\n> A composable function can be invoked with additional path segments or key predicates appended to the resource path that identifies the composable function, and with system query options as appropriate for the type returned by the composable function.\n> \n\nand `BillingDocOutputDataBinary` is an \"additional path segment\".\n\nThe [Protocol specification](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_InvokingaFunction) seems to allow system query options without composability\n> \n> If the function is composable, additional path segments may be appended to the URL that identifies the composable function (or function import) as appropriate for the type returned by the function (or function import). The last path segment determines the system query options and HTTP verbs that can be used with this this URL\n> \n\n\nAssuming that `BillingDocOutputDataBinary` is a stream property,\n```java\nGET BillingDocument('90000090')/self.GetPDF()?$expand=BillingDocOutputDataBinary\n```\nis allowed without composability, and it requires the server to retrieve the same data (just serialize it differently).\n\n Related to [ODATA-1644](https://issues.oasis-open.org/browse/ODATA-1644)\n\n### Proposal\n\nStep 1: come up with one definition of non/composability, also taking actions into account which are \"non-composable\" now\n\nStep 2: complement it with capabilities to express what actually is possible if a function is \"composable\"\n\nImported from [ODATA-1640](https://issues.oasis-open.org/browse/ODATA-1640)",
     "labels": [
-      "CSDL JSON ",
+      "CSDL JSON",
       "CSDL XML",
       "V4.01_ERRATA01"
     ],
