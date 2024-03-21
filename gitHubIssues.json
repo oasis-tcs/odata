@@ -6,7 +6,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify that content-id referencing for newly created entities also works for entities created by an action",
@@ -16,7 +17,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Referencing values from request bodies in batch requests: add examples",
@@ -27,7 +29,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Authorization: use consistent alias in vocabulary definition",
@@ -36,7 +39,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Section 11.5.2 is about \"operations\", not only \"actions\"",
@@ -46,7 +50,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Validation.Constraint may also be applied to a navigation property",
@@ -55,7 +60,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Avoid homonym \"target path\"",
@@ -66,7 +72,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "CSDL: correct examples for odata.concat to use two parameters",
@@ -77,7 +84,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Avoid \"MAY ... only if\"",
@@ -88,7 +96,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify context URL in JSON error response",
@@ -98,7 +107,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Consistently use \"parameter\" instead of \"argument\"",
@@ -108,7 +118,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify matchespattern and regular expression flags",
@@ -118,7 +129,8 @@
       "V4.02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Is ODATA-1472 an erratum or a new feature?",
@@ -128,7 +140,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Data Modification Request succeeds, but response body cannot be created",
@@ -138,7 +151,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Latest updates for Aggregation vocabulary use wrong-typed DefaultValue for Core.OptionalParameter",
@@ -148,7 +162,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "ABNF for key values is overly generous",
@@ -158,7 +173,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify meaning of trailing spaces in $search query option",
@@ -168,7 +184,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "CSDL example 39 applies to Term",
@@ -178,26 +195,31 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "concat: allow more than two arguments",
     "body": "The URL function [`concat`](https://docs.oasis-open.org/odata/odata/v4.01/os/part2-url-conventions/odata-v4.01-os-part2-url-conventions.html#sec_concat) is currently defined with exactly two arguments.\n\nHowever all its example uses as a client-side function in annotations in the CSDL specs use three or more arguments, which is quite natural.\n\n### Proposal\n\nCorrect examples in CSDL specs via [ODATA-1628](https://issues.oasis-open.org/browse/ODATA-1628) and close this issue and its associated PRs\n- [https://github.com/oasis-tcs/odata-specs/pull/230]\n- [https://github.com/oasis-tcs/odata-abnf/pull/111] \n\nwithout action.\n\nImported from [ODATA-1601](https://issues.oasis-open.org/browse/ODATA-1601)",
     "labels": [
       "URL Conventions",
-      "V4.02"
+      "V4.02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Functions and Actions as Interfaces",
     "body": "I would like to define an OData function or action outside of a service that serves as an interface. Such a function/action could then be invoked by a special client whenever a service implements it.\n\nThe functions `isancestor` and `isdescendant` defined in the Aggregation vocabulary would have been candidates for such treatment, if we had not assumed they are implemented by _every_ service that uses the `Aggregation.RecursiveHierarchy` annotation.\n\nIf the interface has a parameter or return type of an abstract type like `Edm.EntityType`, its implementations MAY (or MUST) replace this with a concrete entity type.\n\n### Proposal\n\n[https://github.com/oasis-tcs/odata-vocabularies/pull/228]\n\nThe proposed annotation\n```json\n\"ActionA\": [{\n  \"$Kind\": \"Action\",\n  \"@Core.ImplementsSignature\": \"ActionB\"\n}]\n```\nis not superior to currently used annotations like\n```json\n\"EntityType\": {\n  \"$Kind\": \"EntityType\",\n  \"@SAP.ActionB\": \"ActionA\"\n}\n```\nTherefore close this issue without further action.\n\nImported from [ODATA-1600](https://issues.oasis-open.org/browse/ODATA-1600)",
     "labels": [
-      "Vocabularies"
+      "Vocabularies",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Example number 21 is used 3 times in the JSON format document",
@@ -206,17 +228,20 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow Scale=\"floating\" also in 4.0 responses",
     "body": "Section [7.2.4 Scale](https://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.html#sec_Scale) restricts use of `Scale=\"floating\"` to responses with `OData-Version: 4.01`.\n\nThis seems too hard given that the XML documents use the same XML namespace http://docs.oasis-open.org/odata/ns/edm, which references the combined 4.0 plus 4.01 XML schema.\n\n\n### Proposal\n\nRelax to\n> OData 4.0 responses SHOULD NOT specify the value `floating`.\n> \n\n\nImported from [ODATA-1596](https://issues.oasis-open.org/browse/ODATA-1596)",
     "labels": [
       "CSDL XML",
-      "V4.02"
+      "V4.02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Replace references to RFC7230, RFC7231, and RFC7232 with RFC9110",
@@ -226,7 +251,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "11.4.12 Update a Collection of Entities: add examples",
@@ -237,7 +263,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "correct vocabulary URIs in CSDL XML examples",
@@ -247,7 +274,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "OData-Protocol example 64 is syntactically wrong",
@@ -257,7 +285,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow creating and linking along a nullable single-valued navigation",
@@ -267,7 +296,8 @@
       "V4.02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Remove reference to obsolete GeoJSON document",
@@ -277,7 +307,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Inconsistency regarding $select=@Namespace.Term",
@@ -288,7 +319,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Mention use of ETag with bound function: only process if binding entity matches ETag",
@@ -298,7 +330,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify duplicate properties in JSON Batch payload",
@@ -308,7 +341,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Consistently use \"annotated with the term\" instead of \"annotated with term\"",
@@ -321,7 +355,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Consistently use \"entity-id\" instead of \"entity id\"",
@@ -335,7 +370,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Consistently use \"instances of structured types\" instead of \"structured instances\"",
@@ -348,14 +384,16 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "2023 Virtual Face-to-Face Agenda",
     "body": "Walldorf rooms and times\n|| ||Tue, May 2||Wed, May 3||Thu, May 4||Fri, May 5||\n|*morning*|WDF53 B1.01|WDF53 B1.01| |WDF53 B1.02|\n| |Work time| |Hiking event| |\n|*room switch*|1pm|2pm|3:30pm| |\n|*afternoon*|WDF53 B1.02|WDF53 B1.02|WDF53 B1.02|WDF53 B1.02|\n| |Work time| | | |\n|*4-6pm*|4-4:30 Refine Agenda\n 4-6: Aggregation (Heiko/Gerald)|4-5: 4.01 Triage (Ralf)\n 5-6: Aggregation (Heiko/Gerald)|RSDL Open Items (Mike/Christof)\n RSDL Wrap-up (Mike/Christof)|4-5: RAPID inventory/next steps (Mike)\n 5-6: Aggregation (Heiko/Gerald)|\n|*6-6:15pm*|Break|Break|Break|Break|\n|*6:15-7pm*|RSDL Capabilities (Mike/Christof)|Aggregation (Heiko/Gerald)|RSDL Wrap-up (Mike/Christof)|Aggregation (Heiko/Gerald)|\n|*7-8pm*|4.01 Triage (Ralf)|Aggregation (Heiko/Gerald)|Aggregation (Heiko/Gerald)|Revisit Timeline, Wrap-up|\n\n \n\nImported from [ODATA-1572](https://issues.oasis-open.org/browse/ODATA-1572)",
     "labels": [],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow empty entity containers",
@@ -366,7 +404,8 @@
       "V4.02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "CSDL XML is defined with reference to XML 1.1 but none of the examples use XML version 1.1 documents",
@@ -376,17 +415,20 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow CSDL JSON also for OData versions 2.0 and 3.0",
     "body": "As a first step relax the JSON Schema to also allow these two values for the `$Version` field in CSDL JSON files.\n\n### Proposal\n\nClose without further action.\n1. CSDL XML also doesn't cover v1, v2, or v3\n1. CSDL JSON can't represent constructs from earlier versions that were not taken over into v4\n\nImported from [ODATA-1569](https://issues.oasis-open.org/browse/ODATA-1569)",
     "labels": [
       "CSDL JSON",
-      "V4.02"
+      "V4.02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Allow handling of in-stream errors on protocol level",
@@ -396,7 +438,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify: Is Open on a derived type required or implied",
@@ -404,10 +447,12 @@
     "labels": [
       "CSDL JSON",
       "CSDL XML",
-      "V4.01_ERRATA01"
+      "V4.01_ERRATA01",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Document that Measures terms can also apply to parameters",
@@ -416,7 +461,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Protocol 11.7.7.1 misleading text on request formats",
@@ -426,7 +472,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "URL 4.11, paragraph 2: clarify restriction \"that is part of a Boolean expression\"",
@@ -436,7 +483,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify uniqueness of bound action and function names",
@@ -447,7 +495,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify format of AsyncResult response header value",
@@ -458,7 +507,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify definition of transient",
@@ -468,7 +518,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Collection-valued Aggregation.RecursiveHierarchy/ParentNavigationProperty",
@@ -478,7 +529,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Entities with ambiguous property values",
@@ -488,7 +540,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Strengthen definitions for $orderby, $top and $skip",
@@ -498,7 +551,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify the algorithm for evaluating the compute transformation",
@@ -508,7 +562,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify the algorithm for evaluating $compute",
@@ -518,7 +573,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "edm.xsd permits primitive Type for NavigationProperty",
@@ -528,7 +584,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Recursive complex types must be nullable",
@@ -539,7 +596,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify /$value segment appended to function returning a primitive value",
@@ -550,7 +608,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Conflicting information about presence of read-only properties on update",
@@ -560,7 +619,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Forward slashes in /$filter segments",
@@ -570,7 +630,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Require decoding of plus as space in query part of URL",
@@ -580,7 +641,8 @@
       "V4.02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify decoding of plus character in URLs",
@@ -590,7 +652,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "edm.xml: types TSimpleIdentifier, TNamespaceName, and TQualifiedName too restrictive",
@@ -600,7 +663,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "ODATA 4.01. 16.1 Example CSDL has missing alias",
@@ -610,7 +674,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow more methods to qualify start nodes of transformation ancestors and descendants",
@@ -620,7 +685,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Align usages of recursive hierarchies",
@@ -630,7 +696,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "14.1.2 Applicability: clarify that \"Property\" means \"structural property\" and excludes navigation properties",
@@ -641,7 +708,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Specify when and how stream valued properties are included",
@@ -651,7 +719,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify context URL for response to $expand=*",
@@ -661,7 +730,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify key-as-segment representation for Duration and EnumValue",
@@ -671,7 +741,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Can Validation.DerivedTypeConstraint specify collection-valued types?",
@@ -680,14 +751,18 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Define behavior for partial /$count",
     "body": "We define the $count=true query option as returning an estimate of the number of records matching the request. In OData-1516 we introduced control information that a service could return in order to convey the accuracy of the inline count, and specifically to enabling returning a partial count where counting all of the items was too expensive.\n\n/$count in the resource path is defined to be an exact count. If an implementation can't return an exact count it is required to fail the request. However, in the case that the implementation has reached a limit in counting matching records there is no way for the service to convey to the implementation the partial count reached.\n\nFor backward compatibility I think we need to continue returning an error, and /$count used within an expression definitely must error if an exact count cannot be returned, but it would be nice to have a way to return the fact that an error was being returned because a certain threshold had been reached.\n\nWe could return this information as an annotation within the returned error, or as a header.  Alternatively, we could define a preference header that the client could specify to say that they were willing to accept an incomplete count, and a preference-applied header that the service could return in the response to specify the accuracy of the count.\n\n \n\n \n\nImported from [ODATA-1522](https://issues.oasis-open.org/browse/ODATA-1522)",
-    "labels": [],
+    "labels": [
+      "wontDo"
+    ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Case statement ambiguous with timeOfDay values",
@@ -698,7 +773,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Central definition for type-cast and term-cast segments",
@@ -708,17 +784,20 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify: Clients should ignore unknown control information in a json response",
     "body": "\n\nImported from [ODATA-1519](https://issues.oasis-open.org/browse/ODATA-1519)",
     "labels": [
       "JSON Format",
-      "V4.01_ERRATA01"
+      "V4.01_ERRATA01",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Extend [OData-Protocol, example 18] with properties from derived types",
@@ -728,7 +807,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "[OData-CSDL, example 64] annotating a navigation property or its addressed resource?",
@@ -739,7 +819,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow $value as the last path segment of an annotation target - no, annotate the media entity type",
@@ -750,7 +831,8 @@
       "V4.02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Dynamic properties are not allowed as function parameters",
@@ -770,7 +852,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Core.MediaType for media resources",
@@ -779,7 +862,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Missing annotation namespace in example 8",
@@ -789,17 +873,20 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Does a filter segment followed by a key predicate make sense?",
     "body": "ABNF rules allow the production\n```java\ncollectionNavNoCastExpr = filterExpr keyPredicate\n```\nwhich enables things like\n```java\nOrder('A')/Items/$filter(Product eq 'Sugar')(ItemNumber=2)\n```\nIs the `$filter` redundant since a key predicate follows anyway? Or does this ensure that item #2 is returned only if its product is sugar?\n\n### Proposal\n\n[PR #62](https://github.com/oasis-tcs/odata-abnf/pull/62)\n\nImported from [ODATA-1507](https://issues.oasis-open.org/browse/ODATA-1507)",
     "labels": [
       "ABNF",
-      "V4.01_ERRATA01"
+      "V4.01_ERRATA01",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Instance annotations of absent complex properties",
@@ -809,7 +896,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Annotations targeting contained singletons",
@@ -820,7 +908,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Why is function \"matchesPattern\" written in camelCase?",
@@ -831,7 +920,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify where collection of primitive type can be used",
@@ -842,7 +932,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "13.6 Function Import: annotations allowed but not mentioned",
@@ -852,7 +943,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "clarify the relationship of the various path expression types",
@@ -863,7 +955,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Remove statement about format of media streams",
@@ -873,14 +966,16 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "edm.xsd doesn't allow Edmx Version=\"4.01\", and there doesn't seem to be a 4.01 version of the xsd",
     "body": "XSD-based validation of a CSDL XML file fails if Edmx Version=\"4.01\".\n\n\n### Proposal\n\nEither we need to have a 4.01 version of the xsd, or the 4.0 version needs to allow Edmx Version=\"4.01\".\n\n\nImported from [ODATA-1494](https://issues.oasis-open.org/browse/ODATA-1494)",
     "labels": [],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "OData-URL 5.1.1.15 does not explain example 106 in 5.1.1.14.4",
@@ -890,7 +985,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Inconsistency in example 16.1, entity type Product",
@@ -901,7 +997,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Point out that additional rules for stream properties were introduced with V4.01",
@@ -909,10 +1006,12 @@
     "labels": [
       "JSON Format",
       "URL Conventions",
-      "V4.01_ERRATA01"
+      "V4.01_ERRATA01",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Core.ContentDisposition: add Disposition Type",
@@ -921,7 +1020,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Inconsistencies for Annotation between CSDL XML spec and edm.xsd",
@@ -931,7 +1031,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "broken link in \"References\" section",
@@ -945,7 +1046,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Section 4.3: Correct references to ABNF rules",
@@ -955,7 +1057,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify canonical URLs for stream properties",
@@ -967,7 +1070,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify response to batch request that fails before \"OData processing\"",
@@ -977,7 +1081,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow Edm.Stream for non-binding action and function parameters",
@@ -989,7 +1094,8 @@
       "V4.02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "7.2.3 Precision: clarify absence of $Precision for DateTimeOffset",
@@ -999,7 +1105,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Aggregation on different levels",
@@ -1018,7 +1125,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "How to search for double quotes",
@@ -1028,7 +1136,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add example for timeline entity set requiring an object key definition",
@@ -1038,7 +1147,8 @@
       "V4.0_CS01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify: PATCH should allow changing type on nested complex type",
@@ -1049,7 +1159,8 @@
       "duplicate"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Clarify: PATCH should allow changing type on nested complex type",
@@ -1059,7 +1170,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Core.ContentDisposition for media resources",
@@ -1068,7 +1180,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify value of @odata.mediaContentType if stream is null",
@@ -1078,7 +1191,8 @@
       "V4.02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify $select behavior for properties of \"null\" instances",
@@ -1088,7 +1202,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Unified treatment of paths in aggregate, groupby and transformnested",
@@ -1098,7 +1213,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarification: Delete supported for Nullable single-valued navigation properties",
@@ -1108,7 +1224,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Redundant section 14.4.4.3 Function odata.matchesPattern",
@@ -1119,7 +1236,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "in operator should allow empty collection literals",
@@ -1129,7 +1247,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Term describing GeoJSON Feature Objects",
@@ -1138,7 +1257,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Aggregation.ApplySupportedDefaults: use PATCH logic when overriding with ApplySupported",
@@ -1149,7 +1269,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify representation of property paths in groupby with leading segments being null",
@@ -1159,7 +1280,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify representation of navigation properties in response that are expanded by $apply",
@@ -1169,7 +1291,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Navigation path from instance to lambda operator",
@@ -1179,26 +1302,31 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Deprecate media entities in next minor version, and remove them in next major version",
     "body": "Media entities are left-overs from AtomPub, offer no benefit over entities with stream properties, are a constant source of confusion (when to use which), and need a lot of special rules and specification text.\n\nBetter get rid of them altogether.\n\n### Proposal\n\nDeprecate media entities in V4.02\n\nRemove media entities in V5\n\nImported from [ODATA-1455](https://issues.oasis-open.org/browse/ODATA-1455)",
     "labels": [
-      "Protocol"
+      "Protocol",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Allow upserts against media entities",
     "body": "Section 11.4.4 in protocol mentions that upserts are not supported against media entities and, more importantly, that services MUST fail an update request to a URL that would identify such an entity if it does not exist.\nGiven the fact that the service can't be using service-generated keys for these entities and the client apparently already knows how to compose/identify the individual media entities in such collection, why not allow upserts as well?\n\nPS Also noted that in v4.01 we've added \"single-valued non-containment navigation properties\" to the exclusions list as well. Couldn't quickly recall/figure out the issue but shouldn't that only be if there is no navigation property binding?\n\n### Proposal\n\nAllow a service to support upserts against media entities if and only if the media resource is inlined as a `$value` pseudo-property according to [JSON Format, 10. Media Entity](https://docs.oasis-open.org/odata/odata-json-format/v4.01/odata-json-format-v4.01.html#sec_MediaEntity).\n\nImported from [ODATA-1454](https://issues.oasis-open.org/browse/ODATA-1454)",
     "labels": [
       "Protocol",
-      "V4.02"
+      "V4.02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "search('text') instead of search(text)",
@@ -1208,7 +1336,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Rephrase definitions for any, all and aggregate",
@@ -1218,7 +1347,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Key with PropertyRef using navigation path incompatible with Protocol 11.4.2 \"Create an Entity\"",
@@ -1228,7 +1358,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Split nest into three transformations",
@@ -1238,7 +1369,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Re-allow CustomAggregate and ApplySupported targeting EntityType",
@@ -1248,7 +1380,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify applicability of terms Core.MediaType and Core.MediaAcceptableMediaType",
@@ -1257,7 +1390,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify usage of Edm.Stream-typed function and action return types",
@@ -1267,7 +1401,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow applying JSON.Schema to any model element that can be typed with Edm.Stream",
@@ -1276,7 +1411,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "groupby algorithm does not cover \"select distinct\" case",
@@ -1286,7 +1422,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Aggregation vocabulary: Create container-level term for ApplySupported defaults",
@@ -1295,7 +1432,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Update Aggregation ABNF with changes from previous issues",
@@ -1306,7 +1444,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Aggregation.CustomAggregate applies to ComplexType still needed?",
@@ -1316,7 +1455,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Improve descriptions of property restrictions in term Aggregation.ApplySupported",
@@ -1327,7 +1467,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "11.4.9.4 Update a Collection Property: reference section 11.4.11 Positional Inserts",
@@ -1337,7 +1478,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "List of recommended navigation property bindings is incomplete.",
@@ -1348,7 +1490,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify applicability of lambda operators to complex-typed collections",
@@ -1358,7 +1501,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify wording in Section 7.2, Type Facets",
@@ -1369,7 +1513,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Standard vocabulary does not always specify Nullable for collection typed properties",
@@ -1378,7 +1523,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify handling of null values for complex-typed properties",
@@ -1388,7 +1534,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify applicability of $expand options",
@@ -1399,7 +1546,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Definition of service-specific client-side functions",
@@ -1407,10 +1555,12 @@
     "labels": [
       "CSDL JSON",
       "CSDL XML",
-      "V4.02"
+      "V4.02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Clarify treatment of duplicates in OData-Aggr example 7",
@@ -1420,7 +1570,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow marking properties as required on insert or update",
@@ -1429,7 +1580,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Check uniform handling of entities reached via navigation in responses",
@@ -1439,7 +1591,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify $select behavior for stream properties",
@@ -1450,7 +1603,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add UpdateRestrictions property to specify update type",
@@ -1460,7 +1614,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Path evaluation for annotations targeting annotations",
@@ -1472,7 +1627,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Use of Core.ContentID by clients if service does not reference Core vocabulary",
@@ -1482,7 +1638,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Capabilities.UpdateRestrictions lacks a NonUpdatableProperties",
@@ -1491,7 +1648,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Inconsistencies in OData-CSDL section 14.2.2",
@@ -1502,7 +1660,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Dynamic capabilities for containment cases",
@@ -1511,7 +1670,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify application of term Aggregation.ApplySupported on entity containers",
@@ -1522,7 +1682,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarification of response to a request against a delta link",
@@ -1532,7 +1693,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "$expand: Discrepancy in argument descriptions",
@@ -1543,7 +1705,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "$expand: clarify that property *paths* must not appear twice",
@@ -1553,7 +1716,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add support for joining entities with instances of their related collections ",
@@ -1563,7 +1727,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify behavior of aggregate on property paths with collection-valued properties",
@@ -1573,7 +1738,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "groupby specification does not explain example 54",
@@ -1583,7 +1749,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Annotation of implicit entity sets",
@@ -1594,7 +1761,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Correct Nullable attributes in Aggregation vocabulary terms",
@@ -1605,7 +1773,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add term Measures.UNECEUnit",
@@ -1614,7 +1783,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify that Validation.DerivedTypeConstraint can be used to restrict Edm.Untyped",
@@ -1623,7 +1793,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Close gap in definition of term JSON.Schema ",
@@ -1632,7 +1803,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Improve text and examples for JSON and multipart batch",
@@ -1643,7 +1815,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Examples 86 and 87 apply an entity type as term",
@@ -1654,7 +1827,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Rules \"ordinalIndex\" and \"complexColPath\" are too restrictive: negative indexes and index with type-cast",
@@ -1664,7 +1838,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify impact of applying expand to subsequent transformations ",
@@ -1674,7 +1849,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Rule \"index\" is too restrictive, needs to allow negative integers with 4.01",
@@ -1684,7 +1860,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Point out aggregation of amounts in different currencies",
@@ -1694,7 +1871,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Enable usage of $this and $root in filter transformation",
@@ -1704,7 +1882,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clean up annotation term RecursiveHierarchy",
@@ -1714,17 +1893,20 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Difference between Asynchronous and Repeatable Requests",
     "body": "The term \"[Asynchronous Requests](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_AsynchronousRequests)\" invites comparison to the term \"Asynchronous SOAP communication\". The latter involves \"reliable messaging\", which is not implied by the former.\n\nHowever, readers of the OData specification who are acquainted with SOAP may not be aware of this difference.\n\n### Proposal\n\nClarify in the spec that Asynchronous OData Requests do not imply reliable messaging. Refer to the [Repeatable Requests](https://blogs.sap.com/2020/07/27/repeatable-requests-for-rest-apis/) specification for the latter.\n\nImported from [ODATA-1387](https://issues.oasis-open.org/browse/ODATA-1387)",
     "labels": [
       "Protocol",
-      "V4.01_ERRATA01"
+      "V4.01_ERRATA01",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Add TypecastSegmentSupported to ReadRestrictions",
@@ -1734,7 +1916,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify usage of annotation qualifiers as references to hierarchies",
@@ -1744,7 +1927,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Complete the cardinalities in data model",
@@ -1754,7 +1938,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add EntitySet to the list of possible target for terms ApplySupported, CustomAggregate",
@@ -1764,7 +1949,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "New term Core.ContentDisposition",
@@ -1773,7 +1959,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "11.4.1.2 Handling of DateTimeOffset Values: replace \"i.e. UTC\" with \"for example UTC\"",
@@ -1784,7 +1971,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify use of $root with function imports",
@@ -1794,7 +1982,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "$all not available for rolling up named hierarchies",
@@ -1804,7 +1993,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify terminology where unbound functions can be invoked",
@@ -1816,7 +2006,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify location of custom aggregates in $apply results",
@@ -1826,7 +2017,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify service-defined bound functions used as $apply transformations",
@@ -1836,7 +2028,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Examples 60, 61: Missing aggregation method for $count on related entities",
@@ -1846,7 +2039,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify term \"filter function\"",
@@ -1856,7 +2050,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Improve structure of CSDL clause 4",
@@ -1867,7 +2062,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Example 30: Wrong context",
@@ -1877,7 +2073,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify Term applicability",
@@ -1888,7 +2085,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Improve the layout of vocabularies markdown to indicate that shown annotations are not exhaustive",
@@ -1897,7 +2095,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Remove redundant text to improve readability",
@@ -1907,7 +2106,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Enhance Validation.AllowedValue to have optional symbolic name",
@@ -1916,7 +2116,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Missing comma in JSON metadata example",
@@ -1926,7 +2127,8 @@
       "V4.01_COS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "ABNF: preference omit-values missing",
@@ -1936,7 +2138,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "CSDL TimeOfDay literals inconsistent with XSD",
@@ -1946,7 +2149,8 @@
       "V4.01_COS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify that clients have to do content-ID replacing to interpret Location headers in batch results",
@@ -1957,7 +2161,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "19.4, second paragraph, first sentence: missing \"in\"",
@@ -1967,7 +2172,8 @@
       "V4.01_COS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add descriptions to system query option restrictions in Capability vocabulary",
@@ -1977,7 +2183,8 @@
       "V4.02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "13.2, paragraph 5: typo \"indicatet\" instead of \"indicated\"",
@@ -1987,7 +2194,8 @@
       "V4.01_COS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Generalize Validation.Minimum and Validation.Maximum to Edm.PrimitiveType",
@@ -1996,7 +2204,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarity for \"@odata.type\" in request payloads",
@@ -2006,7 +2215,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify format for $value",
@@ -2015,7 +2225,8 @@
       "Protocol"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify IEEE754Compatible applies to request payloads as well",
@@ -2025,7 +2236,8 @@
       "V4.01_OS"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Calculate Custom Aggregates from Aggregated Instances",
@@ -2035,7 +2247,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "CSDL MaxLength is ill-defined",
@@ -2046,7 +2259,8 @@
       "V4.01_OS"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add an example showing a delta link and nested next link in the same response payload",
@@ -2056,7 +2270,8 @@
       "V4.01_OS"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify handling of delta with $expand",
@@ -2066,7 +2281,8 @@
       "V4.01_OS"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Issues with ContextUrl",
@@ -2076,7 +2292,8 @@
       "V4.01_OS"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Remove leftover wording regarding $expand within $select",
@@ -2086,7 +2303,8 @@
       "V4.01_OS"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Multipart Batch Request Body example is missing required CRLF before first occurrence of boundary",
@@ -2096,7 +2314,8 @@
       "V4.01_OS"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Core.Ordered: mention \"Term\" in AppliesTo",
@@ -2105,7 +2324,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify that nested next links can appear on the same page as a delta link",
@@ -2116,7 +2336,8 @@
       "V4.01_OS"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Make examples 8 (entity type) and 86 (record expression) consistent",
@@ -2127,7 +2348,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Additional representation of entity references using (alternate) key properties",
@@ -2146,7 +2368,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "ABNF Does not allow selecting instance annotations",
@@ -2157,7 +2380,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Mismatch in ModificationException term naming",
@@ -2168,7 +2392,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Support augmenting entities with aggregated values from related entities",
@@ -2178,7 +2403,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Override entity set when extending an entity container (public comment)",
@@ -2189,7 +2415,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "JSON Batch: explicitly state that continue-on-error=true is the default",
@@ -2199,7 +2426,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "JSON Batch: explicitly state that continue-on-error=true is the default",
@@ -2210,7 +2438,8 @@
       "duplicate"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Simplify query rules by removing $expand select option",
@@ -2222,7 +2451,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Extend applicability of Core.MediaType and Core.AcceptableMediaTypes to non-stream (string/binary) properties and terms",
@@ -2231,7 +2461,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Enhance syntax of term Validation.OpenPropertyTypeConstraint",
@@ -2250,7 +2481,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Incorrect text about mediaEditLink control information",
@@ -2260,7 +2492,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify representation of GEO literals and streams in annotations (XML, JSON)",
@@ -2271,17 +2504,20 @@
       "V4.02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add odata. prefix to omit-values preference",
     "body": "In the last TC call it was decided that we should register the \"odata.\" prefixed versions of the OData preferences with IANA.  The omit-values preference is new to OData 4.01 and therefore never had an \"odata.\" prefixed version of the preference.  Should an the preference name \"odata.omit-values\" be added as an alternate name for the preference? \n\n### Proposal\n\nAdd \"odata.omit-values\" as an alternate name for the omit-values preference\n\nImported from [ODATA-1322](https://issues.oasis-open.org/browse/ODATA-1322)",
     "labels": [
       "Protocol",
-      "V4.01_CS02"
+      "V4.01_CS02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Prefer:respond-async on individual requests within a batch request",
@@ -2292,7 +2528,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "edm.xsd: attribute edm:Annotations/@Target does not cover all allowed targets",
@@ -2302,7 +2539,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify format parameter IEEE754Compatible with requests",
@@ -2312,7 +2550,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Should support multiple permissions for read/write",
@@ -2322,7 +2561,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Introduce CollectionAnnotation control information for JSON",
@@ -2332,7 +2572,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "odata.mediaContentType control information for embedded stream properties",
@@ -2342,7 +2583,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Simplify $batch atomicity group processing",
@@ -2352,7 +2594,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add $compute to supported $select query options",
@@ -2364,7 +2607,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Edm.AnyPropertyPath: no corresponding path expression",
@@ -2385,7 +2629,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "JSON Batch: clarify \"Textual media types\" and their string representation",
@@ -2395,7 +2640,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Errors in Example 34: products with aggregated sales",
@@ -2405,7 +2651,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Align conformance clauses with normative text",
@@ -2415,7 +2662,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify ranges of minute, hour, and second functions",
@@ -2426,7 +2674,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Improve descriptions on Capabilities.NavigationRestrictionsType",
@@ -2435,7 +2684,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify whether schemas traversed in path expressions must be in scope",
@@ -2446,7 +2696,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Support PUT to replace a collection of entities",
@@ -2456,7 +2707,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Can nullable singletons be deleted or created?",
@@ -2466,7 +2718,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Capabilities: clarify CountRestrictions and ExpandRestrictions",
@@ -2475,7 +2728,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Continue-on-Error for Collection requests",
@@ -2485,7 +2739,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify creation choreography for media entities, recommend stream properties",
@@ -2497,7 +2752,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "JSON Batch: clarify values of body property, context URL, batch in batch, continue-on-error",
@@ -2507,7 +2763,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow all non-whitespace characters in a search word, and allow unbalanced quotes and parentheses",
@@ -2518,7 +2775,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify whether new annotation target syntax requires Version=4.01",
@@ -2529,7 +2787,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Explicitly state what is returned on create and update",
@@ -2539,7 +2798,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "CSDL 7.2.1 Nullable: improve wording",
@@ -2550,7 +2810,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "ETags for Collections",
@@ -2562,7 +2823,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Can an etag value of \"*\" be used in If-Match to force update?",
@@ -2572,7 +2834,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Capabilities: use Edm.Boolean instead of Core.Tag as a type for properties",
@@ -2581,7 +2844,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Precisely specify the format of the Error Response",
@@ -2592,7 +2856,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Annotate a property as \"cannot be specified on insert, can be updated later\"",
@@ -2602,7 +2867,8 @@
       "V4.0_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "What is the meaning of year 0, and negative years",
@@ -2613,7 +2879,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add ReadByKeyRestrictions similar to ReadRestrictions",
@@ -2623,7 +2890,8 @@
       "V4.0_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow referencing properties of \"outer\" entity in expressions nested within $expand",
@@ -2633,7 +2901,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "$search: ABNF comment is more restrictive than prose text",
@@ -2643,7 +2912,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "How to set the mediaReadLink and mediaEditLink of a stream property",
@@ -2654,7 +2924,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify: interpretation of omitted optional function parameters",
@@ -2665,7 +2936,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify insert entity defined only by key properties of related entities",
@@ -2677,7 +2949,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Data Aggregation: Clarify need for @odata.id in nested response structures",
@@ -2687,7 +2960,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Deleted Entity: @odata.removed possible in addition to @removed?",
@@ -2697,7 +2971,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "null and empty paths in Annotation Path, Property Path, Navigation Property Path",
@@ -2708,7 +2983,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Explicitly allow the minus sign / dash in a search term",
@@ -2718,7 +2994,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Describe structure of \"JSON properties\"",
@@ -2727,7 +3004,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify that a server MUST respond with content-id annotations and MUST include nested entity IDs",
@@ -2737,7 +3015,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Define mapping of permission scopes to resources",
@@ -2746,7 +3025,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Highlight implications of derived complex types to their annotations",
@@ -2757,7 +3037,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Define a validation term for terms applicable in a given context",
@@ -2767,7 +3048,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "14.4.11: rephrase prose text for dynamic expression Null",
@@ -2778,7 +3060,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add QueryRestrictions to the Capabilities Vocabulary",
@@ -2798,7 +3081,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "URL Conventions example in 5.1.1.5.1 has \"bad\" whitespace",
@@ -2808,7 +3092,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Geo literals with three dimensions",
@@ -2818,7 +3103,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify property paths used in a lambda predicate expression",
@@ -2828,7 +3114,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "CRUDQ descriptions on entity sets",
@@ -2837,7 +3124,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Requirement for 204 (No Content) with 11.4.3 \"Update an Entity\" is not backwards compatible",
@@ -2847,7 +3135,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify read-write access via URLs differing from the canonical/read/edit URL",
@@ -2857,7 +3146,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify @type (@odata.type) and metadata=full",
@@ -2867,7 +3157,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Should we allow arrays of primitive in term definitions?",
@@ -2878,7 +3169,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Do URLs within a Batch Request need to be URL Encoded?",
@@ -2889,7 +3181,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Harmonize usage of custom aggregates with structured aggregatable properties",
@@ -2899,7 +3192,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Correct usage of $count",
@@ -2909,7 +3203,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Can the default set of properties change over time?",
@@ -2919,7 +3214,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Abstract type definition Core.Number as a super-type of all numeric types",
@@ -2928,10 +3224,12 @@
       "CSDL JSON",
       "CSDL XML",
       "Vocabularies",
-      "V4.02"
+      "V4.02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "TypeDefinition should allow Edm.Primitive as underlying type",
@@ -2942,7 +3240,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Should annotated null/default values be omitted/restored?",
@@ -2952,7 +3251,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "GeoJSON, SRID, and LineString",
@@ -2962,7 +3262,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "edm.xsd: ActionImport and IncludeInServiceDocument",
@@ -2972,7 +3273,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "csdl.schema.json: add descriptions to all schema elements",
@@ -2982,7 +3284,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "DerivedTypeConstraint should apply to entityset, singleton, navigation properties, parameters, and action/function returns",
@@ -3002,7 +3305,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add a function to determine aggregated values within common expressions",
@@ -3012,7 +3316,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify whether $orderby and string comparison with ge, gt, le, lt is language-specific",
@@ -3023,7 +3328,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify that resolved relative URIs in batch responses cannot contain content-ID references",
@@ -3034,7 +3340,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Support common expressions as values in URL-JSON",
@@ -3045,7 +3352,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Chapter 2: wrong description of how to split URLs into syntax components",
@@ -3055,7 +3363,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarifications for select-list in ContextUrl",
@@ -3065,7 +3374,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "How to specify static result entity set for bound actions/functions?",
@@ -3073,10 +3383,12 @@
     "labels": [
       "CSDL JSON",
       "CSDL XML",
-      "V4.01_CS02"
+      "V4.01_CS02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "What should be returned for inserted non-entity value?",
@@ -3086,7 +3398,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow relative URLs in headers",
@@ -3096,7 +3409,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Support Union types",
@@ -3106,7 +3420,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Remove $Kind for entity container children",
@@ -3116,7 +3431,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "/$filter(...) segments in paths and expressions",
@@ -3128,7 +3444,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Introduce LocalDateTime TypeDef to apply to string datatype",
@@ -3139,7 +3456,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Support non-batch mechanism for long URLs",
@@ -3150,7 +3468,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Improve description of filter expression restrictions",
@@ -3159,7 +3478,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Ambiguity with Capabilities.ChangeTracking annotation",
@@ -3169,7 +3489,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Correct example 68",
@@ -3179,17 +3500,20 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Make [OData-]EntityId header optional if the same as Location header",
     "body": "On create and upsert request returning 204 No Content we currently MUST return an [OData-]EntityId header which, if following convention, always has the same value as the, always required, Location header.\n\n### Proposal\n\nMake the [OData-]EntityId header optional if it has the same value then the Location header.\n\nImported from [ODATA-1224](https://issues.oasis-open.org/browse/ODATA-1224)",
     "labels": [
       "Protocol",
-      "V4.01_CS02"
+      "V4.01_CS02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Add OData- prefix back to EntityId header",
@@ -3199,7 +3523,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Validation: add terms MinItems and MaxItems",
@@ -3208,7 +3533,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Apply, as much as possible, our JSON Format to our annotations as well",
@@ -3218,7 +3544,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Instance annotations section only refers to the XML CSDL, not JSON CSDL",
@@ -3228,7 +3555,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Be more explicit about the purpose of $DefaultValue in a Term definition",
@@ -3238,7 +3566,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Enhance hierarchy processing",
@@ -3248,7 +3577,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clients should read symbolic values in CSDL case-insensitive",
@@ -3259,7 +3589,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Terms for POST/PATCH/PUT with system query options to shape response",
@@ -3269,7 +3600,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify datatype of virtual property $count",
@@ -3279,7 +3611,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Address use of 201 Created for Create Link Requests",
@@ -3289,7 +3622,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Validation term for allowed terms in Annotation Paths ",
@@ -3301,7 +3635,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "4.2 and 5.1: Explicitly state that an alias MUST NOT be identical to any other alias or namespace in the same document.",
@@ -3312,7 +3647,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "CSDL ReturnType element needs to specify rules for Nullable and Collection with entity types",
@@ -3323,7 +3659,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Term for original OData version of (auto-)converted $metadata",
@@ -3344,7 +3681,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify need for @odata.id in nested response structures",
@@ -3355,7 +3693,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Explicitly note support for collection-valued navigation/complex properties in property paths in aggregate/groupby",
@@ -3365,7 +3704,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Examples 53, 54, and 59 are not compliant with Data Aggregation ABNF",
@@ -3375,7 +3715,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow numeric indexes in Path constructs within annotations",
@@ -3386,7 +3727,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Deep update with nested delta items should allow Core.ContentID",
@@ -3397,7 +3739,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Improve the syntax of aggregation exceptions with \"from\"",
@@ -3407,7 +3750,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Support sample values for types, parameters, request/response bodies",
@@ -3417,16 +3761,19 @@
       "CN02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add property SystemQueryOptions to call out supported system query options per request method",
     "body": "In V4.01 we added the possibility to shape the response to POST, PATCH, and PUT requests with system query options.\n\nSupport for this needs to be expressed in some way, see [ODATA-1005](https://issues.oasis-open.org/browse/ODATA-1005).\n\nEasiest way would be to add a property SystemQueryOptions next to CustomQueryOptions.\nType could be a collection of strings naming the query option, or a complex type of Boolean flags telling which of the system query options is supported.\n\nDrawback is of course that this needs to be annotated for each entity set, whereas a \"traditional\" XxxSupport annotation can be attached to the entity container if the underlying engine supports this across all entity sets.\n\nSecond drawback is the overlap with the existing XxxRestrictions/Xxxable flags.\n\n\n\nImported from [ODATA-1199](https://issues.oasis-open.org/browse/ODATA-1199)",
     "labels": [
-      "Vocabularies"
+      "Vocabularies",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "ETag handling deviations from RFC7232 are avoidable if we consider two kinds of ETag (ETag in response header and ETag in response payload)",
@@ -3447,7 +3794,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify update of media streams",
@@ -3457,7 +3805,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "11.2.6.6: value of $search is search expression, not boolean expression",
@@ -3467,7 +3816,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add term Core.Example to allow including annotation examples in term definitions",
@@ -3477,7 +3827,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Automated vocabulary checks indicate some potential issues",
@@ -3487,7 +3838,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Capabilities vocabulary: invalid DefaultValue for KeyAsSegmentSupported",
@@ -3497,7 +3849,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Make sure that all model elements are annotatable",
@@ -3505,10 +3858,12 @@
     "labels": [
       "CSDL JSON",
       "CSDL XML",
-      "V4.01_CS02"
+      "V4.01_CS02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Add matchesPattern as a $filter function",
@@ -3520,7 +3875,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Conformance: Nullable for collections",
@@ -3530,7 +3886,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow using instance annotations in $select and $expand",
@@ -3542,7 +3899,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "No way to bind nav prop on recursively nested (contained or complex) type",
@@ -3553,7 +3911,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify names that can appear in annotation of term ApplySupported/Transformations",
@@ -3563,7 +3922,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Extend transformation nest to multiple sequences",
@@ -3573,7 +3933,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow Singletons to be null",
@@ -3585,7 +3946,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify that transformation topcount keeps the order of the input set",
@@ -3595,17 +3957,20 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify $expand=NavSingle/$count and $expand=*/$count",
     "body": "Section 4.8 only defines the /$count segment for collection-valued paths.\n\nSection 5.1.2 does not state a restriction to collection-valued navigation properties for $expand=NavProp/$count and similar paths.\n\nWe could allow /$count for all kinds of paths, returning 1 for single-valued navigation paths to an existing resource, and returning 0 for single-valued navigation paths that would return 204 or 404 without the /$count suffix.\n\nBuilding on that $expand=*/$count could be defined to return the count of related entities for all navigation properties.\n\n### Proposal\n\nWe don't want to allow these requests and their consequences for expressions in general\n\nImported from [ODATA-1181](https://issues.oasis-open.org/browse/ODATA-1181)",
     "labels": [
       "URL Conventions",
-      "V4.01_CS02"
+      "V4.01_CS02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Cast between enumeration types and integer types",
@@ -3615,7 +3980,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Enhance orderby $apply-transformation with sorting of undefined properties",
@@ -3625,7 +3991,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "External targeting for action/function overloads",
@@ -3636,7 +4003,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Embed \"JSON properties\" in OData JSON requests and responses",
@@ -3646,7 +4014,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Capabilities: add new term SelectSupport",
@@ -3656,7 +4025,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Capabilities: allow UpdateRestrictions also for singletons",
@@ -3666,7 +4036,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "JSON CSDL should not require nullable attribute for collections",
@@ -3676,7 +4047,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "14.4.11: Description of Null",
@@ -3687,7 +4059,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "4.5.3: use $schemaversion query option instead of SchemaVersion header",
@@ -3697,7 +4070,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Consider using matrix parameters for filter segments",
@@ -3705,10 +4079,12 @@
     "labels": [
       "Protocol",
       "URL Conventions",
-      "V4.01_CS02"
+      "V4.01_CS02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Allow @odata.type for isomorphy to CSDL XML",
@@ -3718,7 +4094,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Transformation for nesting the result of another transformation within a single entity",
@@ -3728,7 +4105,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify the use of ETags for Avoiding Update Conflicts",
@@ -3739,7 +4117,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add way to specify which batch formats (if any) are supported by a service",
@@ -3749,7 +4128,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Update JSON references to RFC8259",
@@ -3760,7 +4140,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Describe $compute, $expand, and $select via prose text and examples, remove ABNF snippets",
@@ -3770,7 +4151,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "List of use cases for canonical functions is incomplete",
@@ -3780,7 +4162,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "A Case for Common Expressions",
@@ -3791,7 +4174,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Fix data type in example model",
@@ -3801,7 +4185,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify how to process hybrid results of a transformation in subsequent transformations",
@@ -3811,7 +4196,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify example 66 in section 7.5",
@@ -3821,7 +4207,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify context URLs for aggregated result sets",
@@ -3831,7 +4218,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Transformations for limiting the number of entities in the result of a $apply transformation ",
@@ -3841,7 +4229,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Transformation for sorting entities created by a $apply transformation",
@@ -3851,7 +4240,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Context URL: allow empty parentheses after navigation property",
@@ -3861,7 +4251,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "ABNF: allow omitting default namespaces everywhere in the URL",
@@ -3871,7 +4262,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify which OData-Version a service should return",
@@ -3881,7 +4273,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Core.Immutable: clarify that value can be provided *by client* in insert",
@@ -3891,7 +4284,8 @@
       "V4.0_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Align Prefer header rule with RFC7240: optional whitespace around commas",
@@ -3901,7 +4295,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Edm.Stream and Nullable",
@@ -3912,7 +4307,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Case Sensitivity of Property Names, EntitySets, Singletons and Operations",
@@ -3925,7 +4321,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Support Delta responses for Singletons",
@@ -3936,7 +4333,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "PATCH with nested nav props should not remove omitted resources",
@@ -3944,10 +4342,12 @@
     "labels": [
       "JSON Format",
       "Protocol",
-      "V4.01_CS02"
+      "V4.01_CS02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Annotate a function or action as \"availability is advertised per instance\"",
@@ -3957,7 +4357,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify that an enumeration type must have at least one member",
@@ -3967,7 +4368,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Align Authorization vocabulary with OpenAPI V3",
@@ -3977,7 +4379,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow percent-encoded colon in time values in URLs",
@@ -3987,7 +4390,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Extend the Property metatype to allow a type that is an EntityType.",
@@ -3995,10 +4399,12 @@
     "labels": [
       "CSDL JSON",
       "CSDL XML",
-      "V4.01_CS02"
+      "V4.01_CS02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Clarify MaxDistance is an optional parameter in hierarchy filter functions",
@@ -4009,7 +4415,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Upsert: clarify upsert along nullable single-valued navigation path",
@@ -4019,7 +4426,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify: contains, startswith, endswith, indexof should all be case-sensitive",
@@ -4029,7 +4437,8 @@
       "V4.01_CS01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Facilitate processing of aggregated results created with concat",
@@ -4037,10 +4446,12 @@
     "labels": [
       "Data Aggregation",
       "Vocabularies",
-      "V4.0_CSD04"
+      "V4.0_CSD04",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Clarify type information for dynamic properties in the aggregated result set",
@@ -4050,7 +4461,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow hierarchy filter functions for ancestors and descendants to return true for starting node",
@@ -4061,7 +4473,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Document use of JSON Schema $schema",
@@ -4081,7 +4494,8 @@
       "V4.0_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Part 1 protocol clause 1.3 Entity is unclear on template usage",
@@ -4091,7 +4505,8 @@
       "V4.01_ERRATA01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Propagation of NavigationRestrictions",
@@ -4101,7 +4516,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Consistent order of function parameters",
@@ -4113,7 +4529,8 @@
       "V4.01_CS01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "JSON Batch and continue-on-error",
@@ -4124,7 +4541,8 @@
       "V4.01_CS01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow deep insert of media resources",
@@ -4134,7 +4552,8 @@
       "V4.01_CS01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify function imports in $filter and $orderby",
@@ -4144,7 +4563,8 @@
       "V4.01_CS01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "clarify support for navigation properties on deleted entries",
@@ -4155,7 +4575,8 @@
       "V4.01_CS01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Remove a Reference to an Entity (public review comment c201710e00005)",
@@ -4166,7 +4587,8 @@
       "V4.01_CS01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Define by-value/reference expectations for action/function payloads.",
@@ -4176,7 +4598,8 @@
       "V4.01_CS01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Authorization vocabulary: KeyLocation - also allow cookie as value?",
@@ -4186,17 +4609,20 @@
       "V4.0_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow 24:00:00 for Edm.TimeOfDay (public review comment c201710e00003)",
     "body": "Public review comment https://lists.oasis-open.org/archives/odata-comment/201710/msg00003.html\n\nCSDL 4.01 permits Edm.TimeOfDay values to range from 00:00:00 to 23:59:59.999*.\n\nHowever existing systems (e.g. SAP backends) frequently utilize 24:00:00 to indicate end-of-day. Requiring these values to be transmitted (e.g. to clients) as 23:59:59.999* could result in round-trip data loss.\n\n In fact such SAP systems (for V2/V4) already will return PT24H or normalization-equivalent (for the V2 format of Edm.Time using XSD duration) or 24:00:00 (for the V4 format of Edm.TimeOfDay using XSD time), which is non-compliant with OData V2-V4 specifications.\n\nTo improve interoperability, it would be preferable to standardize this behaviour.\n\nNote that the lexical format for XSD time permits 24:00:00, as it is the left-truncation of dateTime lexical representation, and dateTime lexical representation (see https://www.w3.org/TR/xmlschema-2/#dateTime) states:\n\n -    hh is a two-digit numeral that represents the hour; '24' is permitted if the minutes and seconds represented are zero, and the dateTime value so represented is the first instant of the following day (the hour property of a dateTime object in the ·value space· cannot have a value greater than 23);\n\n### Proposal\n\nResolve with no action.  ISO 8601 has explicitly removed 24:00 for information exchange in order to avoid ambiguity. As most common programming langauges don't support storing this as a distinct value (even those that accept such a value), clients would have problems roundtripping the value.\n\nImported from [ODATA-1123](https://issues.oasis-open.org/browse/ODATA-1123)",
     "labels": [
       "CSDL JSON",
-      "CSDL XML"
+      "CSDL XML",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Add singletons for capability term targets",
@@ -4206,7 +4632,8 @@
       "V4.0_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add FilterExpressionType values \"MultiRange\" and \"MultiRangeOrSearchExpression\"",
@@ -4216,7 +4643,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Put entity set restrictions on NavigationPropertyDescriptions",
@@ -4227,7 +4655,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add CollectionPropertyRestrictions capability term",
@@ -4238,7 +4667,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clients must not specify select options to the same property more than once",
@@ -4249,7 +4679,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "4.01 services should support $select select option in Intermediate",
@@ -4259,7 +4690,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Introduce $this for referencing current item in $select/$expand options",
@@ -4270,7 +4702,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Default values for $Precision and $Scale",
@@ -4280,7 +4713,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "If-Then-Else in $batch requests",
@@ -4291,17 +4725,20 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Default page size for server-driven paging",
     "body": "Add new term to Capabilities or Core vocabulary to describe the default page size used for server-driven paging.\n\n### Proposal\n\nAdd new term \n\n      <Term Name=\"DefaultPageSize\" Type=\"Edm.Int32\" AppliesTo=\"EntitySet\">\n        <Annotation Term=\"Core.Description\" String=\"Default number of items in partial responses for server-driven paging.\" />\n      </Term>\n\nImported from [ODATA-1112](https://issues.oasis-open.org/browse/ODATA-1112)",
     "labels": [
       "Vocabularies",
-      "V4.0_CSD02"
+      "V4.0_CSD02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Structural properties: default for $Nullable is false in CSDL JSON",
@@ -4311,7 +4748,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify that 'parameter' aliases can also be used to substitute expressions",
@@ -4321,7 +4759,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Disallow empty parens for implicit parameter syntax",
@@ -4331,16 +4770,19 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Introduce mechanism for selecting default properties",
     "body": "Today, in the absence of $select, services can return a default set of properties that is a subset of the full set of available properties.\n\nClient can use $select=* to select all properties, but there is no way to select default properties plus one or two (potentailly non-default) properties, such as:\n\n$select=<default>,Address\n\n### Proposal\n\nPropose no action at this time; re-open if we come up with compelling client scenarios.\n\nImported from [ODATA-1106](https://issues.oasis-open.org/browse/ODATA-1106)",
     "labels": [
-      "URL Conventions"
+      "URL Conventions",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Simplify selection of properties of complex type",
@@ -4350,7 +4792,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Make \"@\" optional for implicit parameters",
@@ -4360,7 +4803,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Special values of temporal types (public comment c201708e0003)",
@@ -4374,7 +4818,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Multiplication and division of Edm.Decimal: result has floating scale if either operand has floating scale",
@@ -4384,25 +4829,30 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "The hash (#) character is not allowed in search phrases per the ABNF definition",
     "body": "The hash character (#) has meaning in both a URL and in OData so it makes sense that the hash character is not allowed in a search word.  I would have expected though that the hash character could be used in a quoted search phrase, but the ABNF definition for search phrase does not include the hash character.\n\nsearchPhrase = quotation-mark 1*qchar-no-AMP-DQUOTE quotation-mark\n\nqchar-no-AMP-DQUOTE   = qchar-unescaped \n                      / escape ( escape / quotation-mark )\n\nqchar-unescaped       = unreserved / pct-encoded-unescaped / other-delims / \":\" / \"@\" / \"/\" / \"?\" / \"$\" / \"'\" / \"=\"\n\nunreserved    = ALPHA / DIGIT / \"-\" / \".\" / \"_\" / \"~\"\n\nother-delims   = \"!\" /                   \"(\" / \")\" / \"*\" / \"+\" / \",\" / \";\"\n\nNone of those definitions include the hash character.  Was the hash character left out on purpose?  Is the only way to include it to percent encode it?\n\n### Proposal\n\nClarify that # characters in search phrases have to be percent-encoded because the first clear-text occurrence of the hash character (#) ends the query part of a URL and starts the fragment part, see https://tools.ietf.org/html/rfc3986#section-3.5. \n\nImported from [ODATA-1101](https://issues.oasis-open.org/browse/ODATA-1101)",
     "labels": [
-      "ABNF"
+      "ABNF",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Add mechanism for specifying match type for $search",
     "body": "When doing text searches, many of the common algorithms we use have a number of different ways to define a match (Exact match, begins with, synonym, base word or inflection, etc).  The spec currently says it is up to the implementation as to what constitutes a match, this is fine, but in the case where the search algorithm provides different matching types it would be nice if the query writer could specify the type of match they want in the $search expression.\n\n\n\n### Proposal\n\nAdd “search modifiers” which consist of a letter sequence immediately followed by a colon and immediately followed by anything except space, parentheses, and an ampersand\n\nsearchTerm   = searchModifier / [ 'NOT' RWS ] ( searchPhrase / searchWord )\nsearchPhrase = quotation-mark 1*qchar-no-AMP-DQUOTE quotation-mark\n\nsearchModifier = searchOperator COLON searchOperand\nsearchOperator = 1*ALPHA\n; A searchOperand is a sequence of anything except ampersand, space, and parentheses, in clear-text or percent-encoded\n; Expressing this in ABNF is somewhat clumsy, so the following rule is overly generous.\nsearchOperand  = 1*qchar-no-AMP-parens\n\nThis would allow expressing e.g. a fuzziness factor or a matching algorithm\n\n$search=hello fuzzy:0.8 match:synonym\n\nAlternative: restrict search operands to search phrases (enclosed in double quotes) and search words:\n\nsearchOperand = searchPhrase / searchWord\n\n\nImported from [ODATA-1100](https://issues.oasis-open.org/browse/ODATA-1100)",
     "labels": [
-      "Protocol"
+      "Protocol",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Add annotations to describe custom query options and custom headers",
@@ -4412,7 +4862,8 @@
       "V4.0_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "xxxRestrictions can be applied more broadly",
@@ -4422,7 +4873,8 @@
       "V4.0_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "14.4.1.1 Path Syntax: add odata.mediaETag",
@@ -4434,7 +4886,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "9.1.4 Response Code 204 No Content: rephrase second paragraph",
@@ -4444,7 +4897,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow empty edm:Schema elements",
@@ -4455,7 +4909,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Apply expression: allow all URL functions with prefix odata.",
@@ -4467,17 +4922,20 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "DMTF needs a feature to allow the schema references to become references to a local files.  Use cases include testing and implementations that do not allow access to the web.",
     "body": "DMTF needs a feature to allow the schema references to become references to a local files.  Use cases include testing and implementations that do not allow access to the web.\n\n### Proposal\n\nLooking for recommendations\n\nImported from [ODATA-1093](https://issues.oasis-open.org/browse/ODATA-1093)",
     "labels": [
       "CSDL JSON",
-      "CSDL XML"
+      "CSDL XML",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Navigation Property Binding (public comment c201707e0004)",
@@ -4489,7 +4947,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Special values of numeric types (public comment c201707e0002)",
@@ -4502,7 +4961,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify text about referential constraint for navigation properties on complex types",
@@ -4514,7 +4974,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Org.OData.Aggregation.V1 missing Nullable=\"false\" for Function ReturnType",
@@ -4524,7 +4985,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify effect of applying an Annotation to an element",
@@ -4535,7 +4997,8 @@
       "V4.01_CS02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Discourage names differing only in case",
@@ -4547,7 +5010,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "AppliesTo semantics are not normative",
@@ -4559,7 +5023,8 @@
       "V4.01_CSD03"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Rule searchWord is too restrictive",
@@ -4569,7 +5034,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add annotation expressions for arithmetic operators ",
@@ -4580,7 +5046,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add term Constraint to Validation vocabulary",
@@ -4590,7 +5057,8 @@
       "V4.0_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Remove restriction on overriding of annotations on type definitions",
@@ -4600,7 +5068,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "$each as wildcard for keys",
@@ -4620,7 +5089,8 @@
       "V4.0_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "What happens if lambda variable name matches a (complex) property name?",
@@ -4630,7 +5100,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Include atomicityGroup in JSON Batch Response",
@@ -4640,7 +5111,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "If-Match: align wording with RFC7232",
@@ -4650,7 +5122,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Introduce operator for checking whether a collection is a subset or equal to another collection",
@@ -4660,7 +5133,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Support Functions with /$each and define the representation for collection-valued actions and functions with /$each",
@@ -4672,7 +5146,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Conformance section references wrong annotation term",
@@ -4682,7 +5157,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Annotation to describe supported aggregation methods",
@@ -4693,7 +5169,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "New term Core.OperationAvailable",
@@ -4703,7 +5180,8 @@
       "V4.0_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "3.12 Transformation expand: require at least two parameters, with innermost expansion requiring a filter()",
@@ -4713,7 +5191,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Consider ability to define computed default values",
@@ -4722,7 +5201,8 @@
       "Vocabularies"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Consider supporting optional operation parameters",
@@ -4734,7 +5214,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Generalize Edm.AnyPath to be a path to any model element and rename it to Edm.ModelElementPath",
@@ -4745,7 +5226,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add ability to annotate collections to return only count and NextLink",
@@ -4753,10 +5235,12 @@
     "labels": [
       "Protocol",
       "Vocabularies",
-      "V4.01_CS02"
+      "V4.01_CS02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Allow $format and custom query options for all requests",
@@ -4766,7 +5250,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Allow key expressions in Path constructs within annotations",
@@ -4777,7 +5262,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add ability to annotate revisions with information on all elements",
@@ -4787,7 +5273,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add path segment /$each",
@@ -4797,7 +5284,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Key-as-Segment with Referential Constraints",
@@ -4807,7 +5295,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "DeepInsertSupport: allow applying to entity sets and collection-valued navigation properties",
@@ -4817,7 +5306,8 @@
       "V4.0_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Part 1 Protocol: Add recommendations for Vary header",
@@ -4827,7 +5317,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "URL conventions document should have non-normative examples if primitive value syntax",
@@ -4838,7 +5329,8 @@
       "duplicate"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Further simplify JSON Batch Format",
@@ -4848,7 +5340,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Change sets: do not require the same content type for all request in a change set",
@@ -4858,7 +5351,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Content referencing in batch requests",
@@ -4868,7 +5362,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify server-driven paging requirement",
@@ -4878,7 +5373,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Rename $IsCollection to $Collection",
@@ -4889,7 +5385,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add JSON format for Batch",
@@ -4900,7 +5397,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Disallow propagation of Accept header on batch requests to individual requests within the batch",
@@ -4910,7 +5408,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Require aliases for schemas and require alias-qualified names",
@@ -4920,7 +5419,8 @@
       "V4.01_WD01"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify purpose of context URL",
@@ -4930,7 +5430,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Cast annotation expression and Unicode facet",
@@ -4942,7 +5443,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Broaden definitions of transformations topcount and bottomcount",
@@ -4952,7 +5454,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarification of term \"expression\"",
@@ -4962,17 +5465,20 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Relax constraints on namespace names",
     "body": "Currently a namespace has to consist of several dot-separated segments, and each segment has to be a SimpleIdentifier (essentially a JavaScipt/Java/Swift/C# variable name).\n\nWe could relax this and allow - at least for the second, third, ... segment, additional characters, most prominently the dash (-), and allow to have purely numeric segments, e.g. Some.Namespace.3.1.4 to allow for semantic versioning of namespaces.\n\n### Proposal\n\n- Allow purely numeric segments after the first segment. First segment still needs to start with with a letter\n- Allow dash in all segments (except as first character in first segment)\n\nImported from [ODATA-1039](https://issues.oasis-open.org/browse/ODATA-1039)",
     "labels": [
       "CSDL XML",
-      "V4.01_CSD02"
+      "V4.01_CSD02",
+      "wontDo"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "Clarify term \"simple value\"",
@@ -4982,7 +5488,8 @@
       "V4.0_CSD04"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Add tagging term Core.Deprecated to mark deprecated model elements",
@@ -4993,7 +5500,8 @@
       "duplicate"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "not_planned"
   },
   {
     "title": "10.7/8: Simplify context URL for \"all operations in schema\"",
@@ -5003,7 +5511,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "10.13: Simplify context URL for Property Value",
@@ -5013,7 +5522,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Support the notion of a collection of name/value pairs where the type of the value is known",
@@ -5023,7 +5533,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Interoperability issue when using escaped slash/backslash in URLs",
@@ -5033,7 +5544,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Define comparison for numeric value exceptions",
@@ -5043,7 +5555,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Define term for links to related information",
@@ -5053,7 +5566,8 @@
       "V4.0_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Consider support of NavigationPropertyBindings to non-contained nav props",
@@ -5063,7 +5577,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "5.1.1.10.2: clarify that all() is always true if applied to an empty collection",
@@ -5073,7 +5588,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "4.3.4 and 4.4: clarify resolution of relative URLs in system query option $id",
@@ -5083,7 +5599,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Support instance annotations in $orderby",
@@ -5093,7 +5610,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Clarify when $it is required",
@@ -5103,7 +5621,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Treatment of same query option in multiple \"spellings\"",
@@ -5113,7 +5632,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "5.1.1.5.7 substring: explicitly state that the index N (second parameter value) is zero-based",
@@ -5123,7 +5643,8 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   },
   {
     "title": "Provide stable anchors to all sections",
@@ -5137,6 +5658,7 @@
       "V4.01_CSD02"
     ],
     "assignees": [],
-    "state": "closed"
+    "state": "closed",
+    "state_reason": "completed"
   }
 ]
