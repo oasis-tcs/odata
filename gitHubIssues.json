@@ -6,7 +6,6 @@
       "ATOM Format",
       "JSON Format",
       "Protocol",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -19,7 +18,6 @@
     "labels": [
       "CSDL XML",
       "V5.0",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -32,7 +30,6 @@
     "labels": [
       "ATOM Format",
       "Protocol",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -45,7 +42,6 @@
     "labels": [
       "JSON Format",
       "V5.0",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -57,7 +53,6 @@
     "body": "According to atom (rfc4287), the atom:id must be an IRI which must be absolute:\n\n(section 4.2.6)\n\n   The \"atom:id\" element conveys a permanent, universally unique\n   identifier for an entry or feed.\n\n   atomId = element atom:id {\n      atomCommonAttributes,\n      (atomUri)\n   }\n\n   Its content MUST be an IRI, as defined by [RFC3987].  Note that the\n   definition of \"IRI\" excludes relative references.  Though the IRI\n   might use a dereferencable scheme, Atom Processors MUST NOT assume it\n   can be dereferenced.\n\n\nIn [ATOM] we talk about relative urls in section 4.3, and explicitly support relative ids in places we don't use atom:id, such as entity references, the ref attribute of deleted entry (is this legal according to atom-tombstone?), source and target for added/deleted links, etc. \n\nAttribute id \nThe id attribute MUST be present. For entities the id attribute MUST be the atom:id of the referenced entity. It may be relative or absolute\n\n\n### Proposal\n\nClarify that the atom:id in OData's Atom format must be an absolute IRI as per RFC4287. \nConsider consistently using absolute ids in other places in Atom (ref, deltas, etc.)\n\nImported from [ODATA-573](https://issues.oasis-open.org/browse/ODATA-573)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -69,7 +64,6 @@
     "body": "JSON format permits stream properties to optionally indicate content-type (as well as mediaEtag). So the receiver can determine the media content type without having to actually GET the stream content.\n\nATOM format, on the other hand, does not permit the media content type to appear in an \"atom:link\". (See ATOM section 9.1 in CS02).\n\nIt seems that this must be an accidental omission, as surely we should expect equivalent information about the stream content to be available regardless of the format (JSON or ATOM).\n\n\n### Proposal\n\nAdd a new attribute metadata:content-type for atom:link.\n\n\nImported from [ODATA-593](https://issues.oasis-open.org/browse/ODATA-593)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -81,7 +75,6 @@
     "body": "In regard to OData's use of GML for Geo-types with ATOM format, it is not specified if clients/servers can or should:\n\n(1) Use gml:pos (in particular for a set of points, an array of gml:pos as opposed to using a single gml:posList)?\n\n(2) Use gml:posList?\n\n(3) Use gml:coordinates (which is a deprecated GML element)?\n\nAlso, there is no mention in OData of whether the GML srcDimension attribute should or must be indicated. When we are parsing a gml:posList, without knowing the dimension, it is next to impossible (without having a full database of SRID's to refer to) to separate the points, unless we assume only 2D systems.\n\n\n### Proposal\n\n(a) Disallow the use of gml:coordinates with OData.\n\n(b) Specify that if non-2D dimension systems are used, then srsDimension must be specified, OR an array of gml:pos (rather than gml:posList) should be specified (where each gml:pos identifies a single N-dimensional point).\n\nImported from [ODATA-595](https://issues.oasis-open.org/browse/ODATA-595)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -93,7 +86,6 @@
     "body": "JSON format uses GeoJSON for geo-types. GeoJSON states:\n\n  http://geojson.org/geojson-spec.html#positions\n\n  The order of elements must follow x, y, z order (easting, northing, altitude for coordinates in a projected coordinate reference system, or longitude, latitude, altitude for coordinates in a geographic coordinate reference system).\n\nATOM format uses GML, which seems to permit the order of elements to depend on the CRS definition. For example, with SRID 4326 (the default for geography types) , GML puts latitude before longitude (i.e. in the opposite order to what GeoJSON would dictate).\n\nNow this presents some difficulties for clients (and proxy servers which wish to switch the format). Suppose we wish to define an OData client API which encapsulates the format (ATOM or JSON) entirely under the covers. Suppose we then receive a GeographyPoint (some API abstraction of a point, which is format neutral) from a server. With JSON format, the client API will be able to guarantee in which order longitude and latitude appear in GeographyPoint (since GeoJSON dictates it). On the other hand, for ATOM (GML) the order of elements may depend on the CRS. This might lead one to conclude that an ATOM-format consuming client needs a full database of SRIDs, together with rules about element order, so it can receive geo-values over ATOM and give a predictable ordering of the coordinate elements within the client API (such that the element order would not change if the OData format is changed from ATOM to JSON).\n\n\n\nImported from [ODATA-596](https://issues.oasis-open.org/browse/ODATA-596)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -105,7 +97,6 @@
     "body": "It appears there is some ambiguity in the (draft) spec.\n\n  http://docs.oasis-open.org/odata/odata-atom-format/v4.0/cs02/odata-atom-format-v4.0-cs02.html#_Toc372792708\n\nSee the snippet below. The prose says there must be a “scheme” attribute, but the examples show a “rel” attribute.\n\n----\n\n6.3 Element atom:category\nAn OData entry MUST contain a single atom:category element with a scheme attribute equal to\nhttp://docs.oasis-open.org/odata/ns/scheme \nto identify the entity type of the entry. \nAn atom:category element describing an OData entity type MUST have a term attribute whose value is a URI indicating the type of the entity. The URI may be an absolute or relative URL containing the namespace-qualified or alias-qualified type name as a fragment, or may simply contain the qualified type name prefixed with hash (#). In the latter case, the type MUST be defined or referenced in the metadata document defined by the current context URL.\nExample 6: entity of type Model.VipCustomer defined in the metadata document of the same service\n<category rel=\"http://docs.oasis-open.org/odata/ns/scheme\"\nterm=\"#Model.VipCustomer\"/>\nExample 7: entity of type Model.VipCustomer defined in the metadata document of a different service\n<category rel=\"http://docs.oasis-open.org/odata/ns/scheme\"\nterm=\"http://host/alternate/$metadata#Model.VipCustomer\"/>\nFor more information on namespace-qualified and alias-qualified names, see [OData-CSDL]. \nThe entry MAY contain additional atom:category elements with different scheme values; such atom:category elements have no semantic meaning in OData.\n\n\n### Proposal\n\nFix the (non-normative) examples to show the correct usage of \"scheme\". Note that the \"scheme\" attribute is defined by Atom.\n\nAccepted: https://www.oasis-open.org/committees/download.php/52864/odata-meeting-71_on-20140424-minutes.html#odata-648\n\nImported from [ODATA-648](https://issues.oasis-open.org/browse/ODATA-648)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -117,7 +108,6 @@
     "body": "4.0 spec for ATOM and JSON formats doesn't define how values are represented when they are returned from operations (actions or functions).\n\nFor example, the following JSON format sections would appear to be only applicable only to a property within an entity or complex type instance.\n\n7.1 Primitive Value\n7.2 Complex Value\n7.3 Collection of Primitive Values.\n7.4 Collection of Complex Values\n11 Individual Property\n\nIf a value of one of the above types is returned by an action or function, we need to define how it is represented.\n\n\n### Proposal\n\nUse the same representation as for an individual property, section 11.\n\n\nImported from [ODATA-649](https://issues.oasis-open.org/browse/ODATA-649)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -129,7 +119,6 @@
     "body": "The ATOM format spec doesn't mention atom:title and atom:updated (which are required elements in feeds and entries).\n\nSince RFC4287 is listed as a normative reference, and it clearly defines that atom:title and atom:updated are required within feeds and entries, this omission is not critical.\n\nHowever an implementor who refers to the OData ATOM format spec (the prose, rather than the examples) and who does not also refer to the ATOM Syndication spec, may erroneously conclude that atom:title and atom:updated are not required in feeds and entries.\n\nAlso, in the prose there is no guidance on what the content of these elements should be. Some examples tend to suggest that atom:title should be an entity set name for a feed, and that title should be empty for an element. And for atom:updated, the lexical format is clear, but exactly which date/time value should be specified, and whether a client can use that value in any meaningful way, is not mentioned.\n\n\n### Proposal\n\nInclude prose in the definition of feeds and entries to make it clear that atom:title and atom:updated are required, with guidance on appropriate values.\n\n\nImported from [ODATA-653](https://issues.oasis-open.org/browse/ODATA-653)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -141,7 +130,6 @@
     "body": "6.2 Element atom:id\n\n  \"The atom:id element MUST contain the entity-id\"\n\nThis is a problem for clients creating new entities. In the case of a server supporting canonical URLs, if some of the key properties are server-generated, the client won't know what is an appropriate entity-id.\n\nAlso, the ATOM Syndication spec makes it clear that atom:entry must have an atom:id.\n\nFor OData, we need to define what value a client should pass for atom:id (in POST) when atom:id is not knowable to the client.\n\n\n### Proposal\n\nUse the constant value odata:new\n\nImported from [ODATA-655](https://issues.oasis-open.org/browse/ODATA-655)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -153,7 +141,6 @@
     "body": "JSON format spec section 4.5.1 \"Annotation odata.context\" states:\n\n  \"Request payloads in JSON do not require context URLs.\"\n\nWe have no similar statement for atom:context in ATOM format spec section 6.1.2 \"Attribute metadata:context\".\n\n\n\n### Proposal\n\nExplicitly state that context URLs are not required in ATOM request payloads.\n\n\nImported from [ODATA-658](https://issues.oasis-open.org/browse/ODATA-658)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -165,7 +152,6 @@
     "body": "ATOM format spec section 10.2 \"Element atom:content\" does not indicate if the element can be omitted in client-to-server requests.\n\nThe ATOM syndication spec allows atom:content to be optional, perhaps we should be clear about that too.\n\n(Having the element included in request payload seems to offer no value, as the server should know a retrieval URL, and if the client wanted to set or change the MIME type of a media entity they need to do it with the HTTP Content-Type header anyway).\n\nAlso, if the client does include atom:content, and they set the \"type\" attribute, is there any expectation that the server should take note of it? (Considering that the client would be expected to set the Content-Type header in POST/PUT).\n\n\n### Proposal\n\nAllow request payload to omit atom:content for media entities.\n\nSpecify whether the server must, should, should not, or must not take note of the type attribute if the request payload does include atom:content.\n\n\nImported from [ODATA-659](https://issues.oasis-open.org/browse/ODATA-659)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -177,7 +163,6 @@
     "body": "See summary\n\n### Proposal\n\nUse symbolic member name if it exists, use numeric value otherwise\n\nImported from [ODATA-677](https://issues.oasis-open.org/browse/ODATA-677)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -189,7 +174,6 @@
     "body": "The atom:id element MUST hold the entity-id.  The Atom syndication spec (RFC 4287) specifies that the atom:id element must be an IRI and must not be relative.\n\nHowever, the atom:id section (section 6.2) of the ATOM format document points to the entity-ID section (section 4.1) in the protocol document which says that entity-IDs can be relative.\n\nWe should clarify that the atom:id must not contain a relative entity-id.\n\nImported from [ODATA-719](https://issues.oasis-open.org/browse/ODATA-719)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -201,7 +185,6 @@
     "body": "OData CSDL spec states that Edm.String is a \"Sequence of UTF-8 characters\". However some characters (e.g. ASCII control characters < 32 other than tab, newline, carriage return) are not valid in XML 1.0 (all except NUL are valid in XML 1.1 by the way).\n\nSo there are some valid OData String characters not transmittable using ATOM.\n\nWe ran into this recently with a client which was uploading a stack trace (from C#) that was the result of a client side exception (the client was attempting to create a \"log record\" entity at the server). The client's stack trace text contained a backspace character (which was actually the reason for the client's failure, so therefore it was important content).\n\nThe client successfully uploaded this information to the server (a proxy) using JSON, then the proxy server tried to use XML to further upload that data to a backend server using XML, which failed due to XML 1.0 limitations (backspace not being transmissable).\n\nThis would appear to indicate that ATOM (with XML 1.0) is not suitable for some legal values of type Edm.String. Even with XML 1.1, the NUL character is not transmissable.\n\n\n### Proposal\n\n1. Mention in Protocol spec that some protocols may not be able to encode values for all Unicode characters, or...\n\n2. Recommend using Edm.String only for properties that are guaranteed to contain content that can be represented in all formats supported by the server, and use Edm.Binary otherwise (puts burden on service modeler)\n\nOnly as a last resort:\n\n3. Determine an (OData-proprietary) approach to encode all valid Unicode characters in ATOM, e.g. encode backspace as:\n\n{U+0009}\n\n(That is, eight separate characters indicating a Unicode HEX value).\n\n\n\nImported from [ODATA-764](https://issues.oasis-open.org/browse/ODATA-764)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -213,7 +196,6 @@
     "body": "The CSDL specification states in http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part3-csdl/odata-v4.0-errata02-os-part3-csdl-complete.html#_Toc406009991 that:\n\"Metadata annotations can be used to define additional characteristics or capabilities of a metadata element (...). Instance annotations can be used to define additional information (...). Where the same annotation is defined at both the metadata and instance level, the instance-level annotation overrides the annotation specified at the metadata level.\"\nThe ATOM format specification is incomplete because it does not allow overriding metadata-level annotations <b>that use a qualifier</b>, because qualifiers in instance annotations are not supported by the ATOM format.\nSee also Jira Ticket [ODATA-773](https://issues.oasis-open.org/browse/ODATA-773).\n\n### Proposal\n\nExtend the ATOM format <metadata:annotation> element with a \"qualifier\" attribute.\n\nImported from [ODATA-772](https://issues.oasis-open.org/browse/ODATA-772)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -225,7 +207,6 @@
     "body": "New related entities are specified using the same representation as for an expanded navigation property, i.e. as an atom:link element. This element requires an href attribute with a valid IRI value.\n\nWhich href value should consumers provide? They cannot know (in all cases) what the final URI of the newly created entity will be\n\n### Proposal\n\nClients MAY provide any valid IRI, e.g. odata:dummy.\n\nServices MUST ignore the provided href attribute value.\n\nUse odata:dummy in example 22, lines 5 and 20\n\nImported from [ODATA-792](https://issues.oasis-open.org/browse/ODATA-792)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -237,7 +218,6 @@
     "body": "The JSON format spec describes three scenarios: An entity in a payload may be a complete entity, a projected entity (see System Query Option $select [OData-Protocol]), or a partial entity update (see Update an Entity in [OData-Protocol]). For symmetry reasons, the ATOM Format Spec should make a similar statement.\n\n### Proposal\n\nIn 6.5 Element atom:content:\n\nRemove the “the” from the “the properties” in the first sentence, and add: An entity in a payload may be a complete entity, a projected entity (see System Query Option $select [OData-Protocol]), or a partial entity update (see Update an Entity in [OData-Protocol]).\n\nImported from [ODATA-898](https://issues.oasis-open.org/browse/ODATA-898)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -249,7 +229,6 @@
     "body": "Currently it is not possible to aggregate data  and then directly apply an action to the aggregation result. \n\nAn interesting special case is to filter an entity set and then apply an action to the set of entities that passes the filter, e.g. discount all products that have been on the shelf for more than three months.\n\n### Proposal\n\n*Deferred proposal*\n\nAdd to chapter 3:\n\nService-defined bound actions that take an entity set as their binding parameter MAY be used as the last set transformation within $apply if the type of the binding parameter matches the type of the result set of the preceding transformation. In this case the request MUST be a POST request.\n\nExample:\n Discount all products that meet a filter condition\n```java\nPOST Products?$apply=filter(ShelfLife gt duration'P90D')/Special.Discount(Percent=15)\n```\nNote: this example is now possible with [URL Conventions 4.12 Addressing a Subset of a Collection](https://docs.oasis-open.org/odata/odata/v4.01/os/part2-url-conventions/odata-v4.01-os-part2-url-conventions.html#sec_AddressingaSubsetofaCollection)\n\n*Updated proposal*\n\nIf new use cases arise using other transformations, we may introduce a path segment `/$apply(...)` that can be followed by the action to call on the aggregated result.\n\nImported from [ODATA-977](https://issues.oasis-open.org/browse/ODATA-977)",
     "labels": [
       "Data Aggregation",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -261,7 +240,6 @@
     "body": "JSON Format V4 requires @odata.type values to be prefixed with a hash (#), even for built-in primitive types.\n\nJSON Format V4.01 allows omitting the hash.\n\nAtom Format V4 requires NOT to prefix with a hash.\n\n### Proposal\n\nAllow both flavors, e.g. \"#Double\" and just \"Double\", to be consistent with JSON V4.01.\n\nImported from [ODATA-990](https://issues.oasis-open.org/browse/ODATA-990)",
     "labels": [
       "ATOM Format",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -273,7 +251,6 @@
     "body": "In [ODATA-958](https://issues.oasis-open.org/browse/ODATA-958) we decided to use the new abstract types Edm.AnyPropertyPath in terms of the Capabilities vocabulary.\n\nTechnically this requires to use Version=\"4.01\" in the Edmx wrapper element (which we don't do yet).\n\nShould we provide to \"versions\" of the Capabilities vocabulary, one restricted to Version=\"4.0\" constructs, and one using Version=\"4.01\"?\n\nIf yes, how should we do this technically: by creating a new schema name, e.g. Org.OData.Capabilities.V1_01, or by having two branches of the well-known current schema name. If the latter, which one is the \"master\" branch?\n\nHow should this be reflected in the OData Vocabularies work product: should we continue to publish CSDs for version 4.0 and in parallel have CSDs for version 4.01?\n\nImported from [ODATA-1085](https://issues.oasis-open.org/browse/ODATA-1085)",
     "labels": [
       "Vocabularies",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
@@ -285,7 +262,6 @@
     "body": "[OData-Aggr, section. 3.1.3.6](https://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/odata-data-aggregation-ext-v4.0-cs02.html#_Toc432754680) states that services can define custom aggregation methods, and the annotation term property [`Aggregation.ApplySupportedDefaults/CustomAggregationMethods`](https://github.com/oasis-tcs/odata-vocabularies/blob/main/vocabularies/Org.OData.Aggregation.V1.xml#L86) is used to advertise them.\n\nBut this leaves no room for explaining the _behaviour_ of a custom aggregation method. Could this be modelled as a function tagged with a new term `Aggregation.IsCustomAggregationMethod` ([PR #145](https://github.com/oasis-tcs/odata-vocabularies/pull/145))? The one from example 13 in OData-Aggr would then be modelled as\n```xml\n<Schema Name=\"Custom\">\n <Function Name=\"concat\">\n  <Annotation Term=\"Aggregation.IsCustomAggregationMethod\"/>\n  <Annotation Term=\"Core.Description\" String=\"Concatenates distinct string values separated by commas\"/>\n  <Parameter Name=\"InputSet\" Type=\"Collection(Edm.String)\"/>\n  <ReturnType Type=\"Edm.String\"/>\n </Function>\n</Schema>\n```\n\nImported from [ODATA-1466](https://issues.oasis-open.org/browse/ODATA-1466)",
     "labels": [
       "Data Aggregation",
-      "Deferred",
       "wontDo"
     ],
     "assignees": [],
