@@ -1045,7 +1045,8 @@
     "body": "We state that PATCH semantics to an entity also applies PATCH semantics to any provided complex-typed properties. However, we don't say whether a PATCH to an entity can change a complex-typed property to a different complex type.\n\nWhile we (explicitly) prohibit changing the type of an instance of an entity type (since an instance of an entity type has identity) it should be possible to change the a complex-typed property to a property of a value of a different type.\n\n### Proposal\n\nA complex-typed property can be set to different type in a PATCH request by specifying a different type in the payload.  Properties shared through inheritance, as well as dynamic properties, are retained (unless overwritten by new values in the payload). Other properties are discarded.\n\nImported from [ODATA-1473](https://issues.oasis-open.org/browse/ODATA-1473)",
     "labels": [
       "Protocol",
-      "V4.01_ERRATA01"
+      "V4.01_ERRATA01",
+      "duplicate"
     ],
     "assignees": [],
     "state": "closed"
@@ -2205,7 +2206,8 @@
     "body": "In [19.4 Processing a Batch Request](https://docs.oasis-open.org/odata/odata-json-format/v4.01/csprd05/odata-json-format-v4.01-csprd05.html#sec_ProcessingaBatchRequest) we state that clients can specify the preference `continue-on-error=false`. This sort of implies that `true` is the default, but it doesn't explicitly say so.\n\n### Proposal\n\nSee summary\n\nImported from [ODATA-1329](https://issues.oasis-open.org/browse/ODATA-1329)",
     "labels": [
       "JSON Format",
-      "V4.01_CS02"
+      "V4.01_CS02",
+      "duplicate"
     ],
     "assignees": [],
     "state": "closed"
@@ -4832,7 +4834,8 @@
     "body": "Having a table of non-normative examples of primitive value syntax would assist client developers (especially those not using frameworks such as query builder apis) in creating correct requests.\n\n\n\n### Proposal\n\nAdd a table of non-normative examples of primitive value syntax.\n\n\nImported from [ODATA-1053](https://issues.oasis-open.org/browse/ODATA-1053)",
     "labels": [
       "URL Conventions",
-      "V4.01_CSD02"
+      "V4.01_CSD02",
+      "duplicate"
     ],
     "assignees": [],
     "state": "closed"
@@ -4986,7 +4989,8 @@
     "body": "Our model versioning rules only allow adding optional model elements, they don't allow removing model elements.\n\nOne way to deal with this is to leave outdated model elements in a service and just mark them as \"deprecated\".\n\n### Proposal\n\nDo not add new Core term\n\n      <Term Name=\"Deprecated\" Type=\"Core.Tag\" DefaultValue=\"true\">\n        <Annotation Term=\"Core.Description\" String=\"Model elements annotated with this term are deprecated and should no longer be used. They may be removed in a future version of the service.\" />\n      </Term>\n\nInstead close this as a duplicate (subset) of [ODATA-1058](https://issues.oasis-open.org/browse/ODATA-1058)\n\nImported from [ODATA-1037](https://issues.oasis-open.org/browse/ODATA-1037)",
     "labels": [
       "Vocabularies",
-      "V4.01_CSD02"
+      "V4.01_CSD02",
+      "duplicate"
     ],
     "assignees": [],
     "state": "closed"
