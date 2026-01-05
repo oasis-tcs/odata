@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{metadata.title}}</title>
+  <style>
+    :root {
+      --primary-color: #0078d4;
+      --border-color: #e1e1e1;
+      --bg-light: #f9f9f9;
+      --text-color: #333;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+    }
+    
+    header {
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+    
+    h1 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 2.2em;
+    }
+    
+    h2 {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 10px;
+      margin-top: 40px;
+      font-weight: 600;
+      font-size: 1.8em;
+    }
+    
+    h3 {
+      color: #333;
+      margin-top: 30px;
+      font-weight: 600;
+      font-size: 1.4em;
+    }
+    
+    h4 {
+      color: #555;
+      margin-top: 20px;
+      font-weight: 500;
+      font-size: 1.2em;
+    }
+    
+    .metadata {
+      color: #666;
+      font-size: 0.9em;
+    }
+    
+    .metadata a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    
+    .metadata a:hover {
+      text-decoration: underline;
+    }
+    
+    nav {
+      background: var(--bg-light);
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 5px;
+      border: 1px solid var(--border-color);
+      font-size: 0.9em;
+    }
+    
+    nav h2 {
+      margin-top: 0;
+      border: none;
+      font-size: 1.2em;
+      font-weight: normal;
+      color: #666;
+    }
+    
+    nav ul {
+      list-style: disc;
+      padding-left: 20px;
+      margin: 10px 0 0 0;
+    }
+    
+    nav li {
+      margin-bottom: 5px;
+    }
+    
+    section {
+      margin-bottom: 30px;
+    }
+    
+    .element-section {
+      padding: 20px;
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    
+    .element-section h3 {
+      margin-top: 0;
+    }
+    
+    .element-info p {
+      margin: 10px 0;
+    }
+    
+    .label {
+      font-weight: bold;
+      color: #555;
+    }
+    
+    .list-inline {
+      display: inline;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .list-inline li {
+      display: inline;
+    }
+    
+    .list-inline li:not(:last-child)::after {
+      content: ", ";
+    }
+    
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    
+    th {
+      background: #f8f9fa;
+      color: #333;
+      padding: 12px;
+      text-align: left;
+      font-weight: 500;
+      font-size: 0.95em;
+      border-bottom: 2px solid var(--border-color);
+    }
+    
+    td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+    
+    tr:hover {
+      background: var(--bg-light);
+    }
+    
+    .type-basic {
+      color: #0066cc;
+    }
+    
+    .type-reference {
+      color: #cc6600;
+    }
+    
+    .type-path {
+      color: #009933;
+    }
+    
+    code {
+      background: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+    
+    .placeholder {
+      font-style: italic;
+      color: #666;
+    }
+    
+    .note {
+      font-style: italic;
+      color: #666;
+      margin-top: 5px;
+      font-size: 0.95em;
+    }
+
+    
+    /* Internal links (relative paths or anchors) */
+    a[href^="/"],
+    a[href^="#"] {
+      color: green; /* Example style */
+    }
+
+    
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>{{metadata.title}}</h1>
+    <div class="metadata">
+      <p>{{metadata.description}}</p>
+      <p>Version: {{metadata.version}}</p>
+      <p>
+        Source: <a href="{{metadata.sourceUrl}}" target="_blank" rel="noopener">{{metadata.source}}</a> |
+        Specification: <a href="{{metadata.baseUrl}}" target="_blank" rel="noopener">CSDL XML</a> |
+        <a href="{{metadata.altBaseUrl}}" target="_blank" rel="noopener">CSDL JSON</a>
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <h2 id="elements">Elements</h2>
+    
+    {{#each elements}}
+    <section class="element-section" id="{{id}}">
+      <h3>{{name}}</h3>
+      <div class="element-info">
+        <p>{{description}} {{#if ref}}<a href="{{../metadata.baseUrl}}{{ref}}" target="_blank" rel="noopener">[spec]</a>{{/if}}</p>
+        {{#if note}}<p class="note">N.b.: {{note}}</p>{{/if}}
+        
+        <p>
+          <span class="label">Children:</span>
+          {{#if children.length}}
+            {{#each children}}<a href="#{{id}}">{{name}}</a>{{#unless @last}}, {{/unless}}{{/each}}
+          {{else}}
+            <em>None</em>
+          {{/if}}
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+          {{#if parents.length}}
+            {{#each parents}}<a href="#{{id}}">{{name}}</a>{{#unless @last}}, {{/unless}}{{/each}}
+          {{else}}
+            <em>None</em>
+          {{/if}}
+        </p>
+      </div>
+      
+      {{#if attributes.length}}
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each attributes}}
+          <tr id="{{id}}">
+            <td>
+              {{name}}
+            </td>
+            <td>
+              {{description}}
+              {{#if note}}
+              <br><em>{{note}}</em>
+              {{/if}}
+              {{#if constraints}}
+              <em>({{constraints}})</em>
+              {{/if}}
+            </td>
+            <td>{{{typeHtml}}}</td>
+             <td>
+              {{#if ref}}
+              <a href="{{specUrl}}" target="_blank" rel="noopener">[spec]</a>
+              {{/if}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{/if}}
+    </section>
+    {{/each}}
+
+    <h2 id="attributes">Attributes</h2>
+    <p>This section describes the different kinds of attributes used in the element tables above.</p>
+    
+    <h3 id="basic-attributes">Basic Attributes</h3>
+    <p>{{attributeCategories.basic.description}}</p>
+    
+    {{#each attributeCategories.basic.categories}}
+    <section>
+      <h4 id="category-{{id}}">{{displayName}}</h4>
+      <p>{{description}}</p>
+      
+      {{#if usedBy.length}}
+      <p><strong>Used by:</strong>
+        {{#each usedBy}}<a href="#{{attributeId}}">{{displayText}}</a>{{#unless @last}}, {{/unless}}{{/each}}
+      </p>
+      {{/if}}
+    </section>
+    {{/each}}
+    
+    <h3 id="model-attributes">Model Attributes</h3>
+    <p>{{attributeCategories.model.description}}</p>
+    
+    {{#each attributeCategories.model.categories}}
+    <section>
+      <h4 id="category-{{id}}">{{displayName}}</h4>
+      <p>{{description}} {{#if ref}}<a href="{{../metadata.baseUrl}}{{ref}}" target="_blank" rel="noopener">[spec]</a>{{/if}}</p>
+      
+      {{#if usedBy.length}}
+      <p><strong>Used by:</strong>
+        {{#each usedBy}}<a href="#{{attributeId}}">{{displayText}}</a>{{#unless @last}}, {{/unless}}{{/each}}
+      </p>
+      {{/if}}
+    </section>
+    {{/each}}
+  </main>
+</body>
+</html>

@@ -1,0 +1,2620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OData EDM model structure</title>
+  <style>
+    :root {
+      --primary-color: #0078d4;
+      --border-color: #e1e1e1;
+      --bg-light: #f9f9f9;
+      --text-color: #333;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+    }
+    
+    header {
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+    
+    h1 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 2.2em;
+    }
+    
+    h2 {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 10px;
+      margin-top: 40px;
+      font-weight: 600;
+      font-size: 1.8em;
+    }
+    
+    h3 {
+      color: #333;
+      margin-top: 30px;
+      font-weight: 600;
+      font-size: 1.4em;
+    }
+    
+    h4 {
+      color: #555;
+      margin-top: 20px;
+      font-weight: 500;
+      font-size: 1.2em;
+    }
+    
+    .metadata {
+      color: #666;
+      font-size: 0.9em;
+    }
+    
+    .metadata a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    
+    .metadata a:hover {
+      text-decoration: underline;
+    }
+    
+    nav {
+      background: var(--bg-light);
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 5px;
+      border: 1px solid var(--border-color);
+      font-size: 0.9em;
+    }
+    
+    nav h2 {
+      margin-top: 0;
+      border: none;
+      font-size: 1.2em;
+      font-weight: normal;
+      color: #666;
+    }
+    
+    nav ul {
+      list-style: disc;
+      padding-left: 20px;
+      margin: 10px 0 0 0;
+    }
+    
+    nav li {
+      margin-bottom: 5px;
+    }
+    
+    section {
+      margin-bottom: 30px;
+    }
+    
+    .element-section {
+      padding: 20px;
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    
+    .element-section h3 {
+      margin-top: 0;
+    }
+    
+    .element-info p {
+      margin: 10px 0;
+    }
+    
+    .label {
+      font-weight: bold;
+      color: #555;
+    }
+    
+    .list-inline {
+      display: inline;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .list-inline li {
+      display: inline;
+    }
+    
+    .list-inline li:not(:last-child)::after {
+      content: ", ";
+    }
+    
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    
+    th {
+      background: #f8f9fa;
+      color: #333;
+      padding: 12px;
+      text-align: left;
+      font-weight: 500;
+      font-size: 0.95em;
+      border-bottom: 2px solid var(--border-color);
+    }
+    
+    td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+    
+    tr:hover {
+      background: var(--bg-light);
+    }
+    
+    .type-basic {
+      color: #0066cc;
+    }
+    
+    .type-reference {
+      color: #cc6600;
+    }
+    
+    .type-path {
+      color: #009933;
+    }
+    
+    code {
+      background: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+    
+    .placeholder {
+      font-style: italic;
+      color: #666;
+    }
+    
+    .note {
+      font-style: italic;
+      color: #666;
+      margin-top: 5px;
+      font-size: 0.95em;
+    }
+
+    
+    /* Internal links (relative paths or anchors) */
+    a[href^="/"],
+    a[href^="#"] {
+      color: green; /* Example style */
+    }
+
+    
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>OData EDM model structure</h1>
+    <div class="metadata">
+      <p>This document lists all EDM model elements, their attributes and relationships. It categorizes the element&#x27;s attributes into basic and model attributes and describes their semantics in detail. It is generated from a JSON file that is based on the OASIS OData CSDL XML Representation Version 4.02 specification, and adds the details about allowed values, symbolic references and constraints for elements and attributes.</p>
+      <p>Version: 4.02</p>
+      <p>
+        Source: <a href="" target="_blank" rel="noopener">odata-edm-structure.json</a> |
+        Specification: <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html" target="_blank" rel="noopener">CSDL XML</a> |
+        <a href="https://docs.oasis-open.org/odata/odata-csdl-json/v4.02/odata-csdl-json-v4.02.html" target="_blank" rel="noopener">CSDL JSON</a>
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <h2 id="elements">Elements</h2>
+    
+    <section class="element-section" id="edmx">
+      <h3>Edmx</h3>
+      <div class="element-info">
+        <p>The root element of a CSDL XML document. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmxEdmx.2" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#dataservices">DataServices</a>, <a href="#reference">Reference</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <em>None</em>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="edmx-version">
+            <td>
+              Version
+            </td>
+            <td>
+              version number string
+            </td>
+            <td><a href="#category-string">String</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeVersion.2.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="dataservices">
+      <h3>DataServices</h3>
+      <div class="element-info">
+        <p>The edmx:DataServices contains one or more edm:Schema elements. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmxDataServices.3" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#schema">Schema</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#edmx">Edmx</a>
+        </p>
+      </div>
+      
+    </section>
+    <section class="element-section" id="reference">
+      <h3>Reference</h3>
+      <div class="element-info">
+        <p>specifies external CSDL documents <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmxReference.4" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#include">Include</a>, <a href="#includeannotations">IncludeAnnotations</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#edmx">Edmx</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="reference-uri">
+            <td>
+              Uri
+            </td>
+            <td>
+              URI string
+            </td>
+            <td><a href="#category-uri">Uri</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeUri.4.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="schema">
+      <h3>Schema</h3>
+      <div class="element-info">
+        <p>One or more schemas describe the entity model exposed by an OData service. The schema acts as a namespace for elements of the entity model such as entity types, complex types, enumerations and terms. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmSchema.7" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#entitytype">EntityType</a>, <a href="#complextype">ComplexType</a>, <a href="#enumtype">EnumType</a>, <a href="#typedefinition">TypeDefinition</a>, <a href="#action">Action</a>, <a href="#function">Function</a>, <a href="#entitycontainer">EntityContainer</a>, <a href="#term">Term</a>, <a href="#annotations">Annotations</a>, <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#dataservices">DataServices</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="schema-alias">
+            <td>
+              Alias
+            </td>
+            <td>
+              The alias of a schema MAY be used instead of the namespaceto identify model elements of that schema.
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeAlias.5.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="schema-namespace">
+            <td>
+              Namespace
+            </td>
+            <td>
+              A simple identifier used to uniquely identify the element within its containing scope.
+            </td>
+            <td><a href="#category-string">String</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeNamespace.5.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="include">
+      <h3>Include</h3>
+      <div class="element-info">
+        <p>Specifies a schema to include from the referenced CSDL document. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmxInclude.5" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#reference">Reference</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="include-alias">
+            <td>
+              Alias
+            </td>
+            <td>
+              The value that can be used in qualified names instead of the namespace.
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeAlias.5.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="include-namespace">
+            <td>
+              Namespace
+            </td>
+            <td>
+              namespace reference
+            </td>
+            <td>Reference to <a href="#schema">Schema</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeNamespace.5.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="includeannotations">
+      <h3>IncludeAnnotations</h3>
+      <div class="element-info">
+        <p>Specifies the annotations to include from the referenced CSDL document. Add <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmxIncludeAnnotations.6" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <em>None</em>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#reference">Reference</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="includeannotations-qualifier">
+            <td>
+              Qualifier
+            </td>
+            <td>
+              Optional qualifier to distinguish multiple instances
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeQualifier.6.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="includeannotations-targetnamespace">
+            <td>
+              TargetNamespace
+            </td>
+            <td>
+              namespace reference
+            </td>
+            <td>Reference to <a href="#schema">Schema</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeTargetNamespace.6.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="includeannotations-termnamespace">
+            <td>
+              TermNamespace
+            </td>
+            <td>
+              namespace reference
+            </td>
+            <td>Reference to <a href="#schema">Schema</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeTermNamespace.6.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="action">
+      <h3>Action</h3>
+      <div class="element-info">
+        <p>Actions are service-defined operations that may have observable side effects and may return a single instance or a collection of instances of any type. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmAction.20" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>, <a href="#parameter">Parameter</a>, <a href="#returntype">ReturnType</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#schema">Schema</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="action-entitysetpath">
+            <td>
+              EntitySetPath
+            </td>
+            <td>
+              entity set path expression
+            </td>
+            <td><a href="#category-entityset-path">Entityset Path</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeEntitySetPath.21.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="action-isbound">
+            <td>
+              IsBound
+            </td>
+            <td>
+              Whether the action/function is bound to a specific entity type
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeIsBound.21.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="action-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The action’s name.
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.9.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="annotations">
+      <h3>Annotations</h3>
+      <div class="element-info">
+        <p>Used to apply a group of annotations to a single model element. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmAnnotations.8" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#schema">Schema</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="annotations-qualifier">
+            <td>
+              Qualifier
+            </td>
+            <td>
+              Optional qualifier to distinguish multiple instances
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeQualifier.6.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="annotations-target">
+            <td>
+              Target
+            </td>
+            <td>
+              The target of the annotations is the model element the terms are applied to.
+            </td>
+            <td>Reference to <a href="#action">Action</a>, <a href="#actionimport">ActionImport</a>, <a href="#annotation">Annotation</a>, <a href="#complextype">ComplexType</a>, <a href="#entitycontainer">EntityContainer</a>, <a href="#entityset">EntitySet</a>, <a href="#entitytype">EntityType</a>, <a href="#enumtype">EnumType</a>, <a href="#function">Function</a>, <a href="#functionimport">FunctionImport</a>, <a href="#member">Member</a>, <a href="#navigationproperty">NavigationProperty</a>, <a href="#ondelete">OnDelete</a>, <a href="#parameter">Parameter</a>, <a href="#property">Property</a>, <a href="#reference">Reference</a>, <a href="#referentialconstraint">ReferentialConstraint</a>, <a href="#returntype">ReturnType</a>, <a href="#schema">Schema</a>, <a href="#singleton">Singleton</a>, <a href="#term">Term</a>, or <a href="#typedefinition">TypeDefinition</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#Target" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="complextype">
+      <h3>ComplexType</h3>
+      <div class="element-info">
+        <p>Complex types are keyless nominal structured types. The lack of a key means that instances of complex types cannot be referenced, created, updated or deleted independently of an entity type. Complex types allow entity models to group properties into common structures. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmComplexType.16" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>, <a href="#property">Property</a>, <a href="#navigationproperty">NavigationProperty</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#schema">Schema</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="complextype-abstract">
+            <td>
+              Abstract
+            </td>
+            <td>
+              Whether the type is abstract and cannot be instantiated directly
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeAbstract.9.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="complextype-basetype">
+            <td>
+              BaseType
+            </td>
+            <td>
+              qualified name of a edm:ComplexType
+            </td>
+            <td>Reference to <a href="#complextype">ComplexType</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeBaseType.9.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="complextype-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The name identifier of the element
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.9.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="complextype-opentype">
+            <td>
+              OpenType
+            </td>
+            <td>
+              Whether the type allows additional properties not explicitly declared
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeOpenType.9.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="entitycontainer">
+      <h3>EntityContainer</h3>
+      <div class="element-info">
+        <p>Entity containers define the entity sets, singletons, function and action imports exposed by the service. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmEntityContainer.24" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#actionimport">ActionImport</a>, <a href="#annotation">Annotation</a>, <a href="#entityset">EntitySet</a>, <a href="#functionimport">FunctionImport</a>, <a href="#singleton">Singleton</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#schema">Schema</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="entitycontainer-extends">
+            <td>
+              Extends
+            </td>
+            <td>
+              qualified entity container name
+            </td>
+            <td>Reference to <a href="#entitycontainer">EntityContainer</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeExtends.24.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="entitycontainer-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The EntityContainer&#x27;s name
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.9.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="entitytype">
+      <h3>EntityType</h3>
+      <div class="element-info">
+        <p>An entity type is the template for an entity: any uniquely identifiable record. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmEntityType.9" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>, <a href="#key">Key</a>, <a href="#property">Property</a>, <a href="#navigationproperty">NavigationProperty</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#schema">Schema</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="entitytype-abstract">
+            <td>
+              Abstract
+            </td>
+            <td>
+              Whether the type is abstract and cannot be instantiated directly
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeAbstract.9.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="entitytype-basetype">
+            <td>
+              BaseType
+            </td>
+            <td>
+              qualified name of an edm:EntityType
+            </td>
+            <td>Reference to <a href="#entitytype">EntityType</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeBaseType.9.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="entitytype-hasstream">
+            <td>
+              HasStream
+            </td>
+            <td>
+              Whether the entity type supports media resources
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeHasStream.9.5" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="entitytype-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The entity type’s name that MUST be unique within its schema.
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.9.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="entitytype-opentype">
+            <td>
+              OpenType
+            </td>
+            <td>
+              Whether the type allows additional properties not explicitly declared
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeOpenType.9.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="enumtype">
+      <h3>EnumType</h3>
+      <div class="element-info">
+        <p>Enumeration types are nominal types that represent a non-empty series of related values. Enumeration types expose these related values as members of the enumeration. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmEnumType.17" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>, <a href="#member">Member</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#schema">Schema</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="enumtype-isflags">
+            <td>
+              IsFlags
+            </td>
+            <td>
+              Whether the enumeration supports bitwise operations
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeIsFlags.17.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="enumtype-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The enumeration type’s name
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.9.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="enumtype-underlyingtype">
+            <td>
+              UnderlyingType
+            </td>
+            <td>
+              qualified name of and integer type
+              <em>(restricted to: Edm.Byte, Edm.SByte, Edm.Int16, Edm.Int32, or Edm.Int64)</em>
+            </td>
+            <td>Reference to <a href="#primitivetype">PrimitiveType</a> or <a href="#enumtype">EnumType</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeUnderlyingType.17.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="function">
+      <h3>Function</h3>
+      <div class="element-info">
+        <p>Function overloads allow functions to be defined with multiple different parameter sets. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmFunction.21" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>, <a href="#parameter">Parameter</a>, <a href="#returntype">ReturnType</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#schema">Schema</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="function-entitysetpath">
+            <td>
+              EntitySetPath
+            </td>
+            <td>
+              entity set path expression
+            </td>
+            <td><a href="#category-entityset-path">Entityset Path</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeEntitySetPath.21.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="function-isbound">
+            <td>
+              IsBound
+            </td>
+            <td>
+              Whether the action/function is bound to a specific entity type
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeIsBound.21.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="function-iscomposable">
+            <td>
+              IsComposable
+            </td>
+            <td>
+              Whether the function can be used in composition with other functions
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeIsComposable.21.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="function-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The function&#x27;s name.
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.9.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="term">
+      <h3>Term</h3>
+      <div class="element-info">
+        <p>A term allows annotating a model element or OData resource representation with additional data. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmTerm.30" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#schema">Schema</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="term-appliesto">
+            <td>
+              AppliesTo
+            </td>
+            <td>
+              specifies a list of model elements to which the term MAY be applied to.
+            </td>
+            <td><a href="#category-list-of-symbols">List Of Symbols</a> or one of <code>Action</code>, <code>ActionImport</code>, <code>Annotation</code>, <code>Apply</code>, <code>Cast</code>, <code>Collection</code>, <code>ComplexType</code>, <code>EntityContainer</code>, <code>EntitySet</code>, <code>EntityType</code>, <code>EnumType</code>, <code>Function</code>, <code>FunctionImport</code>, <code>If</code>, <code>Include</code>, <code>IsOf</code>, <code>LabeledElement</code>, <code>Member</code>, <code>NavigationProperty</code>, <code>Null</code>, <code>OnDelete</code>, <code>Parameter</code>, <code>Property</code>, <code>PropertyValue</code>, <code>Record</code>, <code>Reference</code>, <code>ReferentialConstraint</code>, <code>ReturnType</code>, <code>Schema</code>, <code>Singleton</code>, <code>Term</code>, <code>TypeDefinition</code>, <code>UrlRef</code></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#Applicability" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="term-baseterm">
+            <td>
+              BaseTerm
+            </td>
+            <td>
+              qualified term name
+            </td>
+            <td>Reference to <a href="#term">Term</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeBaseTerm.30.5" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="term-defaultvalue">
+            <td>
+              DefaultValue
+            </td>
+            <td>
+              A primitive- or enumeration-typed value that is used if the property is not explicitly represented in an annotation or the body of a request or response.
+            </td>
+            <td><a href="#category-primitive-value">Primitive Value</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeDefaultValue.30.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="term-iscollection">
+            <td>
+              IsCollection
+            </td>
+            <td>
+              Whether the term is collection-valued
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="term-maxlength">
+            <td>
+              MaxLength
+            </td>
+            <td>
+              Maximum length constraint for string and binary properties
+            </td>
+            <td><a href="#category-positive-integer">Positive Integer</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="term-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The term’s name.
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.30.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="term-nullable">
+            <td>
+              Nullable
+            </td>
+            <td>
+              Whether the property can have null values
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeNullable.30.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="term-precision">
+            <td>
+              Precision
+            </td>
+            <td>
+              Number of significant digits for decimal and temporal properties
+            </td>
+            <td><a href="#category-string">String</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="term-scale">
+            <td>
+              Scale
+            </td>
+            <td>
+              Maximum number of digits allowed to the right of the decimal point
+            </td>
+            <td><a href="#category-non-negative-integer">Non Negative Integer</a> or one of <code>floating</code>, <code>variable</code></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeDefaultValue.12.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="term-srid">
+            <td>
+              SRID
+            </td>
+            <td>
+              Spatial Reference System Identifier for spatial properties
+            </td>
+            <td><a href="#category-string">String</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="term-type">
+            <td>
+              Type
+            </td>
+            <td>
+              qualified type name or collection
+            </td>
+            <td>Reference to <a href="#entitytype">EntityType</a>, <a href="#complextype">ComplexType</a>, <a href="#enumtype">EnumType</a>, <a href="#typedefinition">TypeDefinition</a>, or <a href="#primitivetype">PrimitiveType</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeType.30.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="term-unicode">
+            <td>
+              Unicode
+            </td>
+            <td>
+              Whether the property might contain string values with Unicode characters
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeUnicode.1.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="primitivetype">
+      <h3>PrimitiveType</h3>
+      <div class="element-info">
+        <p>One of the pre-defined built-in atomic type types like Edm.Int32 or Edm.String. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#PrimitiveTypes" target="_blank" rel="noopener">[spec]</a></p>
+        <p class="note">N.b.: Primitive types are predefined and there is no way to represent them in CSDL. But they are referenced from multiple model elements.</p>
+        
+        <p>
+          <span class="label">Children:</span>
+            <em>None</em>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <em>None</em>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="primitivetype-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The name identifier of the element
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="typedefinition">
+      <h3>TypeDefinition</h3>
+      <div class="element-info">
+        <p>A type definition defines a specialization of one of the primitive types. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmTypeDefinition.19" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#schema">Schema</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="typedefinition-iscollection">
+            <td>
+              IsCollection
+            </td>
+            <td>
+              Whether the element is collection-valued
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="typedefinition-maxlength">
+            <td>
+              MaxLength
+            </td>
+            <td>
+              
+            </td>
+            <td><a href="#category-positive-integer">Positive Integer</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="typedefinition-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The name identifier of the element
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.9.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="typedefinition-precision">
+            <td>
+              Precision
+            </td>
+            <td>
+              The maximum number of significant decimal digits of the model element’s value; 
+            </td>
+            <td><a href="#category-positive-integer">Positive Integer</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="typedefinition-scale">
+            <td>
+              Scale
+            </td>
+            <td>
+              specifies the maximum number of digits allowed to the right of the decimal point.
+            </td>
+            <td><a href="#category-non-negative-integer">Non Negative Integer</a> or one of <code>floating</code>, <code>variable</code></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeDefaultValue.12.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="typedefinition-srid">
+            <td>
+              SRID
+            </td>
+            <td>
+              Spatial Reference System Identifier for spatial properties
+            </td>
+            <td><a href="#category-string">String</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="typedefinition-underlyingtype">
+            <td>
+              UnderlyingType
+            </td>
+            <td>
+              qualified name of primitive type
+              <em>(cannot be another type definition)</em>
+            </td>
+            <td>Reference to <a href="#primitivetype">PrimitiveType</a> or <a href="#enumtype">EnumType</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeUnderlyingType.17.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="typedefinition-unicode">
+            <td>
+              Unicode
+            </td>
+            <td>
+              The Unicode facet indicates whether the property might contain string values with Unicode characters.
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeUnicode.1.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="actionimport">
+      <h3>ActionImport</h3>
+      <div class="element-info">
+        <p>Action imports allow exposing actions from an entity container. Each action import must specify the action it imports and the EntitySet or Singleton that exposes it. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmActionImport.28" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#entitycontainer">EntityContainer</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="actionimport-action">
+            <td>
+              Action
+            </td>
+            <td>
+              qualified unbound action name
+            </td>
+            <td>Reference to <a href="#action">Action</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeAction.28.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="actionimport-entityset">
+            <td>
+              EntitySet
+            </td>
+            <td>
+              If the imported action returns an entity or a collection of entities, this specifies the entity set that contains the returned entity/entities
+              <br><em>CSDL XML and CSDL JSON allow to specify this as either just the name of an EntitySet or Singlton in the same container or the target path to an element in a different container.</em>
+            </td>
+            <td>Reference to <a href="#entityset">EntitySet</a> or <a href="#singleton">Singleton</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeEntitySet.28.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="actionimport-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The ActionImport&#x27;s name.
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.28.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="entityset">
+      <h3>EntitySet</h3>
+      <div class="element-info">
+        <p>Entity sets are top-level collection-valued resources. An entity set is identified by its name and must specify a type that must be an entity type in scope. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmEntitySet.25" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#navigationpropertybinding">NavigationPropertyBinding</a>, <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#entitycontainer">EntityContainer</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="entityset-entitytype">
+            <td>
+              EntityType
+            </td>
+            <td>
+              qualified entity type name
+            </td>
+            <td>Reference to <a href="#entitytype">EntityType</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeEntityType.25.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="entityset-includeinservicedocument">
+            <td>
+              IncludeInServiceDocument
+            </td>
+            <td>
+              Whether to include this element in the service document
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeIncludeInServiceDocument.25.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="entityset-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The value of Name is the entity set’s name
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.9.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="functionimport">
+      <h3>FunctionImport</h3>
+      <div class="element-info">
+        <p>Function imports allow exposing functions from an entity container. All unbound overloads of the imported function can be invoked from the entity container. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmFunctionImport.29" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#entitycontainer">EntityContainer</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="functionimport-entityset">
+            <td>
+              EntitySet
+            </td>
+            <td>
+              If the imported action returns an entity or a collection of entities, this specifies the entity set that contains the returned entitie(s)
+            </td>
+            <td>Reference to <a href="#entityset">EntitySet</a> or <a href="#singleton">Singleton</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeIncludeInServiceDocument.29.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="functionimport-function">
+            <td>
+              Function
+            </td>
+            <td>
+              qualified unbound function name
+            </td>
+            <td>Reference to <a href="#function">Function</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeFunction.29.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="functionimport-includeinservicedocument">
+            <td>
+              IncludeInServiceDocument
+            </td>
+            <td>
+              Whether to include this element in the service document
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeIncludeInServiceDocument.25.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="functionimport-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The function import’s name.
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.29.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="key">
+      <h3>Key</h3>
+      <div class="element-info">
+        <p>An entity is uniquely identified within an entity set by its key. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmKey.10" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#propertyref">PropertyRef</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#entitytype">EntityType</a>
+        </p>
+      </div>
+      
+    </section>
+    <section class="element-section" id="member">
+      <h3>Member</h3>
+      <div class="element-info">
+        <p>Enumeration type values consist of discrete members. Each member is identified by its name and must specify an associated numeric value. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmMember.18" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#enumtype">EnumType</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="member-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The name identifier of the element
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.9.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="member-value">
+            <td>
+              Value
+            </td>
+            <td>
+              integer value
+            </td>
+            <td><a href="#category-integer">Integer</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeValue.18.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="navigationproperty">
+      <h3>NavigationProperty</h3>
+      <div class="element-info">
+        <p>A navigation property allows navigation to related entities. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmNavigationProperty.13" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#ondelete">OnDelete</a>, <a href="#referentialconstraint">ReferentialConstraint</a>, <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#complextype">ComplexType</a>, <a href="#entitytype">EntityType</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="navigationproperty-containstarget">
+            <td>
+              ContainsTarget
+            </td>
+            <td>
+              Whether the navigation property contains its target entities
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeContainsTarget.13.5" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="navigationproperty-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The name identifier of the element
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.9.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="navigationproperty-nullable">
+            <td>
+              Nullable
+            </td>
+            <td>
+              Whether the property can have null values
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeNullable.12.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="navigationproperty-partner">
+            <td>
+              Partner
+            </td>
+            <td>
+              path to partner navigation property
+            </td>
+            <td><a href="#category-navigation-path">Navigation Path</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributePartner.13.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="navigationproperty-type">
+            <td>
+              Type
+            </td>
+            <td>
+              qualified entity type name or collection of that
+            </td>
+            <td>Reference to <a href="#entitytype">EntityType</a>, <a href="#complextype">ComplexType</a>, <a href="#enumtype">EnumType</a>, <a href="#typedefinition">TypeDefinition</a>, or <a href="#primitivetype">PrimitiveType</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeType.12.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="parameter">
+      <h3>Parameter</h3>
+      <div class="element-info">
+        <p>An action or function overload may specify parameters. Each parameter must have a name that is a simple identifier and must specify a type. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmParameter.23" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#action">Action</a>, <a href="#function">Function</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="parameter-iscollection">
+            <td>
+              IsCollection
+            </td>
+            <td>
+              Whether the parameter is collection-valued
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="parameter-maxlength">
+            <td>
+              MaxLength
+            </td>
+            <td>
+              Maximum length constraint for string and binary properties
+            </td>
+            <td><a href="#category-positive-integer">Positive Integer</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="parameter-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The name identifier of the element
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.9.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="parameter-nullable">
+            <td>
+              Nullable
+            </td>
+            <td>
+              Whether the property can have null values
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeNullable.12.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="parameter-precision">
+            <td>
+              Precision
+            </td>
+            <td>
+              Number of significant digits for decimal and temporal properties
+            </td>
+            <td><a href="#category-string">String</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="parameter-scale">
+            <td>
+              Scale
+            </td>
+            <td>
+              Maximum number of digits allowed to the right of the decimal point
+            </td>
+            <td><a href="#category-non-negative-integer">Non Negative Integer</a> or one of <code>floating</code>, <code>variable</code></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeDefaultValue.12.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="parameter-srid">
+            <td>
+              SRID
+            </td>
+            <td>
+              Spatial Reference System Identifier for spatial properties
+            </td>
+            <td><a href="#category-string">String</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="parameter-type">
+            <td>
+              Type
+            </td>
+            <td>
+              qualified type name or collection
+            </td>
+            <td>Reference to <a href="#entitytype">EntityType</a>, <a href="#complextype">ComplexType</a>, <a href="#enumtype">EnumType</a>, <a href="#typedefinition">TypeDefinition</a>, or <a href="#primitivetype">PrimitiveType</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeType.12.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="parameter-unicode">
+            <td>
+              Unicode
+            </td>
+            <td>
+              Whether the property might contain string values with Unicode characters
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeUnicode.1.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="property">
+      <h3>Property</h3>
+      <div class="element-info">
+        <p>Properties are used to define the internal structure of entity and complex types. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmProperty.12" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#complextype">ComplexType</a>, <a href="#entitytype">EntityType</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="property-defaultvalue">
+            <td>
+              DefaultValue
+            </td>
+            <td>
+              the model&#x27;s value of the attribute when the attribute is not present in CSDL
+            </td>
+            <td><a href="#category-primitive-value">Primitive Value</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeDefaultValue.12.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="property-iscollection">
+            <td>
+              IsCollection
+            </td>
+            <td>
+              Whether the property is collection-valued
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="property-maxlength">
+            <td>
+              MaxLength
+            </td>
+            <td>
+              Maximum length constraint for string and binary properties
+            </td>
+            <td><a href="#category-positive-integer">Positive Integer</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="property-name">
+            <td>
+              Name
+            </td>
+            <td>
+              
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.9.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="property-nullable">
+            <td>
+              Nullable
+            </td>
+            <td>
+              Whether the property can have null values
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeNullable.12.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="property-precision">
+            <td>
+              Precision
+            </td>
+            <td>
+              Number of significant digits for decimal and temporal properties
+            </td>
+            <td><a href="#category-string">String</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="property-scale">
+            <td>
+              Scale
+            </td>
+            <td>
+              specifies the maximum number of digits allowed to the right of the decimal point.
+            </td>
+            <td><a href="#category-non-negative-integer">Non Negative Integer</a> or one of <code>floating</code>, <code>variable</code></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeDefaultValue.12.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="property-srid">
+            <td>
+              SRID
+            </td>
+            <td>
+              Spatial Reference System Identifier for spatial properties
+            </td>
+            <td><a href="#category-string">String</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="property-type">
+            <td>
+              Type
+            </td>
+            <td>
+              qualified type name or collection of that
+            </td>
+            <td>Reference to <a href="#entitytype">EntityType</a>, <a href="#complextype">ComplexType</a>, <a href="#enumtype">EnumType</a>, <a href="#typedefinition">TypeDefinition</a>, or <a href="#primitivetype">PrimitiveType</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeType.12.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="property-unicode">
+            <td>
+              Unicode
+            </td>
+            <td>
+              Whether the property might contain string values with Unicode characters
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeUnicode.1.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="returntype">
+      <h3>ReturnType</h3>
+      <div class="element-info">
+        <p>The return type of an action or function overload may be any type in scope, or a collection of any type in scope. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmReturnType.22" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#action">Action</a>, <a href="#function">Function</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="returntype-iscollection">
+            <td>
+              IsCollection
+            </td>
+            <td>
+              Whether the return type is collection-valued
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="returntype-maxlength">
+            <td>
+              MaxLength
+            </td>
+            <td>
+              Maximum length constraint for string and binary properties
+            </td>
+            <td><a href="#category-positive-integer">Positive Integer</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="returntype-nullable">
+            <td>
+              Nullable
+            </td>
+            <td>
+              Whether the property can have null values
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeNullable.12.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="returntype-precision">
+            <td>
+              Precision
+            </td>
+            <td>
+              Number of significant digits for decimal and temporal properties
+            </td>
+            <td><a href="#category-string">String</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="returntype-scale">
+            <td>
+              Scale
+            </td>
+            <td>
+              Maximum number of digits allowed to the right of the decimal point
+            </td>
+            <td><a href="#category-non-negative-integer">Non Negative Integer</a> or one of <code>floating</code>, <code>variable</code></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeDefaultValue.12.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="returntype-srid">
+            <td>
+              SRID
+            </td>
+            <td>
+              Spatial Reference System Identifier for spatial properties
+            </td>
+            <td><a href="#category-string">String</a></td>
+             <td>
+            </td>
+          </tr>
+          <tr id="returntype-type">
+            <td>
+              Type
+            </td>
+            <td>
+              qualified type name or collection
+            </td>
+            <td>Reference to <a href="#complextype">ComplexType</a>, <a href="#enumtype">EnumType</a>, <a href="#typedefinition">TypeDefinition</a>, or <a href="#primitivetype">PrimitiveType</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeType.12.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="returntype-unicode">
+            <td>
+              Unicode
+            </td>
+            <td>
+              Whether the property might contain string values with Unicode characters
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeUnicode.1.4" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="singleton">
+      <h3>Singleton</h3>
+      <div class="element-info">
+        <p>Singletons are top-level single-valued resources. A singleton is identified by its name and must specify a type that must be an entity type in scope. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmSingleton.26" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#navigationpropertybinding">NavigationPropertyBinding</a>, <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#entitycontainer">EntityContainer</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="singleton-name">
+            <td>
+              Name
+            </td>
+            <td>
+              The value of Name is the singleton&#x27;s name
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.9.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="singleton-nullable">
+            <td>
+              Nullable
+            </td>
+            <td>
+              Whether the property can have null values
+            </td>
+            <td><a href="#category-boolean">Boolean</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeNullable.12.3" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="singleton-type">
+            <td>
+              Type
+            </td>
+            <td>
+              qualified entity type name
+            </td>
+            <td>Reference to <a href="#entitytype">EntityType</a>, <a href="#complextype">ComplexType</a>, <a href="#enumtype">EnumType</a>, <a href="#typedefinition">TypeDefinition</a>, or <a href="#primitivetype">PrimitiveType</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeType.12.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="navigationpropertybinding">
+      <h3>NavigationPropertyBinding</h3>
+      <div class="element-info">
+        <p>Navigation property bindings associate a navigation property with a target entity set or singleton, allowing navigation between entity sets. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmNavigationPropertyBinding.27" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#entityset">EntitySet</a>, <a href="#singleton">Singleton</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="navigationpropertybinding-path">
+            <td>
+              Path
+            </td>
+            <td>
+              navigation property path expression
+            </td>
+            <td><a href="#category-navigation-path">Navigation Path</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributePath.27.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="navigationpropertybinding-target">
+            <td>
+              Target
+            </td>
+            <td>
+              target path to entity set/singleton
+            </td>
+            <td><a href="#category-binding-target-path">Binding Target Path</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeTarget.27.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="ondelete">
+      <h3>OnDelete</h3>
+      <div class="element-info">
+        <p>The action the service will take on related entities when the entity on which the navigation property is defined is deleted. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmOnDelete.15" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <em>None</em>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#navigationproperty">NavigationProperty</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="ondelete-action">
+            <td>
+              Action
+            </td>
+            <td>
+              action the service will take on related entities when the entity is deleted.
+            </td>
+            <td><a href="#category-unknown">Unknown</a> or one of <code>Cascade</code>, <code>None</code>, <code>SetNull</code>, <code>SetDefault</code></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeAction.15.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="propertyref">
+      <h3>PropertyRef</h3>
+      <div class="element-info">
+        <p>An entity type’s key refers to the set of properties whose values uniquely identify an instance of the entity type within an entity set. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmPropertyRef.11" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <em>None</em>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#key">Key</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="propertyref-alias">
+            <td>
+              Alias
+            </td>
+            <td>
+              Alternative name that can be used to reference the property
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeAlias.5.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="propertyref-name">
+            <td>
+              Name
+            </td>
+            <td>
+              path to structural property
+            </td>
+            <td><a href="#category-property-path">Property Path</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeName.9.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="referentialconstraint">
+      <h3>ReferentialConstraint</h3>
+      <div class="element-info">
+        <p>Entity containers define the entity sets, singletons, function and action imports exposed by the service. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmReferentialConstraint.14" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#navigationproperty">NavigationProperty</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="referentialconstraint-property">
+            <td>
+              Property
+            </td>
+            <td>
+              path to dependent property
+            </td>
+            <td><a href="#category-property-path">Property Path</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeProperty.14.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="referentialconstraint-referencedproperty">
+            <td>
+              ReferencedProperty
+            </td>
+            <td>
+              path to principal property
+            </td>
+            <td><a href="#category-property-path">Property Path</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeReferencedProperty.14.2" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="element-section" id="annotation">
+      <h3>Annotation</h3>
+      <div class="element-info">
+        <p>An annotation applies a term to a model element and defines how to calculate a value for the term application. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#ElementedmAnnotation.31" target="_blank" rel="noopener">[spec]</a></p>
+        
+        
+        <p>
+          <span class="label">Children:</span>
+            <a href="#annotation">Annotation</a>
+        </p>
+        
+        <p>
+          <span class="label">Parents:</span>
+            <a href="#schema">Schema</a>, <a href="#include">Include</a>, <a href="#action">Action</a>, <a href="#annotations">Annotations</a>, <a href="#complextype">ComplexType</a>, <a href="#entitycontainer">EntityContainer</a>, <a href="#entitytype">EntityType</a>, <a href="#enumtype">EnumType</a>, <a href="#function">Function</a>, <a href="#term">Term</a>, <a href="#typedefinition">TypeDefinition</a>, <a href="#actionimport">ActionImport</a>, <a href="#entityset">EntitySet</a>, <a href="#functionimport">FunctionImport</a>, <a href="#member">Member</a>, <a href="#navigationproperty">NavigationProperty</a>, <a href="#parameter">Parameter</a>, <a href="#property">Property</a>, <a href="#returntype">ReturnType</a>, <a href="#singleton">Singleton</a>, <a href="#navigationpropertybinding">NavigationPropertyBinding</a>, <a href="#referentialconstraint">ReferentialConstraint</a>, <a href="#annotation">Annotation</a>
+        </p>
+      </div>
+      
+      <h4>Attributes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="annotation-qualifier">
+            <td>
+              Qualifier
+            </td>
+            <td>
+              Optional qualifier to distinguish multiple instances
+            </td>
+            <td><a href="#category-simple-identifier">Simple Identifier</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#Qualifier" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+          <tr id="annotation-term">
+            <td>
+              Term
+            </td>
+            <td>
+              qualified term name
+            </td>
+            <td>Reference to <a href="#term">Term</a></td>
+             <td>
+              <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#AttributeTerm.31.1" target="_blank" rel="noopener">[spec]</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <h2 id="attributes">Attributes</h2>
+    <p>This section describes the different kinds of attributes used in the element tables above.</p>
+    
+    <h3 id="basic-attributes">Basic Attributes</h3>
+    <p>Basic attributes represent values that get bound to the property of the model element.</p>
+    
+    <section>
+      <h4 id="category-boolean">Boolean</h4>
+      <p>truth value: true of false</p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#action-isbound">Action.IsBound</a>, <a href="#complextype-abstract">ComplexType.Abstract</a>, <a href="#complextype-opentype">ComplexType.OpenType</a>, <a href="#entitytype-abstract">EntityType.Abstract</a>, <a href="#entitytype-opentype">EntityType.OpenType</a>, <a href="#entitytype-hasstream">EntityType.HasStream</a>, <a href="#enumtype-isflags">EnumType.IsFlags</a>, <a href="#function-isbound">Function.IsBound</a>, <a href="#function-iscomposable">Function.IsComposable</a>, <a href="#term-unicode">Term.Unicode</a>, <a href="#term-iscollection">Term.IsCollection</a>, <a href="#term-nullable">Term.Nullable</a>, <a href="#typedefinition-unicode">TypeDefinition.Unicode</a>, <a href="#typedefinition-iscollection">TypeDefinition.IsCollection</a>, <a href="#entityset-includeinservicedocument">EntitySet.IncludeInServiceDocument</a>, <a href="#functionimport-includeinservicedocument">FunctionImport.IncludeInServiceDocument</a>, <a href="#navigationproperty-nullable">NavigationProperty.Nullable</a>, <a href="#navigationproperty-containstarget">NavigationProperty.ContainsTarget</a>, <a href="#parameter-unicode">Parameter.Unicode</a>, <a href="#parameter-iscollection">Parameter.IsCollection</a>, <a href="#parameter-nullable">Parameter.Nullable</a>, <a href="#property-unicode">Property.Unicode</a>, <a href="#property-iscollection">Property.IsCollection</a>, <a href="#property-nullable">Property.Nullable</a>, <a href="#returntype-unicode">ReturnType.Unicode</a>, <a href="#returntype-iscollection">ReturnType.IsCollection</a>, <a href="#returntype-nullable">ReturnType.Nullable</a>, <a href="#singleton-nullable">Singleton.Nullable</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-integer">Integer</h4>
+      <p>Whole number value</p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#member-value">Member.Value</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-list-of-symbols">List Of Symbols</h4>
+      <p>Comma-separated list of predefined symbolic values only</p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#term-appliesto">Term.AppliesTo</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-non-negative-integer">Non Negative Integer</h4>
+      <p>Integer value greater than or equal to zero</p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#term-scale">Term.Scale</a>, <a href="#typedefinition-scale">TypeDefinition.Scale</a>, <a href="#parameter-scale">Parameter.Scale</a>, <a href="#property-scale">Property.Scale</a>, <a href="#returntype-scale">ReturnType.Scale</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-positive-integer">Positive Integer</h4>
+      <p>Integer value greater than zero</p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#term-maxlength">Term.MaxLength</a>, <a href="#typedefinition-maxlength">TypeDefinition.MaxLength</a>, <a href="#typedefinition-precision">TypeDefinition.Precision</a>, <a href="#parameter-maxlength">Parameter.MaxLength</a>, <a href="#property-maxlength">Property.MaxLength</a>, <a href="#returntype-maxlength">ReturnType.MaxLength</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-primitive-value">Primitive Value</h4>
+      <p>any primitive value (string, number, boolean, etc.)</p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#term-defaultvalue">Term.DefaultValue</a>, <a href="#property-defaultvalue">Property.DefaultValue</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-simple-identifier">Simple Identifier</h4>
+      <p>Simple name identifier following XML naming rules</p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#schema-alias">Schema.Alias</a>, <a href="#include-namespace">Include.Namespace</a>, <a href="#include-alias">Include.Alias</a>, <a href="#includeannotations-termnamespace">IncludeAnnotations.TermNamespace</a>, <a href="#includeannotations-qualifier">IncludeAnnotations.Qualifier</a>, <a href="#includeannotations-targetnamespace">IncludeAnnotations.TargetNamespace</a>, <a href="#action-name">Action.Name</a>, <a href="#annotations-qualifier">Annotations.Qualifier</a>, <a href="#complextype-name">ComplexType.Name</a>, <a href="#entitycontainer-name">EntityContainer.Name</a>, <a href="#entitytype-name">EntityType.Name</a>, <a href="#enumtype-name">EnumType.Name</a>, <a href="#function-name">Function.Name</a>, <a href="#term-name">Term.Name</a>, <a href="#primitivetype-name">PrimitiveType.Name</a>, <a href="#typedefinition-name">TypeDefinition.Name</a>, <a href="#actionimport-name">ActionImport.Name</a>, <a href="#entityset-name">EntitySet.Name</a>, <a href="#functionimport-name">FunctionImport.Name</a>, <a href="#member-name">Member.Name</a>, <a href="#navigationproperty-name">NavigationProperty.Name</a>, <a href="#parameter-name">Parameter.Name</a>, <a href="#property-name">Property.Name</a>, <a href="#singleton-name">Singleton.Name</a>, <a href="#propertyref-alias">PropertyRef.Alias</a>, <a href="#annotation-qualifier">Annotation.Qualifier</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-string">String</h4>
+      <p>String</p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#edmx-version">Edmx.Version</a>, <a href="#schema-namespace">Schema.Namespace</a>, <a href="#term-precision">Term.Precision</a>, <a href="#term-srid">Term.SRID</a>, <a href="#typedefinition-srid">TypeDefinition.SRID</a>, <a href="#parameter-precision">Parameter.Precision</a>, <a href="#parameter-srid">Parameter.SRID</a>, <a href="#property-precision">Property.Precision</a>, <a href="#property-srid">Property.SRID</a>, <a href="#returntype-precision">ReturnType.Precision</a>, <a href="#returntype-srid">ReturnType.SRID</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-symbolic-values-only">Symbolic Values Only</h4>
+      <p>Single predefined symbolic value only</p>
+      
+    </section>
+    <section>
+      <h4 id="category-uri">Uri</h4>
+      <p>Uniform Resource Identifier</p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#reference-uri">Reference.Uri</a>
+      </p>
+    </section>
+    
+    <h3 id="model-attributes">Model Attributes</h3>
+    <p>Model attributes can be resolved paths to other model elements and sometimes just a reference to a model element.</p>
+    
+    <section>
+      <h4 id="category-annotation-target">Annotation Target</h4>
+      <p>The target of an annotation is the model element the term is applied to, for example types, properties, parameters and all other annotatable elements <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#Target" target="_blank" rel="noopener">[spec]</a></p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#annotations-target">Annotations.Target</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-binding-target-path">Binding Target Path</h4>
+      <p>A target path that references an entity set or singleton, and traverses containment navigation properties and type casts. <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#BindingTarget" target="_blank" rel="noopener">[spec]</a></p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#navigationpropertybinding-target">NavigationPropertyBinding.Target</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-container-child-path">Container Child Path</h4>
+      <p>Path to entity set or singleton within an entity container context </p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#actionimport-entityset">ActionImport.EntitySet</a>, <a href="#functionimport-entityset">FunctionImport.EntitySet</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-entityset-path">Entityset Path</h4>
+      <p>Path expression used in bound operations to specify result entity set, resolved relative to the binding parameter&#x27;s type </p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#action-entitysetpath">Action.EntitySetPath</a>, <a href="#function-entitysetpath">Function.EntitySetPath</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-navigation-path">Navigation Path</h4>
+      <p>Path expressions for navigation properties and bindings, can include complex properties and containment segments </p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#navigationproperty-partner">NavigationProperty.Partner</a>, <a href="#navigationpropertybinding-path">NavigationPropertyBinding.Path</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-property-path">Property Path</h4>
+      <p>A sequence of property names where the first item is a structural property of the context type, and every following item is a property of the previous item&#x27;s type </p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#propertyref-name">PropertyRef.Name</a>, <a href="#referentialconstraint-property">ReferentialConstraint.Property</a>, <a href="#referentialconstraint-referencedproperty">ReferentialConstraint.ReferencedProperty</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-qualified-name">Qualified Name</h4>
+      <p>Qualified name reference (Namespace.Name|Alias.Name) for model elements that are children of a schema <a href="https://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#QualifiedName" target="_blank" rel="noopener">[spec]</a></p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#entitycontainer-extends">EntityContainer.Extends</a>, <a href="#term-baseterm">Term.BaseTerm</a>, <a href="#actionimport-action">ActionImport.Action</a>, <a href="#functionimport-function">FunctionImport.Function</a>, <a href="#annotation-term">Annotation.Term</a>
+      </p>
+    </section>
+    <section>
+      <h4 id="category-qualified-type-name">Qualified Type Name</h4>
+      <p>Qualified type name references for entity types, complex types, primitive types, etc. </p>
+      
+      <p><strong>Used by:</strong>
+        <a href="#complextype-basetype">ComplexType.BaseType</a>, <a href="#entitytype-basetype">EntityType.BaseType</a>, <a href="#enumtype-underlyingtype">EnumType.UnderlyingType</a>, <a href="#term-type">Term.Type</a>, <a href="#typedefinition-underlyingtype">TypeDefinition.UnderlyingType</a>, <a href="#entityset-entitytype">EntitySet.EntityType</a>, <a href="#navigationproperty-type">NavigationProperty.Type</a>, <a href="#parameter-type">Parameter.Type</a>, <a href="#property-type">Property.Type</a>, <a href="#returntype-type">ReturnType.Type</a>, <a href="#singleton-type">Singleton.Type</a>
+      </p>
+    </section>
+  </main>
+</body>
+</html>
