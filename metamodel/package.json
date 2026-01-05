@@ -1,0 +1,19 @@
+{
+  "name": "odata-edm-structure-doc",
+  "version": "1.0.0",
+  "description": "HTML documentation generator for OData EDM model structure",
+  "main": "generateHtml.js",
+  "scripts": {
+    "generate": "node generateHtml.js"
+  },
+  "keywords": [
+    "OData",
+    "EDM",
+    "documentation"
+  ],
+  "author": "",
+  "license": "SEE LICENSE IN ../LICENSE.md",
+  "dependencies": {
+    "handlebars": "^4.7.8"
+  }
+}
